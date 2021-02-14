@@ -18,9 +18,10 @@ public static class GameComponentsLookup {
     public const int Prefab = 7;
     public const int Rotation = 8;
     public const int Shot = 9;
-    public const int View = 10;
+    public const int SwitchTarget = 10;
+    public const int View = 11;
 
-    public const int TotalComponents = 11;
+    public const int TotalComponents = 12;
 
     public static readonly string[] componentNames = {
         "DetectedCollision",
@@ -33,6 +34,7 @@ public static class GameComponentsLookup {
         "Prefab",
         "Rotation",
         "Shot",
+        "SwitchTarget",
         "View"
     };
 
@@ -47,6 +49,7 @@ public static class GameComponentsLookup {
         typeof(PrefabComponent),
         typeof(RotationComponent),
         typeof(ShotComponent),
+        typeof(SwitchTargetComponent),
         typeof(ViewComponent)
     };
 }
