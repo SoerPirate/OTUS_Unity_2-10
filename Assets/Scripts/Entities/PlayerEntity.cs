@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class PlayerEntity : AbstractEntity
 {
-    public GameObject playerPrefab;
+    public GameObject prefab;
     public float health;
-
+    
     protected override void Start()
     {
         base.Start();
         entity.isPlayer = true;
-        entity.AddPrefab(playerPrefab);
-        entity.AddHealth(health);
+        entity.AddPrefab(prefab);
+        entity.AddHealth(health); 
     }
 }

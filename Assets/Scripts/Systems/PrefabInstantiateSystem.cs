@@ -27,10 +27,10 @@ public class PrefabInstantiateSystem : ReactiveSystem<GameEntity>
     {
         foreach (var e in entities) {
             var obj = GameObject.Instantiate(e.prefab.prefab);
-            if (obj.TryGetComponent<EntitasEntity>(out var ee))
+            /*if (obj.TryGetComponent<EntitasEntity>(out var ee))
                 ee.entity = e;
             else
-                obj.AddComponent<EntitasEntity>().entity = e;
+                obj.AddComponent<EntitasEntity>().entity = e;*/
             e.AddView(obj);
         }
     }

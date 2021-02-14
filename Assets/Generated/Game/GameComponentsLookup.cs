@@ -8,48 +8,36 @@
 //------------------------------------------------------------------------------
 public static class GameComponentsLookup {
 
-    public const int DetectedCollision = 0;
-    public const int Enemy = 1;
-    public const int ForwardMovement = 2;
-    public const int Globals = 3;
-    public const int Health = 4;
-    public const int Player = 5;
-    public const int Position = 6;
-    public const int Prefab = 7;
-    public const int Rotation = 8;
-    public const int Shot = 9;
-    public const int SwitchTarget = 10;
-    public const int View = 11;
+    public const int Enemy = 0;
+    public const int Health = 1;
+    public const int ITarget = 2;
+    public const int Player = 3;
+    public const int Position = 4;
+    public const int Prefab = 5;
+    public const int Rotation = 6;
+    public const int View = 7;
 
-    public const int TotalComponents = 12;
+    public const int TotalComponents = 8;
 
     public static readonly string[] componentNames = {
-        "DetectedCollision",
         "Enemy",
-        "ForwardMovement",
-        "Globals",
         "Health",
+        "ITarget",
         "Player",
         "Position",
         "Prefab",
         "Rotation",
-        "Shot",
-        "SwitchTarget",
         "View"
     };
 
     public static readonly System.Type[] componentTypes = {
-        typeof(DetectedCollision),
         typeof(EnemyComponent),
-        typeof(ForwardMovementComponent),
-        typeof(GlobalsComponent),
         typeof(HealthComponent),
+        typeof(ITargetComponent),
         typeof(PlayerComponent),
         typeof(PositionComponent),
         typeof(PrefabComponent),
         typeof(RotationComponent),
-        typeof(ShotComponent),
-        typeof(SwitchTargetComponent),
         typeof(ViewComponent)
     };
 }

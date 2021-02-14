@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Entitas;
+using Entitas; 
 
 public class PrefabComponent : IComponent
 {
-    public GameObject prefab;
+       public GameObject prefab;
 }
