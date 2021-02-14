@@ -20,6 +20,8 @@ public class GameController : MonoBehaviour
         //systems.Add(new PlayerCollisionSystem(context));
         systems.Add(new TransformApplySystem(context));
         systems.Add(new ViewDestroySystem(context));
+        //systems.Add(new MoveToSystem(context));       // создает компоненту дебаг на всех, тут не нужна, надо запустить по нажатию кнопки
+        
         systems.Initialize();
     }
 
@@ -33,4 +35,5 @@ public class GameController : MonoBehaviour
         systems.Execute();
         systems.Cleanup();
     }
+
 }
