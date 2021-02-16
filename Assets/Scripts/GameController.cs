@@ -11,8 +11,10 @@ public class GameController : MonoBehaviour
 
     public Button buttonAttack;
 
-    public GameObject[] playersGO;  
-    public GameObject[] enemiesGO;  
+    public List<GameObject> playersGO = new List<GameObject>();
+    public List<GameObject> enemiesGO = new List<GameObject>();
+
+    public string debug;
 
     void Awake()
     {
@@ -26,6 +28,8 @@ public class GameController : MonoBehaviour
         //systems.Add(new ShotCollisionSystem(context));
         //systems.Add(new PlayerCollisionSystem(context));
         systems.Add(new TransformApplySystem(context));
+        systems.Add(new FillPlayersListInGameControllerSystem(context));
+        systems.Add(new FillEnemiesListInGameControllerSystem(context));
         systems.Add(new ViewDestroySystem(context));
         //systems.Add(new MoveToSystem(context));       // создает компоненту дебаг на всех, тут не нужна, надо запустить по нажатию кнопки
         
