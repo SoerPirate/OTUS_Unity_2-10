@@ -15,5 +15,6 @@ public class EnemyEntity : AbstractEntity
         entity.AddHealth(health); 
         entity.AddSpeed(speed);
         entity.AddMyGameController(gameController);
+        //entity.AddForwardMovement(speed);
     }
 }

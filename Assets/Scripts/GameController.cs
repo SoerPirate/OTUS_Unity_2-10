@@ -14,7 +14,9 @@ public class GameController : MonoBehaviour
     public List<GameObject> playersGO = new List<GameObject>();
     public List<GameObject> enemiesGO = new List<GameObject>();
 
-    public string debug;
+    public float speed;
+
+    //public string debug;
 
     void Awake()
     {
@@ -24,12 +26,12 @@ public class GameController : MonoBehaviour
         //systems.Add(new DeathSystem(context));
         systems.Add(new PrefabInstantiateSystem(context));
         //systems.Add(new PlayerInputSystem(context));
-        //systems.Add(new ForwardMovementSystem(context));
         //systems.Add(new ShotCollisionSystem(context));
         //systems.Add(new PlayerCollisionSystem(context));
         systems.Add(new TransformApplySystem(context));
         systems.Add(new FillPlayersListInGameControllerSystem(context));
         systems.Add(new FillEnemiesListInGameControllerSystem(context));
+        systems.Add(new ForwardMovementSystem(context));
         systems.Add(new ViewDestroySystem(context));
         //systems.Add(new MoveToSystem(context));       // создает компоненту дебаг на всех, тут не нужна, надо запустить по нажатию кнопки
         
@@ -56,9 +58,18 @@ public class GameController : MonoBehaviour
         systems.Cleanup();
     }
 
-     public void PlayerAttack()
+    public void PlayerAttack()
     {
-        //GetComponent<EntitasEntity>().entity.isDetectedCollision = true;
-        Debug.Log("Attack");
+        //GetComponent<EntitasEntity>().entity.DetectedCollision = true;
+        
+        var valuePlayers = playersGO.Count;
+        var valueEmemies = enemiesGO.Count;
+        Debug.Log("Players: " + valuePlayers + ", Enemies: " + valueEmemies);
+
+        //playersGO[1].GetComponent<EntitasEntity>().entity.isForwardMovement(speed);
+        playersGO[0].GetComponent<EntitasEntity>().entity.isDebug = true;
+        
+        //             GetComponent<EntitasEntity>().entity.isDetectedCollision = true;
+
     }
 }
