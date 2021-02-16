@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 147428394}
   - component: {fileID: 147428393}
   m_Layer: 5
-  m_Name: Button
+  m_Name: ButtonAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -299,6 +299,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 3591750979723153889, guid: 268fe3416a5e8cf4694a8632f9cb8c4d, type: 3}
+  gameController: {fileID: 1606882347}
   health: 2
   speed: 1
 --- !u!1 &212085201
@@ -345,6 +346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 8432393290777526023, guid: 7069c9812e2b61a4897267e66e5134da, type: 3}
+  gameController: {fileID: 1606882347}
   health: 3
   speed: 1
 --- !u!1 &329995835
@@ -363,7 +365,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &329995836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -434,6 +436,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 3591750979723153889, guid: 268fe3416a5e8cf4694a8632f9cb8c4d, type: 3}
+  gameController: {fileID: 1606882347}
   health: 2
   speed: 1
 --- !u!1 &598862533
@@ -806,6 +809,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43e887c0827f1354e9834754afa9249f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonAttack: {fileID: 147428393}
+  playersGO:
+  - {fileID: 0}
+  - {fileID: 0}
+  enemiesGO:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!4 &1606882349
 Transform:
   m_ObjectHideFlags: 0
@@ -1031,6 +1041,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 8432393290777526023, guid: 7069c9812e2b61a4897267e66e5134da, type: 3}
+  gameController: {fileID: 1606882347}
   health: 3
   speed: 1
 --- !u!1 &2088567691

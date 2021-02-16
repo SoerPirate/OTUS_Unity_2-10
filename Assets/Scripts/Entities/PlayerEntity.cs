@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerEntity : AbstractEntity
 {
-    public GameObject prefab;
+    public GameObject prefab, gameController;
     public float health, speed;
     
     protected override void Start()
@@ -14,6 +14,7 @@ public class PlayerEntity : AbstractEntity
         entity.AddPrefab(prefab);
         entity.AddHealth(health);
         entity.AddSpeed(speed);
+        entity.AddMyGameController(gameController);
      
     }
 }

@@ -16,6 +16,16 @@ public class PrefabInstantiateSystem : ReactiveSystem<GameEntity>
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
     {
         return context.CreateCollector(GameMatcher.Prefab);
+
+        /*return new Collector<GameEntity>(
+            new [] {
+                context.GetGroup(GameMatcher.AnyOf(GameMatcher.Prefab)),
+                context.GetGroup(GameMatcher.MyGameController),
+            }, new [] {
+                GroupEvent.Added,
+                GroupEvent.Added,
+            }
+        );*/
     }
 
     protected override bool Filter(GameEntity entity)
@@ -27,10 +37,18 @@ public class PrefabInstantiateSystem : ReactiveSystem<GameEntity>
     {
         foreach (var e in entities) {
             var obj = GameObject.Instantiate(e.prefab.prefab);
-            /*if (obj.TryGetComponent<EntitasEntity>(out var ee))
+
+            if (obj.TryGetComponent<EntitasEntity>(out var ee))
+            {    
                 ee.entity = e;
+                ee.gameController = e.myGameController.gameController;
+            }
             else
-                obj.AddComponent<EntitasEntity>().entity = e;*/
+            {    
+                obj.AddComponent<EntitasEntity>().entity = e;
+                obj.GetComponent<EntitasEntity>().gameController = e.myGameController.gameController;
+            }
+
             e.AddView(obj);
         }
     }

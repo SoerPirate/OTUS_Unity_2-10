@@ -2,10 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Entitas;
-
+using UnityEngine.UI;
+using TMPro;
+    
 public class GameController : MonoBehaviour
 {
     Systems systems;
+
+    public Button buttonAttack;
+
+    public GameObject[] playersGO;  
+    public GameObject[] enemiesGO;  
 
     void Awake()
     {
@@ -25,6 +32,15 @@ public class GameController : MonoBehaviour
         systems.Initialize();
     }
 
+    void Start()
+    {
+        buttonAttack.onClick.AddListener(PlayerAttack);
+        
+        //Utility.SetCanvasGroupEnabled(buttonPanel, false);
+        //Utility.SetCanvasGroupEnabled(pausePanel, false);
+        //StartCoroutine(GameLoop());
+    }
+
     void OnDestroy()
     {
         systems.TearDown();
@@ -36,4 +52,9 @@ public class GameController : MonoBehaviour
         systems.Cleanup();
     }
 
+     public void PlayerAttack()
+    {
+        //GetComponent<EntitasEntity>().entity.isDetectedCollision = true;
+        Debug.Log("Attack");
+    }
 }
