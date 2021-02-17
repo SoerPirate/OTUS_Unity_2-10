@@ -20,10 +20,10 @@ public class NextTargetSystem : IExecuteSystem
 
     public NextTargetSystem(Contexts contexts)
     {
-        JudgeGameLoopEntity = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.JudgeGameLoop, GameMatcher.NextTarget)); 
-        playersEntities = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Player, GameMatcher.NextTarget));
-        enemiesEntities = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Enemy, GameMatcher.NextTarget));
-    }
+        JudgeGameLoopEntity = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.JudgeGameLoop, GameMatcher.NextTarget));  // IAlive
+        playersEntities = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Player, GameMatcher.NextTarget));            // IAlive
+        enemiesEntities = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Enemy, GameMatcher.NextTarget));             // IAlive
+    }   
 
     public void Execute()
     {   
@@ -51,8 +51,10 @@ public class NextTargetSystem : IExecuteSystem
         }
 
         //needThisEnemy = _enemiesEntities[0];              // что со счетчиком? 
-
+        if (_enemyCount < _enemiesEntities.Count)
         _enemyCount++;
+        else
+        _enemyCount = 1;                                // не хватает системы автоустановки первого врага, чтобы счетчик не отставал
 
         foreach (var e in _JudgeGameLoopEntity){
            e.judgeGameLoop.enemyCount = _enemyCount;
@@ -68,9 +70,11 @@ public class NextTargetSystem : IExecuteSystem
         foreach (var e in _playersEntities) {
             if (e.hasMoveTarget)
             e.ReplaceMoveTarget(needThisEnemy.position.value); 
+            //HitTarget
             else
-            e.AddMoveTarget(needThisEnemy.position.value);          // + Remove
-
+            e.AddMoveTarget(needThisEnemy.position.value);         
+            //HitTarget
+            
             e.isNextTarget = false;
         }
         
