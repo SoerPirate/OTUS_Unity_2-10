@@ -16,16 +16,6 @@ public class PrefabInstantiateSystem : ReactiveSystem<GameEntity>
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
     {
         return context.CreateCollector(GameMatcher.Prefab);
-
-        /*return new Collector<GameEntity>(
-            new [] {
-                context.GetGroup(GameMatcher.AnyOf(GameMatcher.Prefab)),
-                context.GetGroup(GameMatcher.MyGameController),
-            }, new [] {
-                GroupEvent.Added,
-                GroupEvent.Added,
-            }
-        );*/
     }
 
     protected override bool Filter(GameEntity entity)

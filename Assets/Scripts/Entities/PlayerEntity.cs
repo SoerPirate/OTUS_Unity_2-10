@@ -15,6 +15,7 @@ public class PlayerEntity : AbstractEntity
         entity.AddHealth(health);
         entity.AddSpeed(speed);
         entity.AddMyGameController(gameController);
+        //entity.isMoveTarget = true;
         //entity.AddForwardMovement(speed);
      
     }

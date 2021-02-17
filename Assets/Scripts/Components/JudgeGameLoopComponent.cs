@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Entitas;
 
-public class MoveTarget : IComponent
+public class JudgeGameLoopComponent : IComponent
 {
-    public Vector3 targetPosition;
+    public int enemyCount; 
 }

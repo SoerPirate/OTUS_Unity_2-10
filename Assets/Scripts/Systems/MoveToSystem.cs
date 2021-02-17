@@ -17,7 +17,7 @@ public class MoveToSystem : IExecuteSystem
     {
         foreach (var e in entities) 
         {
-            e.isDebug = true;
+            //e.isDebug = true;
         }
     }
 }
