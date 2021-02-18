@@ -6,6 +6,8 @@ using Entitas;
 public class MoveToSystem : IExecuteSystem
 {
     IGroup<GameEntity> entities;
+
+    List<GameEntity> _entities = new List<GameEntity>();
     
     public float distanceFromTarget = 0.5f, speed;
 
@@ -13,18 +15,23 @@ public class MoveToSystem : IExecuteSystem
 
     public MoveToSystem(Contexts contexts)
     {
-        entities = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.MoveTarget, GameMatcher.Speed));  // Attack
+        entities = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.MoveTarget, GameMatcher.Speed, GameMatcher.Attack)); 
+                                                                                                    //, GameMatcher.MyTurn вместо Attack
     }
 
     public void Execute()
     {
         
+        //_entities.Clear();
+
         foreach (var e in entities)
         {
-        
         targetPosition = e.moveTarget.targetPosition;
 
         myPosition = e.position.value;
+
+        //e.positionBeforeMove.position = myPosition; 
+        //e.AddPositionBeforeMove(myPosition);
 
         distance = targetPosition - myPosition;
 
@@ -50,7 +57,13 @@ public class MoveToSystem : IExecuteSystem
         e.position.value = myPosition;
         e.view.gameObject.transform.position = myPosition;
 
+        _entities.Add(e);
         }
 
+        foreach (var e in _entities)
+        {
+            if (e.hasMoveTarget && myPosition == targetPosition)
+            e.RemoveMoveTarget();
+        }
     }
 }

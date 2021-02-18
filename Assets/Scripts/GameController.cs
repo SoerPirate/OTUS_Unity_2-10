@@ -9,7 +9,7 @@ public class GameController : MonoBehaviour
 {
     Systems systems;
 
-    public Button buttonAttack;
+    public Button buttonAttack, buttonNextTarget;
 
     public List<GameObject> playersGO = new List<GameObject>();
 
@@ -42,6 +42,7 @@ public class GameController : MonoBehaviour
         systems.Add(new FillEnemiesListInGameControllerSystem(context));
         systems.Add(new NextTargetSystem(context));
         systems.Add(new MoveToSystem(context));
+        systems.Add(new AttackSystem(context));
         systems.Add(new ForwardMovementSystem(context));
         systems.Add(new ViewDestroySystem(context));
         //systems.Add(new MoveToSystem(context));       // создает компоненту дебаг на всех, тут не нужна, надо запустить по нажатию кнопки
@@ -52,7 +53,8 @@ public class GameController : MonoBehaviour
     void Start()
     {
         //buttonAttack.onClick.AddListener(PlayerAttack);                  вернуть на эту кнопку
-        buttonAttack.onClick.AddListener(NextTarget); 
+        buttonAttack.onClick.AddListener(PlayerAttack); 
+        buttonNextTarget.onClick.AddListener(NextTarget); 
 
         //playersGO[0].GetComponent<EntitasEntity>().entity.isITarget = true;
         
@@ -79,6 +81,10 @@ public class GameController : MonoBehaviour
 
     public void PlayerAttack()
     {
+        foreach (var player in playersGO)
+        {
+            player.GetComponent<EntitasEntity>().entity.isAttack = true;
+        }
         //var valuePlayers = playersGO.Count;
         //var valueEmemies = enemiesGO.Count;
         //Debug.Log("Players: " + valuePlayers + ", Enemies: " + valueEmemies);
@@ -96,11 +102,6 @@ public class GameController : MonoBehaviour
 
     public void NextTarget()
     {
-        var valuePlayers = playersGO.Count;
-        var valueEmemies = enemiesGO.Count;
-        Debug.Log("Players: " + valuePlayers + ", Enemies: " + valueEmemies);
-
-        //playersGO[0].GetComponent<EntitasEntity>().entity.isDebug = true;
         foreach (var player in playersGO)
         {
             player.GetComponent<EntitasEntity>().entity.isNextTarget = true;

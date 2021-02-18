@@ -8,26 +8,28 @@
 //------------------------------------------------------------------------------
 public static class GameComponentsLookup {
 
-    public const int Debug = 0;
-    public const int Enemy = 1;
-    public const int ForwardMovement = 2;
-    public const int Health = 3;
-    public const int HitTarget = 4;
-    public const int ITarget = 5;
-    public const int JudgeGameLoop = 6;
-    public const int MoveTarget = 7;
-    public const int MyGameController = 8;
-    public const int NextTarget = 9;
-    public const int Player = 10;
-    public const int Position = 11;
-    public const int Prefab = 12;
-    public const int Rotation = 13;
-    public const int Speed = 14;
-    public const int View = 15;
+    public const int Attack = 0;
+    public const int Debug = 1;
+    public const int Enemy = 2;
+    public const int ForwardMovement = 3;
+    public const int Health = 4;
+    public const int HitTarget = 5;
+    public const int ITarget = 6;
+    public const int JudgeGameLoop = 7;
+    public const int MoveTarget = 8;
+    public const int MyGameController = 9;
+    public const int NextTarget = 10;
+    public const int Player = 11;
+    public const int Position = 12;
+    public const int Prefab = 13;
+    public const int Rotation = 14;
+    public const int Speed = 15;
+    public const int View = 16;
 
-    public const int TotalComponents = 16;
+    public const int TotalComponents = 17;
 
     public static readonly string[] componentNames = {
+        "Attack",
         "Debug",
         "Enemy",
         "ForwardMovement",
@@ -47,6 +49,7 @@ public static class GameComponentsLookup {
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(AttackComponent),
         typeof(DebugComponent),
         typeof(EnemyComponent),
         typeof(ForwardMovementComponent),
