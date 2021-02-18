@@ -7,13 +7,13 @@ public class MoveToSystem : IExecuteSystem
 {
     IGroup<GameEntity> entities;
     
-    public float distanceFromTarget = 0.5f;
+    public float distanceFromTarget = 0.5f, speed;
 
-    public Vector3 targetPosition, myPosition, distance;
+    public Vector3 targetPosition, myPosition, distance, direction, step;
 
     public MoveToSystem(Contexts contexts)
     {
-        entities = contexts.game.GetGroup(GameMatcher.MoveTarget);
+        entities = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.MoveTarget, GameMatcher.Speed));  // Attack
     }
 
     public void Execute()
@@ -26,29 +26,30 @@ public class MoveToSystem : IExecuteSystem
 
         myPosition = e.position.value;
 
-        /*
         distance = targetPosition - myPosition;
-        if (distance.magnitude < 0.00001f) {
+
+        speed = e.speed.value;
+
+            if (distance.magnitude < 0.00001f) 
             myPosition = targetPosition;
-            return true;
-        }
+            else
+            {
+            direction = distance.normalized;
+            //transform.rotation = Quaternion.LookRotation(direction);
 
-        Vector3 direction = distance.normalized;
-        transform.rotation = Quaternion.LookRotation(direction);
+            targetPosition -= direction * distanceFromTarget;
+            distance = (targetPosition - myPosition);
 
-        targetPosition -= direction * distanceFromTarget;
-        distance = (targetPosition - myPosition);
+            step = direction * speed;
+                if (step.magnitude < distance.magnitude) 
+                myPosition += step;
+                else
+                myPosition = targetPosition;
+            }
 
-        Vector3 step = direction * runSpeed;
-        if (step.magnitude < distance.magnitude) {
-            myPosition += step;
-            return false;
-        }
-
-        myPosition = targetPosition;
-        return true;
-        */
-
+        e.position.value = myPosition;
+        e.view.gameObject.transform.position = myPosition;
+        
         }
 
     }

@@ -41,6 +41,7 @@ public class GameController : MonoBehaviour
         systems.Add(new FillPlayersListInGameControllerSystem(context));
         systems.Add(new FillEnemiesListInGameControllerSystem(context));
         systems.Add(new NextTargetSystem(context));
+        systems.Add(new MoveToSystem(context));
         systems.Add(new ForwardMovementSystem(context));
         systems.Add(new ViewDestroySystem(context));
         //systems.Add(new MoveToSystem(context));       // создает компоненту дебаг на всех, тут не нужна, надо запустить по нажатию кнопки
