@@ -7,6 +7,8 @@ public class PrefabInstantiateSystem : ReactiveSystem<GameEntity>
 {
     Contexts contexts;
 
+    Animator animator;
+
     public PrefabInstantiateSystem(Contexts contexts)
         : base(contexts.game)
     {
@@ -37,9 +39,14 @@ public class PrefabInstantiateSystem : ReactiveSystem<GameEntity>
             {    
                 obj.AddComponent<EntitasEntity>().entity = e;
                 obj.GetComponent<EntitasEntity>().gameController = e.myGameController.gameController;
+                //animator = GetComponentInChildren<Animator>();
             }
 
             e.AddView(obj);
+            animator = e.prefab.prefab.GetComponentInChildren<Animator>();
+            
+            //вынести добавление аниматора в другую систему
+            //e.AddAnimator(animator);
         }
     }
 }
