@@ -864,7 +864,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   enemyCount: 1
-  speed: 100
+  speed: 1
   UIController: {fileID: 329995835}
 --- !u!4 &1606882349
 Transform:

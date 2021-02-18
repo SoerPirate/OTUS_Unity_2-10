@@ -40,7 +40,7 @@ public class MoveToSystem : IExecuteSystem
             targetPosition -= direction * distanceFromTarget;
             distance = (targetPosition - myPosition);
 
-            step = direction * speed;
+            step = direction * speed * Time.deltaTime;
                 if (step.magnitude < distance.magnitude) 
                 myPosition += step;
                 else
@@ -49,7 +49,7 @@ public class MoveToSystem : IExecuteSystem
 
         e.position.value = myPosition;
         e.view.gameObject.transform.position = myPosition;
-        
+
         }
 
     }
