@@ -14,7 +14,7 @@ public class EnemyEntity : AbstractEntity
         entity.isEnemy = true;
         entity.AddPrefab(prefab);
         entity.AddHealth(health); 
-        entity.AddSpeed(speed);
+        //entity.AddSpeed(speed);
         entity.AddMyGameController(gameController);
 
         //animator = entity.prefab.prefab.GetComponentInChildren<Animator>();

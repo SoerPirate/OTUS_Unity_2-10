@@ -7,6 +7,8 @@ public class AttackSystem : ReactiveSystem<GameEntity>
 {
     Contexts contexts;
 
+    Animator animator;
+
     public AttackSystem(Contexts contexts)
         : base(contexts.game)
     {
@@ -33,6 +35,11 @@ public class AttackSystem : ReactiveSystem<GameEntity>
     {
         foreach (var e in entities) {
             e.isDebug = true;
+
+            animator = e.view.gameObject.GetComponentInChildren<Animator>();
+            animator.SetTrigger("Shoot");
+
+            e.isAttack = false;
             /*
             var obj = GameObject.Instantiate(e.prefab.prefab);  //создаем объект согласно префабу лежащему в ентити
             if (obj.TryGetComponent<EntitasEntity>(out var ee))

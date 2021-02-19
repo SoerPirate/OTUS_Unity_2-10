@@ -13,6 +13,8 @@ public class MoveToSystem : IExecuteSystem
 
     public Vector3 targetPosition, myPosition, distance, direction, step;
 
+    Animator animator;
+
     public MoveToSystem(Contexts contexts)
     {
         entities = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.MoveTarget, GameMatcher.Speed, GameMatcher.Attack)); 
@@ -26,6 +28,10 @@ public class MoveToSystem : IExecuteSystem
 
         foreach (var e in entities)
         {
+
+        animator = e.view.gameObject.GetComponentInChildren<Animator>();
+        animator.SetFloat("Speed", speed);
+
         targetPosition = e.moveTarget.targetPosition;
 
         myPosition = e.position.value;
@@ -58,12 +64,20 @@ public class MoveToSystem : IExecuteSystem
         e.view.gameObject.transform.position = myPosition;
 
         _entities.Add(e);
+
+        
         }
 
         foreach (var e in _entities)
         {
             if (e.hasMoveTarget && myPosition == targetPosition)
+            {
             e.RemoveMoveTarget();
+            speed = 0.0f;
+            e.ReplaceSpeed(speed);
+            animator = e.view.gameObject.GetComponentInChildren<Animator>();
+            animator.SetFloat("Speed", speed);
+            }
         }
     }
 }

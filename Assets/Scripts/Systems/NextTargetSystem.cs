@@ -70,9 +70,14 @@ public class NextTargetSystem : IExecuteSystem
         foreach (var e in _playersEntities) {
             if (e.hasMoveTarget)
             e.ReplaceMoveTarget(needThisEnemy.position.value); 
-            //HitTarget
             else
-            e.AddMoveTarget(needThisEnemy.position.value);         
+            e.AddMoveTarget(needThisEnemy.position.value);  
+
+            if (e.hasSpeed)
+            e.ReplaceSpeed(1.0f); 
+            else
+            e.AddSpeed(1.0f); 
+
             //HitTarget
             
             e.isNextTarget = false;
