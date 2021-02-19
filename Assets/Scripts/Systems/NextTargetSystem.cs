@@ -81,6 +81,7 @@ public class NextTargetSystem : IExecuteSystem
             //HitTarget
             
             e.isNextTarget = false;
+            
         }
         
         //подтянуть судью ходов. положить ентити врагов в другой список, 

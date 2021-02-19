@@ -43,7 +43,7 @@ public class PrefabInstantiateSystem : ReactiveSystem<GameEntity>
             }
 
             e.AddView(obj);
-            animator = e.prefab.prefab.GetComponentInChildren<Animator>();
+            //animator = e.prefab.prefab.GetComponentInChildren<Animator>();
             
             //вынести добавление аниматора в другую систему
             //e.AddAnimator(animator);

@@ -9,9 +9,9 @@ public class MoveToSystem : IExecuteSystem
 
     List<GameEntity> _entities = new List<GameEntity>();
     
-    public float distanceFromTarget = 0.5f, speed;
+    public float distanceFromTarget = 0.0f, speed;
 
-    public Vector3 targetPosition, myPosition, distance, direction, step;
+    public Vector3 targetPosition, myPosition, distance, direction, step, myStartPosition;
 
     Animator animator;
 
@@ -23,21 +23,24 @@ public class MoveToSystem : IExecuteSystem
 
     public void Execute()
     {
-        
-        //_entities.Clear();
+/*
+        foreach (var e in entities)
+        {
+            myStartPosition = e.position.value;
+            e.startPosition.value = myStartPosition;
+        }
+*/
+
+        _entities.Clear();
 
         foreach (var e in entities)
         {
-
         animator = e.view.gameObject.GetComponentInChildren<Animator>();
         animator.SetFloat("Speed", speed);
 
         targetPosition = e.moveTarget.targetPosition;
 
         myPosition = e.position.value;
-
-        //e.positionBeforeMove.position = myPosition; 
-        //e.AddPositionBeforeMove(myPosition);
 
         distance = targetPosition - myPosition;
 
@@ -48,7 +51,6 @@ public class MoveToSystem : IExecuteSystem
             else
             {
             direction = distance.normalized;
-            //transform.rotation = Quaternion.LookRotation(direction);
 
             targetPosition -= direction * distanceFromTarget;
             distance = (targetPosition - myPosition);
@@ -64,20 +66,34 @@ public class MoveToSystem : IExecuteSystem
         e.view.gameObject.transform.position = myPosition;
 
         _entities.Add(e);
-
-        
         }
 
         foreach (var e in _entities)
         {
-            if (e.hasMoveTarget && myPosition == targetPosition)
+            if (e.hasMoveTarget && myPosition == targetPosition)         
+
+                                                //позиция продолжает совпадать . добавить доп условие кроме hasMoveTarget 
+                                                //ИЛИ 
+                                                //передалть на реактивность 
+                                                //ИЛИ 
+                                                //убегать от врага (для теста)
+
+            //if (e.hasMoveTarget && e.position.value == targetPosition)
+            //if (e.position.value == targetPosition)
             {
+
+            e.isDebug2 = true;
+
             e.RemoveMoveTarget();
             speed = 0.0f;
-            e.ReplaceSpeed(speed);
+            //e.ReplaceSpeed(speed);
+            e.RemoveSpeed();
             animator = e.view.gameObject.GetComponentInChildren<Animator>();
             animator.SetFloat("Speed", speed);
+            
             }
+
+        e.isDebug = true;
         }
     }
 }

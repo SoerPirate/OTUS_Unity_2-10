@@ -16,7 +16,7 @@ public class GameController : MonoBehaviour
     public List<GameObject> enemiesGO = new List<GameObject>();
     public int enemyCount; 
 
-    public float speed;
+    //public float speed;
 
     public GameObject UIController;
 
@@ -43,7 +43,7 @@ public class GameController : MonoBehaviour
         systems.Add(new NextTargetSystem(context));
         systems.Add(new MoveToSystem(context));
         systems.Add(new AttackSystem(context));
-        systems.Add(new ForwardMovementSystem(context));
+        //systems.Add(new ForwardMovementSystem(context));
         systems.Add(new ViewDestroySystem(context));
         //systems.Add(new MoveToSystem(context));       // создает компоненту дебаг на всех, тут не нужна, надо запустить по нажатию кнопки
         
@@ -72,9 +72,7 @@ public class GameController : MonoBehaviour
     {
         systems.Execute();
 
-        //if null
-        //playersGO[0].GetComponent<EntitasEntity>().entity.isITarget = true;
-        //enemiesGO[0].GetComponent<EntitasEntity>().entity.isITarget = true;
+        // можно сюда что-то писать?
 
         systems.Cleanup();
     }
@@ -85,19 +83,6 @@ public class GameController : MonoBehaviour
         {
             player.GetComponent<EntitasEntity>().entity.isAttack = true;
         }
-        //var valuePlayers = playersGO.Count;
-        //var valueEmemies = enemiesGO.Count;
-        //Debug.Log("Players: " + valuePlayers + ", Enemies: " + valueEmemies);
-
-        //playersGO[0].GetComponent<EntitasEntity>().entity.isDebug = true;
-
-        //playersGO[0].GetComponent<EntitasEntity>().entity.AddForwardMovement(speed);
-
-        //playersGO[0].GetComponent<EntitasEntity>().entity.Speed(speed);
-        //playersGO[0].GetComponent<EntitasEntity>().entity.MoveTarget(speed);
-        //playersGO[0].GetComponent<EntitasEntity>().entity.HitTarget(speed);
-
-         
     }
 
     public void NextTarget()

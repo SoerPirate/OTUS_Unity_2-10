@@ -10,28 +10,30 @@ public static class GameComponentsLookup {
 
     public const int Animator = 0;
     public const int Attack = 1;
-    public const int Debug = 2;
-    public const int Enemy = 3;
-    public const int ForwardMovement = 4;
-    public const int Health = 5;
-    public const int HitTarget = 6;
-    public const int ITarget = 7;
-    public const int JudgeGameLoop = 8;
-    public const int MoveTarget = 9;
-    public const int MyGameController = 10;
-    public const int NextTarget = 11;
-    public const int Player = 12;
-    public const int Position = 13;
-    public const int Prefab = 14;
-    public const int Rotation = 15;
-    public const int Speed = 16;
-    public const int View = 17;
+    public const int Debug2 = 2;
+    public const int Debug = 3;
+    public const int Enemy = 4;
+    public const int ForwardMovement = 5;
+    public const int Health = 6;
+    public const int HitTarget = 7;
+    public const int ITarget = 8;
+    public const int JudgeGameLoop = 9;
+    public const int MoveTarget = 10;
+    public const int MyGameController = 11;
+    public const int NextTarget = 12;
+    public const int Player = 13;
+    public const int Position = 14;
+    public const int Prefab = 15;
+    public const int Rotation = 16;
+    public const int Speed = 17;
+    public const int View = 18;
 
-    public const int TotalComponents = 18;
+    public const int TotalComponents = 19;
 
     public static readonly string[] componentNames = {
         "Animator",
         "Attack",
+        "Debug2",
         "Debug",
         "Enemy",
         "ForwardMovement",
@@ -53,6 +55,7 @@ public static class GameComponentsLookup {
     public static readonly System.Type[] componentTypes = {
         typeof(AnimatorComponent),
         typeof(AttackComponent),
+        typeof(Debug2Component),
         typeof(DebugComponent),
         typeof(EnemyComponent),
         typeof(ForwardMovementComponent),
