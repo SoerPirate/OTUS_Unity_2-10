@@ -19,17 +19,18 @@ public class DeathSystem : IExecuteSystem
         deadEntities.Clear();
         foreach (var e in entities) {
             if (e.health.value <= 0)
+            {
                 deadEntities.Add(e);
-            e.myGameController.gameController.GetComponent<GameController>().enemiesGO.Clear();
+                if (e.isPlayer == true)
+                    e.myGameController.gameController.GetComponent<GameController>().playersGO.Clear();
+                if (e.isEnemy == true)
+                    e.myGameController.gameController.GetComponent<GameController>().enemiesGO.Clear();
+            }
         }
 
         foreach (var e in deadEntities)
             //e.isIAlive = false;
-
-            //var _myGameController = e.myGameController.gameController;
-            //_myGameController.GetComponent<GameController>().enemiesGO.Clear();
-
-            //playersInGameController.Clear();
+            //враги не должны исчезать. не удалять, а включать анимацию смерти
             
             e.Destroy();
             
