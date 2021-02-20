@@ -74,9 +74,9 @@ public class NextTargetSystem : IExecuteSystem
             e.AddMoveTarget(needThisEnemy.position.value);  
 
             if (e.hasSpeed)
-            e.ReplaceSpeed(1.0f);  //вынести скорость в геймконтролер
+            e.ReplaceSpeed(2.0f);  //вынести скорость в геймконтролер
             else
-            e.AddSpeed(1.0f); 
+            e.AddSpeed(2.0f); 
 
             if (e.hasHitTarget)
             e.ReplaceHitTarget(needThisEnemy.position.value, needThisEnemy); 

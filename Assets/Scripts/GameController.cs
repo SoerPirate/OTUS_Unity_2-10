@@ -14,13 +14,16 @@ public class GameController : MonoBehaviour
     public List<GameObject> playersGO = new List<GameObject>();
 
     public List<GameObject> enemiesGO = new List<GameObject>();
+
+    //public GameObject curentPlayer, curentEnemy; 
+
     public int enemyCount; 
 
-    //public float speed;
+    public float speed;
 
     public GameObject UIController;
 
-    public GameEntity judgeGameLoop;
+    public GameEntity judgeGameLoop, curentEnemy;
 
     //public string debug;
 
@@ -56,6 +59,8 @@ public class GameController : MonoBehaviour
         buttonAttack.onClick.AddListener(PlayerAttack); 
         buttonNextTarget.onClick.AddListener(NextTarget); 
 
+        
+
         //playersGO[0].GetComponent<EntitasEntity>().entity.isITarget = true;
         
         //Utility.SetCanvasGroupEnabled(buttonPanel, false);
@@ -82,10 +87,21 @@ public class GameController : MonoBehaviour
 
     public void PlayerAttack()
     {
+        foreach (var enemy in enemiesGO)
+        {
+            curentEnemy = enemy.GetComponent<EntitasEntity>().entity;
+        }
+
         foreach (var player in playersGO)
         {
             if (player.GetComponent<EntitasEntity>().entity.hasMoveTarget)
             player.GetComponent<EntitasEntity>().entity.isAttack = true;
+            else
+            {
+            player.GetComponent<EntitasEntity>().entity.AddMoveTarget(curentEnemy.position.value);
+            player.GetComponent<EntitasEntity>().entity.AddSpeed(speed);
+            player.GetComponent<EntitasEntity>().entity.isAttack = true;
+            }
         }
     }
 
