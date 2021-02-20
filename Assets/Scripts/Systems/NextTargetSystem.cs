@@ -20,9 +20,9 @@ public class NextTargetSystem : IExecuteSystem
 
     public NextTargetSystem(Contexts contexts)
     {
-        JudgeGameLoopEntity = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.JudgeGameLoop, GameMatcher.NextTarget));  // IAlive
-        playersEntities = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Player, GameMatcher.NextTarget));            // IAlive
-        enemiesEntities = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Enemy, GameMatcher.NextTarget));             // IAlive
+        JudgeGameLoopEntity = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.JudgeGameLoop, GameMatcher.NextTarget));  
+        playersEntities = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Player, GameMatcher.NextTarget, GameMatcher.IAlive));            
+        enemiesEntities = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Enemy, GameMatcher.NextTarget, GameMatcher.IAlive));             
     }   
 
     public void Execute()
@@ -74,9 +74,14 @@ public class NextTargetSystem : IExecuteSystem
             e.AddMoveTarget(needThisEnemy.position.value);  
 
             if (e.hasSpeed)
-            e.ReplaceSpeed(1.0f); 
+            e.ReplaceSpeed(1.0f);  //вынести скорость в геймконтролер
             else
             e.AddSpeed(1.0f); 
+
+            if (e.hasHitTarget)
+            e.ReplaceHitTarget(needThisEnemy.position.value, needThisEnemy); 
+            else
+            e.AddHitTarget(needThisEnemy.position.value, needThisEnemy); 
 
             //HitTarget
             

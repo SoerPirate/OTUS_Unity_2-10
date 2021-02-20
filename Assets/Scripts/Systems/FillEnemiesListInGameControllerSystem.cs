@@ -12,7 +12,8 @@ public class FillEnemiesListInGameControllerSystem : IExecuteSystem
     {
         entities = contexts.game.GetGroup(GameMatcher.AllOf(
             GameMatcher.Enemy,
-            GameMatcher.View));
+            GameMatcher.View,
+            GameMatcher.IAlive));
     }
 
     public void Execute()

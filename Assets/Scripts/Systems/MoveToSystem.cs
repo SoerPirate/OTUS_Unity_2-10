@@ -17,7 +17,7 @@ public class MoveToSystem : IExecuteSystem
 
     public MoveToSystem(Contexts contexts)
     {
-        entities = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.MoveTarget, GameMatcher.Speed, GameMatcher.Attack)); 
+        entities = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.MoveTarget, GameMatcher.Speed, GameMatcher.Attack, GameMatcher.IAlive)); 
                                                                                                     //, GameMatcher.MyTurn вместо Attack
     }
 
@@ -91,6 +91,7 @@ public class MoveToSystem : IExecuteSystem
             animator = e.view.gameObject.GetComponentInChildren<Animator>();
             animator.SetFloat("Speed", speed);
             
+            //e.AddHitTarget(targetPosition);
             }
 
         e.isDebug = true;

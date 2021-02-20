@@ -8,25 +8,27 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly HitTarget hitTargetComponent = new HitTarget();
+    public HitTarget hitTarget { get { return (HitTarget)GetComponent(GameComponentsLookup.HitTarget); } }
+    public bool hasHitTarget { get { return HasComponent(GameComponentsLookup.HitTarget); } }
 
-    public bool isHitTarget {
-        get { return HasComponent(GameComponentsLookup.HitTarget); }
-        set {
-            if (value != isHitTarget) {
-                var index = GameComponentsLookup.HitTarget;
-                if (value) {
-                    var componentPool = GetComponentPool(index);
-                    var component = componentPool.Count > 0
-                            ? componentPool.Pop()
-                            : hitTargetComponent;
+    public void AddHitTarget(UnityEngine.Vector3 newHitTargetPosition, GameEntity newHitTarget) {
+        var index = GameComponentsLookup.HitTarget;
+        var component = (HitTarget)CreateComponent(index, typeof(HitTarget));
+        component.hitTargetPosition = newHitTargetPosition;
+        component.hitTarget = newHitTarget;
+        AddComponent(index, component);
+    }
 
-                    AddComponent(index, component);
-                } else {
-                    RemoveComponent(index);
-                }
-            }
-        }
+    public void ReplaceHitTarget(UnityEngine.Vector3 newHitTargetPosition, GameEntity newHitTarget) {
+        var index = GameComponentsLookup.HitTarget;
+        var component = (HitTarget)CreateComponent(index, typeof(HitTarget));
+        component.hitTargetPosition = newHitTargetPosition;
+        component.hitTarget = newHitTarget;
+        ReplaceComponent(index, component);
+    }
+
+    public void RemoveHitTarget() {
+        RemoveComponent(GameComponentsLookup.HitTarget);
     }
 }
 

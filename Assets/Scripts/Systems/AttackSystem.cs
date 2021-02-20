@@ -21,7 +21,6 @@ public class AttackSystem : ReactiveSystem<GameEntity>
             new [] {
                 context.GetGroup(GameMatcher.MoveTarget)
             }, new [] {
-                //GroupEvent
                 GroupEvent.Removed
             }
         );
@@ -29,29 +28,26 @@ public class AttackSystem : ReactiveSystem<GameEntity>
 
     protected override bool Filter(GameEntity entity)
     {
-        return entity.isAttack; //&& !entity.hasMoveTarget;
-        //return !entity.hasMoveTarget;
+        return entity.isAttack && entity.isIAlive; //!entity.hasMoveTarget;
     }
 
     protected override void Execute(List<GameEntity> entities)
     {
-        foreach (var e in entities) {
-           
-
+        foreach (var e in entities) 
+        {
             animator = e.view.gameObject.GetComponentInChildren<Animator>();
             animator.SetTrigger("Shoot");
+
+            e.hitTarget.hitTarget.health.value -= 1.0f;
 
             e.isAttack = false;
             e.isDebug = false;
             e.isDebug2 = false;
-            /*
-            var obj = GameObject.Instantiate(e.prefab.prefab);  //создаем объект согласно префабу лежащему в ентити
-            if (obj.TryGetComponent<EntitasEntity>(out var ee))
-                ee.entity = e;
-            else
-                obj.AddComponent<EntitasEntity>().entity = e;   //на объект вешаем скрипт (хранилище) для ентити которая его родила
-            e.AddView(obj);     
-            */                                //на ентити вешаем компонент, значит ентити родила объект (храним его) 
         }
+
+        //foreach (var e in entities)
+        //{
+        //    e.isDebug2 = true;    
+        //}
     }
 }

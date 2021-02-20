@@ -13,6 +13,7 @@ public class PlayerEntity : AbstractEntity
         entity.isPlayer = true;
         entity.AddPrefab(prefab);
         entity.AddHealth(health);
+        entity.isIAlive = true;
         //entity.AddSpeed(speed);
         entity.AddMyGameController(gameController);
         //entity.isMoveTarget = true;

@@ -12,7 +12,8 @@ public class FillPlayersListInGameControllerSystem : IExecuteSystem
     {
         entities = contexts.game.GetGroup(GameMatcher.AllOf(
             GameMatcher.Player,
-            GameMatcher.View));
+            GameMatcher.View,
+            GameMatcher.IAlive));
     }
 
     public void Execute()

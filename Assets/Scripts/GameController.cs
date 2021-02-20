@@ -32,7 +32,7 @@ public class GameController : MonoBehaviour
         judgeGameLoop.AddJudgeGameLoop(enemyCount);
 
         systems = new Systems();
-        //systems.Add(new DeathSystem(context));
+        systems.Add(new DeathSystem(context));
         systems.Add(new PrefabInstantiateSystem(context));
         //systems.Add(new PlayerInputSystem(context));
         //systems.Add(new ShotCollisionSystem(context));
@@ -72,6 +72,9 @@ public class GameController : MonoBehaviour
     {
         systems.Execute();
 
+        //playersGO.Clear();
+        //enemiesGO.Clear();
+
         // можно сюда что-то писать?
 
         systems.Cleanup();
@@ -81,12 +84,14 @@ public class GameController : MonoBehaviour
     {
         foreach (var player in playersGO)
         {
+            if (player.GetComponent<EntitasEntity>().entity.hasMoveTarget)
             player.GetComponent<EntitasEntity>().entity.isAttack = true;
         }
     }
 
     public void NextTarget()
     {
+        //правильней создавать ентити-событие "следующий ход" и системами его ловить. а не хранить список игроков и обращаться к каждому
         foreach (var player in playersGO)
         {
             player.GetComponent<EntitasEntity>().entity.isNextTarget = true;
