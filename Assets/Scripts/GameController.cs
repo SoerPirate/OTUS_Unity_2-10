@@ -33,6 +33,7 @@ public class GameController : MonoBehaviour
 
         judgeGameLoop = context.game.CreateEntity();
         judgeGameLoop.AddJudgeGameLoop(enemyCount);
+        judgeGameLoop.isPlayerTurn = true;
 
         systems = new Systems();
         systems.Add(new DeathSystem(context));
@@ -87,39 +88,48 @@ public class GameController : MonoBehaviour
 
     public void PlayerAttack()
     {
-        foreach (var enemy in enemiesGO)
+        if (judgeGameLoop.isPlayerTurn == true)
         {
-            curentEnemy = enemy.GetComponent<EntitasEntity>().entity;
-        }
-
-        foreach (var player in playersGO)
-        {
-            if (player.GetComponent<EntitasEntity>().entity.hasMoveTarget)
-            player.GetComponent<EntitasEntity>().entity.isAttack = true;
-            else
+            foreach (var enemy in enemiesGO)
             {
-            player.GetComponent<EntitasEntity>().entity.AddMoveTarget(curentEnemy.position.value);
-            player.GetComponent<EntitasEntity>().entity.AddSpeed(speed);
-            player.GetComponent<EntitasEntity>().entity.isAttack = true;
+                curentEnemy = enemy.GetComponent<EntitasEntity>().entity;
             }
+
+            foreach (var player in playersGO)
+            {
+                if (player.GetComponent<EntitasEntity>().entity.hasMoveTarget)
+                player.GetComponent<EntitasEntity>().entity.isAttack = true;
+                else
+                {
+                player.GetComponent<EntitasEntity>().entity.AddHitTarget(curentEnemy.position.value, curentEnemy); 
+                player.GetComponent<EntitasEntity>().entity.AddMoveTarget(curentEnemy.position.value);
+                player.GetComponent<EntitasEntity>().entity.AddSpeed(speed);
+                player.GetComponent<EntitasEntity>().entity.isAttack = true;
+                }
+            }
+
+            judgeGameLoop.isPlayerTurn = false;
         }
     }
 
     public void NextTarget()
     {
         //правильней создавать ентити-событие "следующий ход" и системами его ловить. а не хранить список игроков и обращаться к каждому
-        foreach (var player in playersGO)
-        {
-            player.GetComponent<EntitasEntity>().entity.isNextTarget = true;
-        }
         
-        foreach (var enemy in enemiesGO)
+        if (judgeGameLoop.isPlayerTurn == true)
         {
-            enemy.GetComponent<EntitasEntity>().entity.isNextTarget = true;
+            foreach (var player in playersGO)
+            {
+                player.GetComponent<EntitasEntity>().entity.isNextTarget = true;
+            }
+        
+            foreach (var enemy in enemiesGO)
+            {
+                enemy.GetComponent<EntitasEntity>().entity.isNextTarget = true;
+            }
+
+            judgeGameLoop.isNextTarget = true;
         }
-
-        judgeGameLoop.isNextTarget = true;
-
         //playersGO[0].GetComponent<EntitasEntity>().entity.Speed(speed);
         //playersGO[0].GetComponent<EntitasEntity>().entity.MoveTarget(speed);
         //playersGO[0].GetComponent<EntitasEntity>().entity.HitTarget(speed);
