@@ -29,9 +29,10 @@ public static class GameComponentsLookup {
     public const int Prefab = 18;
     public const int Rotation = 19;
     public const int Speed = 20;
-    public const int View = 21;
+    public const int StartPosition = 21;
+    public const int View = 22;
 
-    public const int TotalComponents = 22;
+    public const int TotalComponents = 23;
 
     public static readonly string[] componentNames = {
         "Animator",
@@ -55,6 +56,7 @@ public static class GameComponentsLookup {
         "Prefab",
         "Rotation",
         "Speed",
+        "StartPosition",
         "View"
     };
 
@@ -80,6 +82,7 @@ public static class GameComponentsLookup {
         typeof(PrefabComponent),
         typeof(RotationComponent),
         typeof(SpeedComponent),
+        typeof(StartPositionComponent),
         typeof(ViewComponent)
     };
 }

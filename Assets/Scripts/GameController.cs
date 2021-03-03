@@ -97,8 +97,11 @@ public class GameController : MonoBehaviour
 
             foreach (var player in playersGO)
             {
-                if (player.GetComponent<EntitasEntity>().entity.hasMoveTarget)
+                if (player.GetComponent<EntitasEntity>().entity.hasMoveTarget & player.GetComponent<EntitasEntity>().entity.hasHitTarget)
+                {
+                player.GetComponent<EntitasEntity>().entity.AddSpeed(speed);
                 player.GetComponent<EntitasEntity>().entity.isAttack = true;
+                }
                 else
                 {
                 player.GetComponent<EntitasEntity>().entity.AddHitTarget(curentEnemy.position.value, curentEnemy); 

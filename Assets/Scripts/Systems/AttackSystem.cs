@@ -41,6 +41,12 @@ public class AttackSystem : ReactiveSystem<GameEntity>
             e.hitTarget.hitTarget.health.value -= 1.0f;
 
             e.isAttack = false;
+
+            e.AddMoveTarget(e.startPosition.startPosition);
+            e.AddSpeed(2.0f); 
+
+            
+
             e.isDebug = false;
             e.isDebug2 = false;
         }
