@@ -40,13 +40,6 @@ public class EnemyNextTargetSystem : IExecuteSystem
             _playersEntities.Add(e);
         }
 
-        foreach (var e in _playersEntities) {
-            e.isEnemyNextTarget = false;
-            if (zh == _playerCount)
-            needThisPlayer = e;
-            zh++;
-        }
-
         if (_playerCount < _playersEntities.Count)
         _playerCount++;
         else
@@ -55,6 +48,13 @@ public class EnemyNextTargetSystem : IExecuteSystem
         foreach (var e in _JudgeGameLoopEntity){
            e.judgeGameLoop.playerCount = _playerCount;
            e.isEnemyNextTarget = false;                                  
+        }
+        
+        foreach (var e in _playersEntities) {
+            e.isEnemyNextTarget = false;
+            if (zh == _playerCount)
+            needThisPlayer = e;
+            zh++;
         }
         
         _enemiesEntities.Clear();

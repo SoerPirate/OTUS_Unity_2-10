@@ -43,6 +43,9 @@ public class GameController : MonoBehaviour
         systems.Add(new FillPlayersListInGameControllerSystem(context));
         systems.Add(new FillEnemiesListInGameControllerSystem(context));
 
+        systems.Add(new NextPlayerSystem(context));
+        systems.Add(new NextEnemySystem(context));
+
         systems.Add(new NextTargetSystem(context));
         systems.Add(new PlayerMoveToEnemySystem(context));
         systems.Add(new PlayerAttackSystem(context));
@@ -144,7 +147,7 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void NextPlayer()   // НАПИСАТЬ СИСТЕМУ
+    public void NextPlayer()   // НАПИСАТЬ СИСТЕМУ NextPlayer
     {
         foreach (var player in playersGO)
         {
@@ -152,7 +155,7 @@ public class GameController : MonoBehaviour
         }
 
         judgeGameLoop.isFindNextPlayer = true;
-        judgeGameLoop.judgeGameLoop.playerCount++;
+        //judgeGameLoop.judgeGameLoop.playerCount++;
     }
             
     public void EnemyTurn()
@@ -181,13 +184,29 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void EnemyNextTarget()
+    public void EnemyNextTarget()  
     {
+        foreach (var player in playersGO)
+            {
+                player.GetComponent<EntitasEntity>().entity.isEnemyNextTarget = true;
+            }
         
+            foreach (var enemy in enemiesGO)
+            {
+                enemy.GetComponent<EntitasEntity>().entity.isEnemyNextTarget = true;
+            }
+
+            judgeGameLoop.isEnemyNextTarget = true;
     }
 
-    public void EnemyNextEnemy()
+    public void EnemyNextEnemy()    // НАПИСАТЬ СИСТЕМУ NextEnemy
     {
-      
+        foreach (var enemy in enemiesGO)
+        {
+            enemy.GetComponent<EntitasEntity>().entity.isFindNextEnemy = true;
+        }
+
+        judgeGameLoop.isFindNextEnemy = true;
+        judgeGameLoop.judgeGameLoop.playerCount++;
     }
 }
