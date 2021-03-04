@@ -19,8 +19,8 @@ public class NextTargetSystem : IExecuteSystem
     public NextTargetSystem(Contexts contexts)
     {
         JudgeGameLoopEntity = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.JudgeGameLoop, GameMatcher.NextTarget));  
-        playersEntities = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Player, GameMatcher.NextTarget, GameMatcher.IAlive));            
-        enemiesEntities = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Enemy, GameMatcher.NextTarget, GameMatcher.IAlive));             
+        playersEntities = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Player, GameMatcher.IAlive, GameMatcher.NextTarget));            
+        enemiesEntities = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Enemy, GameMatcher.IAlive, GameMatcher.NextTarget));             
     }   
 
     public void Execute()

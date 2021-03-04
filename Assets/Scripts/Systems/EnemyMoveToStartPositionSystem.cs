@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Entitas;
-public class PlayerMoveToStartPositionSystem : IExecuteSystem
+public class EnemyMoveToStartPositionSystem : IExecuteSystem
 {
-    IGroup<GameEntity> player;
+    IGroup<GameEntity> enemy;
 
-    List<GameEntity> _player = new List<GameEntity>();
+    List<GameEntity> _enemy = new List<GameEntity>();
 
     public float distanceFromTarget = 0.0f, speed;
 
@@ -14,18 +14,18 @@ public class PlayerMoveToStartPositionSystem : IExecuteSystem
 
     Animator animator;
 
-    public PlayerMoveToStartPositionSystem(Contexts contexts)
+    public EnemyMoveToStartPositionSystem(Contexts contexts)
     {
-        player = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Player, GameMatcher.ICurrentPlayer, 
+        enemy = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Enemy, GameMatcher.ICurrentEnemy, 
         GameMatcher.StartPosition, GameMatcher.Speed, 
         GameMatcher.IAlive)); 
     }
 
     public void Execute()
     {       
-        _player.Clear();
+        _enemy.Clear();
 
-        foreach (var e in player)
+        foreach (var e in enemy)
         {
         myStartPosition = e.position.value;
 
@@ -59,10 +59,10 @@ public class PlayerMoveToStartPositionSystem : IExecuteSystem
         e.position.value = myPosition;
         e.view.gameObject.transform.position = myPosition;
 
-        _player.Add(e);
+        _enemy.Add(e);
         }
 
-        foreach (var e in _player)
+        foreach (var e in _enemy)
         {
             if (e.hasStartPosition && myPosition == targetPosition)         
             {
@@ -74,14 +74,11 @@ public class PlayerMoveToStartPositionSystem : IExecuteSystem
 
             e.RemoveSpeed();
 
-            e.isICurrentPlayer = false;
+            e.isICurrentEnemy = false;
 
-            e.myGameController.gameController.GetComponent<GameController>().NextPlayer();
+            e.myGameController.gameController.GetComponent<GameController>().EnemyNextEnemy();
 
-            e.myGameController.gameController.GetComponent<GameController>().playerTurn = false;
-            e.myGameController.gameController.GetComponent<GameController>().enemyTurn = true;
-
-            e.myGameController.gameController.GetComponent<GameController>().EnemyTurn();
+            e.myGameController.gameController.GetComponent<GameController>().enemyTurn = false;
             }
         }
     }

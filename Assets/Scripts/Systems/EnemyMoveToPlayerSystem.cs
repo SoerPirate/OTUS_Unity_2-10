@@ -2,34 +2,43 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Entitas;
-public class PlayerMoveToStartPositionSystem : IExecuteSystem
+
+public class EnemyMoveToPlayerSystem : IExecuteSystem
 {
-    IGroup<GameEntity> player;
+    IGroup<GameEntity> entities;
 
-    List<GameEntity> _player = new List<GameEntity>();
-
+    List<GameEntity> _entities = new List<GameEntity>();
+    
     public float distanceFromTarget = 0.0f, speed;
 
     public Vector3 targetPosition, myPosition, distance, direction, step, myStartPosition;
 
     Animator animator;
 
-    public PlayerMoveToStartPositionSystem(Contexts contexts)
+    public int msp = 1;
+
+    public EnemyMoveToPlayerSystem(Contexts contexts)
     {
-        player = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Player, GameMatcher.ICurrentPlayer, 
-        GameMatcher.StartPosition, GameMatcher.Speed, 
+        entities = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Enemy, GameMatcher.ICurrentEnemy,  
+        GameMatcher.MoveTarget, GameMatcher.HitTarget, GameMatcher.Speed, 
         GameMatcher.IAlive)); 
     }
 
     public void Execute()
-    {       
-        _player.Clear();
+    {
+        _entities.Clear();
 
-        foreach (var e in player)
+        foreach (var e in entities)
         {
-        myStartPosition = e.position.value;
+        if (msp == 1)
+        {
+            myStartPosition = e.position.value;
+            msp++;
+        }
 
-        targetPosition = e.startPosition.startPosition;
+        //Debug.Log(myStartPosition);
+
+        targetPosition = e.moveTarget.targetPosition;
 
         myPosition = e.position.value;
 
@@ -59,14 +68,14 @@ public class PlayerMoveToStartPositionSystem : IExecuteSystem
         e.position.value = myPosition;
         e.view.gameObject.transform.position = myPosition;
 
-        _player.Add(e);
+        _entities.Add(e);
         }
 
-        foreach (var e in _player)
+        foreach (var e in _entities)
         {
-            if (e.hasStartPosition && myPosition == targetPosition)         
+            if (e.hasMoveTarget && myPosition == targetPosition)         
             {
-            e.RemoveStartPosition();
+            e.RemoveMoveTarget();
 
             speed = 0.0f;
             animator = e.view.gameObject.GetComponentInChildren<Animator>();
@@ -74,14 +83,9 @@ public class PlayerMoveToStartPositionSystem : IExecuteSystem
 
             e.RemoveSpeed();
 
-            e.isICurrentPlayer = false;
+            e.AddStartPosition(myStartPosition);
 
-            e.myGameController.gameController.GetComponent<GameController>().NextPlayer();
-
-            e.myGameController.gameController.GetComponent<GameController>().playerTurn = false;
-            e.myGameController.gameController.GetComponent<GameController>().enemyTurn = true;
-
-            e.myGameController.gameController.GetComponent<GameController>().EnemyTurn();
+            e.isAttack = true;
             }
         }
     }

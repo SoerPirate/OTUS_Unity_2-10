@@ -21,7 +21,7 @@ public class GameController : MonoBehaviour
 
     public GameObject UIController;
 
-    public GameEntity judgeGameLoop, iCurrentPlayer, curentEnemyTarget;
+    public GameEntity judgeGameLoop, curentPlayerTarget, curentEnemyTarget; 
 
     public bool playerTurn = false, enemyTurn = false;
 
@@ -48,6 +48,11 @@ public class GameController : MonoBehaviour
         systems.Add(new PlayerAttackSystem(context));
         systems.Add(new PlayerMoveToStartPositionSystem(context));
 
+        systems.Add(new EnemyNextTargetSystem(context));
+        systems.Add(new EnemyMoveToPlayerSystem(context));
+        systems.Add(new EnemyAttackSystem(context));
+        systems.Add(new EnemyMoveToStartPositionSystem(context));
+
         systems.Add(new ViewDestroySystem(context));
 
         systems.Initialize();
@@ -58,7 +63,7 @@ public class GameController : MonoBehaviour
         buttonAttack.onClick.AddListener(PlayerAttack); 
         buttonNextTarget.onClick.AddListener(NextTarget); 
 
-        
+    
     }
 
     void OnDestroy()
@@ -75,8 +80,8 @@ public class GameController : MonoBehaviour
         foreach (var player in playersGO)
         {
             if (currentPlayerCount==1)
-            {
-            iCurrentPlayer = player.GetComponent<EntitasEntity>().entity;
+            { 
+            curentPlayerTarget = player.GetComponent<EntitasEntity>().entity;
             player.GetComponent<EntitasEntity>().entity.isICurrentPlayer = true;
             currentPlayerCount++;
             }
@@ -87,8 +92,8 @@ public class GameController : MonoBehaviour
             if (currentEnemyCount==1)
             {
             curentEnemyTarget = enemy.GetComponent<EntitasEntity>().entity;
-            enemy.GetComponent<EntitasEntity>().entity.isITarget = true;             // включать систему маркировки цели
-            currentEnemyCount++;
+            enemy.GetComponent<EntitasEntity>().entity.isICurrentEnemy = true;     // включать систему маркировки цели 
+            currentEnemyCount++;                                            // отдельной системой ставить марку по хиттаргету?
             }
         }
         }
@@ -110,7 +115,7 @@ public class GameController : MonoBehaviour
                 }
                 else
                 {
-                    curentEnemyTarget = player.GetComponent<EntitasEntity>().entity.hitTarget.hitTarget;
+                    curentEnemyTarget = player.GetComponent<EntitasEntity>().entity.hitTarget.hitTarget; 
                     player.GetComponent<EntitasEntity>().entity.AddMoveTarget(curentEnemyTarget.position.value);
 
                     player.GetComponent<EntitasEntity>().entity.AddSpeed(speed);
@@ -139,7 +144,7 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void NextPlayer()
+    public void NextPlayer()   // НАПИСАТЬ СИСТЕМУ
     {
         foreach (var player in playersGO)
         {
@@ -154,8 +159,35 @@ public class GameController : MonoBehaviour
     {
         if (playerTurn == false & enemyTurn == true)
         {
-        Debug.Log("EnemyTurn");  
-        //enemyTurn == false;
+            Debug.Log("EnemyTurn");  
+
+            foreach (var enemy in enemiesGO)
+            {
+                if (!enemy.GetComponent<EntitasEntity>().entity.hasHitTarget)
+                {
+                    enemy.GetComponent<EntitasEntity>().entity.AddHitTarget(curentPlayerTarget.position.value, curentPlayerTarget); 
+                    enemy.GetComponent<EntitasEntity>().entity.AddMoveTarget(curentPlayerTarget.position.value);
+                    enemy.GetComponent<EntitasEntity>().entity.AddSpeed(speed);
+                }
+                else
+                {
+                    curentPlayerTarget = enemy.GetComponent<EntitasEntity>().entity.hitTarget.hitTarget; 
+                    enemy.GetComponent<EntitasEntity>().entity.AddMoveTarget(curentPlayerTarget.position.value);
+
+                    enemy.GetComponent<EntitasEntity>().entity.AddSpeed(speed);
+                }
+            }
+        
         }
+    }
+
+    public void EnemyNextTarget()
+    {
+        
+    }
+
+    public void EnemyNextEnemy()
+    {
+      
     }
 }
