@@ -54,7 +54,11 @@ public class NextTargetSystem : IExecuteSystem
         foreach (var e in _enemiesEntities) {
             e.isNextTarget = false;
             if (zh == _enemyCount)
+            {
             needThisEnemy = e;
+            zh = 1;
+            }
+            else
             zh++;
         }
         

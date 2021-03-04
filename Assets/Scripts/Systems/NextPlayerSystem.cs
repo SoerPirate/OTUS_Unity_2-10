@@ -6,10 +6,7 @@ public class NextPlayerSystem : IExecuteSystem
 {
     IGroup<GameEntity> JudgeGameLoopEntity;
     IGroup<GameEntity> playersEntities;
-
-    public GameEntity needThisPlayer;
     public int _playerCount, zh; 
-
     List<GameEntity> _JudgeGameLoopEntity = new List<GameEntity>();
     List<GameEntity> _playersEntities = new List<GameEntity>();
 
@@ -49,7 +46,11 @@ public class NextPlayerSystem : IExecuteSystem
         foreach (var e in _playersEntities) {
             e.isFindNextPlayer = false;
             if (zh == _playerCount)
-            needThisPlayer = e;
+            {
+            e.isICurrentPlayer = true;
+            zh = 1;
+            }
+            else
             zh++; // тоже надо обнулять?
         }
     }

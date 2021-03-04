@@ -53,10 +53,14 @@ public class EnemyNextTargetSystem : IExecuteSystem
         foreach (var e in _playersEntities) {
             e.isEnemyNextTarget = false;
             if (zh == _playerCount)
+            {
             needThisPlayer = e;
+            zh = 1;
+            }
+            else
             zh++;
         }
-        
+
         _enemiesEntities.Clear();
 
         foreach (var e in enemiesEntities) {

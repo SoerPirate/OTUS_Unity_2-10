@@ -76,7 +76,7 @@ public class PlayerMoveToStartPositionSystem : IExecuteSystem
 
             e.isICurrentPlayer = false;
 
-            e.myGameController.gameController.GetComponent<GameController>().NextPlayer();
+            //e.myGameController.gameController.GetComponent<GameController>().NextPlayer();
 
             e.myGameController.gameController.GetComponent<GameController>().playerTurn = false;
             e.myGameController.gameController.GetComponent<GameController>().enemyTurn = true;

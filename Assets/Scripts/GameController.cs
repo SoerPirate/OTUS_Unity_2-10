@@ -119,9 +119,9 @@ public class GameController : MonoBehaviour
                 else
                 {
                     curentEnemyTarget = player.GetComponent<EntitasEntity>().entity.hitTarget.hitTarget; 
-                    player.GetComponent<EntitasEntity>().entity.AddMoveTarget(curentEnemyTarget.position.value);
-
-                    player.GetComponent<EntitasEntity>().entity.AddSpeed(speed);
+                    player.GetComponent<EntitasEntity>().entity.ReplaceMoveTarget(curentEnemyTarget.position.value);
+                                                                //Add ?
+                    player.GetComponent<EntitasEntity>().entity.ReplaceSpeed(speed);
                 }
             }
 
@@ -175,9 +175,9 @@ public class GameController : MonoBehaviour
                 else
                 {
                     curentPlayerTarget = enemy.GetComponent<EntitasEntity>().entity.hitTarget.hitTarget; 
-                    enemy.GetComponent<EntitasEntity>().entity.AddMoveTarget(curentPlayerTarget.position.value);
+                    enemy.GetComponent<EntitasEntity>().entity.ReplaceMoveTarget(curentPlayerTarget.position.value);
 
-                    enemy.GetComponent<EntitasEntity>().entity.AddSpeed(speed);
+                    enemy.GetComponent<EntitasEntity>().entity.ReplaceSpeed(speed);
                 }
             }
         
@@ -207,6 +207,6 @@ public class GameController : MonoBehaviour
         }
 
         judgeGameLoop.isFindNextEnemy = true;
-        judgeGameLoop.judgeGameLoop.playerCount++;
+        //judgeGameLoop.judgeGameLoop.playerCount++;
     }
 }
