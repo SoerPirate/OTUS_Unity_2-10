@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Entitas;
 
-public class MoveToSystem : IExecuteSystem
+public class PlayerMoveToEnemySystem : IExecuteSystem
 {
     IGroup<GameEntity> entities;
 
@@ -15,29 +15,20 @@ public class MoveToSystem : IExecuteSystem
 
     Animator animator;
 
-    public MoveToSystem(Contexts contexts)
+    public PlayerMoveToEnemySystem(Contexts contexts)
     {
-        entities = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.MoveTarget, GameMatcher.Speed, GameMatcher.IAlive)); 
-                                                                                                    //, GameMatcher.MyTurn вместо Attack
-                                                                                                    // GameMatcher.Attack,
+        entities = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Player, GameMatcher.ICurrentPlayer,  
+        GameMatcher.MoveTarget, GameMatcher.HitTarget, GameMatcher.Speed, 
+        GameMatcher.IAlive)); 
     }
 
     public void Execute()
     {
-/*
-        foreach (var e in entities)
-        {
-            myStartPosition = e.position.value;
-            e.startPosition.value = myStartPosition;
-        }
-*/
-
         _entities.Clear();
 
         foreach (var e in entities)
         {
-        animator = e.view.gameObject.GetComponentInChildren<Animator>();
-        animator.SetFloat("Speed", speed);
+        myStartPosition = e.position.value;
 
         targetPosition = e.moveTarget.targetPosition;
 
@@ -46,6 +37,9 @@ public class MoveToSystem : IExecuteSystem
         distance = targetPosition - myPosition;
 
         speed = e.speed.value;
+
+        animator = e.view.gameObject.GetComponentInChildren<Animator>();
+        animator.SetFloat("Speed", speed);
 
             if (distance.magnitude < 0.00001f) 
             myPosition = targetPosition;
@@ -72,30 +66,19 @@ public class MoveToSystem : IExecuteSystem
         foreach (var e in _entities)
         {
             if (e.hasMoveTarget && myPosition == targetPosition)         
-
-                                                //позиция продолжает совпадать . добавить доп условие кроме hasMoveTarget 
-                                                //ИЛИ 
-                                                //передалть на реактивность 
-                                                //ИЛИ 
-                                                //убегать от врага (для теста)
-
-            //if (e.hasMoveTarget && e.position.value == targetPosition)
-            //if (e.position.value == targetPosition)
             {
-
-            e.isDebug2 = true;
-
             e.RemoveMoveTarget();
+
             speed = 0.0f;
-            //e.ReplaceSpeed(speed);
-            e.RemoveSpeed();
             animator = e.view.gameObject.GetComponentInChildren<Animator>();
             animator.SetFloat("Speed", speed);
-            
-            //e.AddHitTarget(targetPosition);
-            }
 
-        e.isDebug = true;
+            e.RemoveSpeed();
+
+            e.AddStartPosition(myStartPosition);
+
+            e.isAttack = true;
+            }
         }
     }
 }

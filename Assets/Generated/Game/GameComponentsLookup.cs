@@ -18,21 +18,23 @@ public static class GameComponentsLookup {
     public const int Health = 7;
     public const int HitTarget = 8;
     public const int IAlive = 9;
-    public const int ITarget = 10;
-    public const int JudgeGameLoop = 11;
-    public const int MoveTarget = 12;
-    public const int MyGameController = 13;
-    public const int NextTarget = 14;
-    public const int Player = 15;
-    public const int PlayerTurn = 16;
-    public const int Position = 17;
-    public const int Prefab = 18;
-    public const int Rotation = 19;
-    public const int Speed = 20;
-    public const int StartPosition = 21;
-    public const int View = 22;
+    public const int ICurrentEnemy = 10;
+    public const int ICurrentPlayer = 11;
+    public const int ITarget = 12;
+    public const int JudgeGameLoop = 13;
+    public const int MoveTarget = 14;
+    public const int MyGameController = 15;
+    public const int NextTarget = 16;
+    public const int Player = 17;
+    public const int PlayerTurn = 18;
+    public const int Position = 19;
+    public const int Prefab = 20;
+    public const int Rotation = 21;
+    public const int Speed = 22;
+    public const int StartPosition = 23;
+    public const int View = 24;
 
-    public const int TotalComponents = 23;
+    public const int TotalComponents = 25;
 
     public static readonly string[] componentNames = {
         "Animator",
@@ -45,6 +47,8 @@ public static class GameComponentsLookup {
         "Health",
         "HitTarget",
         "IAlive",
+        "ICurrentEnemy",
+        "ICurrentPlayer",
         "ITarget",
         "JudgeGameLoop",
         "MoveTarget",
@@ -71,6 +75,8 @@ public static class GameComponentsLookup {
         typeof(HealthComponent),
         typeof(HitTarget),
         typeof(IAlive),
+        typeof(ICurrentEnemyComponent),
+        typeof(ICurrentPlayerComponent),
         typeof(ITargetComponent),
         typeof(JudgeGameLoopComponent),
         typeof(MoveTarget),

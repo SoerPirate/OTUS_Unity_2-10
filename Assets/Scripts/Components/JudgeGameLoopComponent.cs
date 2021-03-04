@@ -5,5 +5,5 @@ using Entitas;
 
 public class JudgeGameLoopComponent : IComponent
 {
-    public int enemyCount;              // кто будет следующим, а не кто выбран сейчас
+    public int enemyCount, playerCount;              // кто будет следующим, а не кто выбран сейчас
 }

@@ -6,7 +6,6 @@ public class EnemyEntity : AbstractEntity
 {
     public GameObject prefab, gameController;
     public float health, speed;
-    //public Animator animator;
 
     protected override void Start()
     {
@@ -15,12 +14,6 @@ public class EnemyEntity : AbstractEntity
         entity.AddPrefab(prefab);
         entity.AddHealth(health); 
         entity.isIAlive = true;
-        //entity.AddSpeed(speed);
         entity.AddMyGameController(gameController);
-
-        //animator = entity.prefab.prefab.GetComponentInChildren<Animator>();
-        //entity.AddAnimator(animator);
-
-        //entity.AddForwardMovement(speed);
     }
 }

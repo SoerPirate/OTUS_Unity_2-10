@@ -15,58 +15,50 @@ public class GameController : MonoBehaviour
 
     public List<GameObject> enemiesGO = new List<GameObject>();
 
-    //public GameObject curentPlayer, curentEnemy; 
-
-    public int enemyCount; 
+    private int currentEnemyCount = 1, currentPlayerCount = 1; 
 
     public float speed;
 
     public GameObject UIController;
 
-    public GameEntity judgeGameLoop, curentEnemy;
+    public GameEntity judgeGameLoop, iCurrentPlayer, curentEnemyTarget;
 
-    //public string debug;
+    public bool playerTurn = false, enemyTurn = false;
+
 
     void Awake()
     {
         var context = Contexts.sharedInstance;
 
         judgeGameLoop = context.game.CreateEntity();
-        judgeGameLoop.AddJudgeGameLoop(enemyCount);
-        judgeGameLoop.isPlayerTurn = true;
+        judgeGameLoop.AddJudgeGameLoop(currentEnemyCount, currentPlayerCount);
 
         systems = new Systems();
+
         systems.Add(new DeathSystem(context));
+
         systems.Add(new PrefabInstantiateSystem(context));
-        //systems.Add(new PlayerInputSystem(context));
-        //systems.Add(new ShotCollisionSystem(context));
-        //systems.Add(new PlayerCollisionSystem(context));
         systems.Add(new TransformApplySystem(context));
+
         systems.Add(new FillPlayersListInGameControllerSystem(context));
         systems.Add(new FillEnemiesListInGameControllerSystem(context));
+
         systems.Add(new NextTargetSystem(context));
-        systems.Add(new MoveToSystem(context));
-        systems.Add(new AttackSystem(context));
-        //systems.Add(new ForwardMovementSystem(context));
+        systems.Add(new PlayerMoveToEnemySystem(context));
+        systems.Add(new PlayerAttackSystem(context));
+        systems.Add(new PlayerMoveToStartPositionSystem(context));
+
         systems.Add(new ViewDestroySystem(context));
-        //systems.Add(new MoveToSystem(context));       // создает компоненту дебаг на всех, тут не нужна, надо запустить по нажатию кнопки
-        
+
         systems.Initialize();
     }
 
     void Start()
     {
-        //buttonAttack.onClick.AddListener(PlayerAttack);                  вернуть на эту кнопку
         buttonAttack.onClick.AddListener(PlayerAttack); 
         buttonNextTarget.onClick.AddListener(NextTarget); 
 
         
-
-        //playersGO[0].GetComponent<EntitasEntity>().entity.isITarget = true;
-        
-        //Utility.SetCanvasGroupEnabled(buttonPanel, false);
-        //Utility.SetCanvasGroupEnabled(pausePanel, false);
-        //StartCoroutine(GameLoop());
     }
 
     void OnDestroy()
@@ -78,48 +70,60 @@ public class GameController : MonoBehaviour
     {
         systems.Execute();
 
-        //playersGO.Clear();
-        //enemiesGO.Clear();
+        if (currentPlayerCount==1 & currentEnemyCount==1)
+        {
+        foreach (var player in playersGO)
+        {
+            if (currentPlayerCount==1)
+            {
+            iCurrentPlayer = player.GetComponent<EntitasEntity>().entity;
+            player.GetComponent<EntitasEntity>().entity.isICurrentPlayer = true;
+            currentPlayerCount++;
+            }
+        }
 
-        // можно сюда что-то писать?
+        foreach (var enemy in enemiesGO)
+        {
+            if (currentEnemyCount==1)
+            {
+            curentEnemyTarget = enemy.GetComponent<EntitasEntity>().entity;
+            enemy.GetComponent<EntitasEntity>().entity.isITarget = true;             // включать систему маркировки цели
+            currentEnemyCount++;
+            }
+        }
+        }
 
         systems.Cleanup();
     }
 
     public void PlayerAttack()
     {
-        if (judgeGameLoop.isPlayerTurn == true)
+        if (playerTurn == false & enemyTurn == false)
         {
-            foreach (var enemy in enemiesGO)
-            {
-                curentEnemy = enemy.GetComponent<EntitasEntity>().entity;
-            }
-
             foreach (var player in playersGO)
             {
-                if (player.GetComponent<EntitasEntity>().entity.hasMoveTarget & player.GetComponent<EntitasEntity>().entity.hasHitTarget)
+                if (!player.GetComponent<EntitasEntity>().entity.hasHitTarget)
                 {
-                player.GetComponent<EntitasEntity>().entity.AddSpeed(speed);
-                player.GetComponent<EntitasEntity>().entity.isAttack = true;
+                    player.GetComponent<EntitasEntity>().entity.AddHitTarget(curentEnemyTarget.position.value, curentEnemyTarget); 
+                    player.GetComponent<EntitasEntity>().entity.AddMoveTarget(curentEnemyTarget.position.value);
+                    player.GetComponent<EntitasEntity>().entity.AddSpeed(speed);
                 }
                 else
                 {
-                player.GetComponent<EntitasEntity>().entity.AddHitTarget(curentEnemy.position.value, curentEnemy); 
-                player.GetComponent<EntitasEntity>().entity.AddMoveTarget(curentEnemy.position.value);
-                player.GetComponent<EntitasEntity>().entity.AddSpeed(speed);
-                player.GetComponent<EntitasEntity>().entity.isAttack = true;
+                    curentEnemyTarget = player.GetComponent<EntitasEntity>().entity.hitTarget.hitTarget;
+                    player.GetComponent<EntitasEntity>().entity.AddMoveTarget(curentEnemyTarget.position.value);
+
+                    player.GetComponent<EntitasEntity>().entity.AddSpeed(speed);
                 }
             }
 
-            judgeGameLoop.isPlayerTurn = false;
+            playerTurn = true;
         }
     }
 
     public void NextTarget()
     {
-        //правильней создавать ентити-событие "следующий ход" и системами его ловить. а не хранить список игроков и обращаться к каждому
-        
-        if (judgeGameLoop.isPlayerTurn == true)
+        if (playerTurn == false & enemyTurn == false)
         {
             foreach (var player in playersGO)
             {
@@ -133,10 +137,5 @@ public class GameController : MonoBehaviour
 
             judgeGameLoop.isNextTarget = true;
         }
-        //playersGO[0].GetComponent<EntitasEntity>().entity.Speed(speed);
-        //playersGO[0].GetComponent<EntitasEntity>().entity.MoveTarget(speed);
-        //playersGO[0].GetComponent<EntitasEntity>().entity.HitTarget(speed);
-
-        //добавить нексттаргет, в нем сохраняется цель в переменную, переменная пробрасывается в хиттаргет, ее позиция в мувтаргет 
     }
 }

@@ -11,17 +11,19 @@ public partial class GameEntity {
     public JudgeGameLoopComponent judgeGameLoop { get { return (JudgeGameLoopComponent)GetComponent(GameComponentsLookup.JudgeGameLoop); } }
     public bool hasJudgeGameLoop { get { return HasComponent(GameComponentsLookup.JudgeGameLoop); } }
 
-    public void AddJudgeGameLoop(int newEnemyCount) {
+    public void AddJudgeGameLoop(int newEnemyCount, int newPlayerCount) {
         var index = GameComponentsLookup.JudgeGameLoop;
         var component = (JudgeGameLoopComponent)CreateComponent(index, typeof(JudgeGameLoopComponent));
         component.enemyCount = newEnemyCount;
+        component.playerCount = newPlayerCount;
         AddComponent(index, component);
     }
 
-    public void ReplaceJudgeGameLoop(int newEnemyCount) {
+    public void ReplaceJudgeGameLoop(int newEnemyCount, int newPlayerCount) {
         var index = GameComponentsLookup.JudgeGameLoop;
         var component = (JudgeGameLoopComponent)CreateComponent(index, typeof(JudgeGameLoopComponent));
         component.enemyCount = newEnemyCount;
+        component.playerCount = newPlayerCount;
         ReplaceComponent(index, component);
     }
 

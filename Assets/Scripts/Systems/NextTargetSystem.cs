@@ -10,8 +10,6 @@ public class NextTargetSystem : IExecuteSystem
 
     public GameEntity needThisEnemy;
 
-    //public bool needOnlyOne = true;
-
     List<GameEntity> _JudgeGameLoopEntity = new List<GameEntity>();
     List<GameEntity> _playersEntities = new List<GameEntity>();
     List<GameEntity> _enemiesEntities = new List<GameEntity>();
@@ -44,7 +42,6 @@ public class NextTargetSystem : IExecuteSystem
 
         foreach (var e in _enemiesEntities) {
             e.isNextTarget = false;
-            //if (needThisEnemy == null)
             if (zh == _enemyCount)
             needThisEnemy = e;
             zh++;
@@ -54,7 +51,7 @@ public class NextTargetSystem : IExecuteSystem
         if (_enemyCount < _enemiesEntities.Count)
         _enemyCount++;
         else
-        _enemyCount = 1;                                // не хватает системы автоустановки первого врага, чтобы счетчик не отставал
+        _enemyCount = 1;                             
 
         foreach (var e in _JudgeGameLoopEntity){
            e.judgeGameLoop.enemyCount = _enemyCount;
@@ -67,30 +64,14 @@ public class NextTargetSystem : IExecuteSystem
             _playersEntities.Add(e);
         }
 
-        foreach (var e in _playersEntities) {
-            if (e.hasMoveTarget)
-            e.ReplaceMoveTarget(needThisEnemy.position.value); 
-            else
-            e.AddMoveTarget(needThisEnemy.position.value);  
-
-            //if (e.hasSpeed)
-            //e.ReplaceSpeed(2.0f);  //вынести скорость в геймконтролер
-            //else
-            //e.AddSpeed(2.0f); 
-
+        foreach (var e in _playersEntities) 
+        {
             if (e.hasHitTarget)
             e.ReplaceHitTarget(needThisEnemy.position.value, needThisEnemy); 
             else
             e.AddHitTarget(needThisEnemy.position.value, needThisEnemy); 
-
-            //HitTarget
-            
-            e.isNextTarget = false;
-            
-        }
-        
-        //подтянуть судью ходов. положить ентити врагов в другой список, 
-        //взять из него врага с индексом (узнать у судьи), судье сдвинуть индекс +1
-        
+   
+            e.isNextTarget = false;            
+        }        
     }
 }

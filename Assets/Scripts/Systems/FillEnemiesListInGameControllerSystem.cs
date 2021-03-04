@@ -27,7 +27,8 @@ public class FillEnemiesListInGameControllerSystem : IExecuteSystem
 
             foreach (var e in entities)
             {
-                e.view.gameObject.GetComponent<EntitasEntity>().gameController.GetComponent<GameController>().enemiesGO = enemiesListGO;
+                e.view.gameObject.GetComponent<EntitasEntity>().gameController.GetComponent<GameController>().enemiesGO = enemiesListGO; 
+                // есть компонент myGameController
             }
         }
     }
