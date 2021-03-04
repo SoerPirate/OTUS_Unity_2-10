@@ -15,6 +15,8 @@ public class PlayerMoveToEnemySystem : IExecuteSystem
 
     Animator animator;
 
+    public int msp = 1;
+
     public PlayerMoveToEnemySystem(Contexts contexts)
     {
         entities = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Player, GameMatcher.ICurrentPlayer,  
@@ -28,7 +30,13 @@ public class PlayerMoveToEnemySystem : IExecuteSystem
 
         foreach (var e in entities)
         {
-        myStartPosition = e.position.value;
+        if (msp == 1)
+        {
+            myStartPosition = e.position.value;
+            msp++;
+        }
+
+        //Debug.Log(myStartPosition);
 
         targetPosition = e.moveTarget.targetPosition;
 

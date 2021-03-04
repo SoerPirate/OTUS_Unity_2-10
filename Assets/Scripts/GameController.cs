@@ -138,4 +138,24 @@ public class GameController : MonoBehaviour
             judgeGameLoop.isNextTarget = true;
         }
     }
+
+    public void NextPlayer()
+    {
+        foreach (var player in playersGO)
+        {
+            player.GetComponent<EntitasEntity>().entity.isFindNextPlayer = true;
+        }
+
+        judgeGameLoop.isFindNextPlayer = true;
+        judgeGameLoop.judgeGameLoop.playerCount++;
+    }
+            
+    public void EnemyTurn()
+    {
+        if (playerTurn == false & enemyTurn == true)
+        {
+        Debug.Log("EnemyTurn");  
+        //enemyTurn == false;
+        }
+    }
 }

@@ -14,27 +14,28 @@ public static class GameComponentsLookup {
     public const int Debug = 3;
     public const int Enemy = 4;
     public const int EnemyTurn = 5;
-    public const int ForwardMovement = 6;
-    public const int Health = 7;
-    public const int HitTarget = 8;
-    public const int IAlive = 9;
-    public const int ICurrentEnemy = 10;
-    public const int ICurrentPlayer = 11;
-    public const int ITarget = 12;
-    public const int JudgeGameLoop = 13;
-    public const int MoveTarget = 14;
-    public const int MyGameController = 15;
-    public const int NextTarget = 16;
-    public const int Player = 17;
-    public const int PlayerTurn = 18;
-    public const int Position = 19;
-    public const int Prefab = 20;
-    public const int Rotation = 21;
-    public const int Speed = 22;
-    public const int StartPosition = 23;
-    public const int View = 24;
+    public const int FindNextPlayer = 6;
+    public const int ForwardMovement = 7;
+    public const int Health = 8;
+    public const int HitTarget = 9;
+    public const int IAlive = 10;
+    public const int ICurrentEnemy = 11;
+    public const int ICurrentPlayer = 12;
+    public const int ITarget = 13;
+    public const int JudgeGameLoop = 14;
+    public const int MoveTarget = 15;
+    public const int MyGameController = 16;
+    public const int NextTarget = 17;
+    public const int Player = 18;
+    public const int PlayerTurn = 19;
+    public const int Position = 20;
+    public const int Prefab = 21;
+    public const int Rotation = 22;
+    public const int Speed = 23;
+    public const int StartPosition = 24;
+    public const int View = 25;
 
-    public const int TotalComponents = 25;
+    public const int TotalComponents = 26;
 
     public static readonly string[] componentNames = {
         "Animator",
@@ -43,6 +44,7 @@ public static class GameComponentsLookup {
         "Debug",
         "Enemy",
         "EnemyTurn",
+        "FindNextPlayer",
         "ForwardMovement",
         "Health",
         "HitTarget",
@@ -71,6 +73,7 @@ public static class GameComponentsLookup {
         typeof(DebugComponent),
         typeof(EnemyComponent),
         typeof(EnemyTurnComponent),
+        typeof(FindNextPlayerComponent),
         typeof(ForwardMovementComponent),
         typeof(HealthComponent),
         typeof(HitTarget),

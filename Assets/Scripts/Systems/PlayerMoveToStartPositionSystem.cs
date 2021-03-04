@@ -7,8 +7,14 @@ public class PlayerMoveToStartPositionSystem : IExecuteSystem
     IGroup<GameEntity> player, players, judge;
 
     List<GameEntity> _player = new List<GameEntity>();
-    List<GameEntity> _players = new List<GameEntity>();
-    List<GameEntity> _judge = new List<GameEntity>();
+    //List<GameEntity> _players = new List<GameEntity>();
+    //List<GameEntity> _judge = new List<GameEntity>();
+
+    public float distanceFromTarget = 0.0f, speed;
+
+    public Vector3 targetPosition, myPosition, distance, direction, step, myStartPosition;
+
+    Animator animator;
 
     public PlayerMoveToStartPositionSystem(Contexts contexts)
     {
@@ -16,72 +22,77 @@ public class PlayerMoveToStartPositionSystem : IExecuteSystem
         GameMatcher.StartPosition, GameMatcher.Speed, 
         GameMatcher.IAlive)); 
 
-        judge = contexts.game.GetGroup(GameMatcher.JudgeGameLoop);  
+        //judge = contexts.game.GetGroup(GameMatcher.JudgeGameLoop);                                      // + условие
 
-        players = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Player, GameMatcher.IAlive));
+        //players = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Player, GameMatcher.IAlive));    // + условие
     }
 
     public void Execute()
     {       
+        // foreach (var e in player)
+        // {
+        //     e.isDebug2 = true;
+        // }
+        _player.Clear();
+
         foreach (var e in player)
         {
-            e.isDebug2 = true;
+        myStartPosition = e.position.value;
+
+        targetPosition = e.startPosition.startPosition;
+
+        myPosition = e.position.value;
+
+        distance = targetPosition - myPosition;
+
+        speed = e.speed.value;
+
+        animator = e.view.gameObject.GetComponentInChildren<Animator>();
+        animator.SetFloat("Speed", speed);
+
+            if (distance.magnitude < 0.00001f) 
+            myPosition = targetPosition;
+            else
+            {
+            direction = distance.normalized;
+
+            targetPosition -= direction * distanceFromTarget;
+            distance = (targetPosition - myPosition);
+
+            step = direction * speed * Time.deltaTime;
+                if (step.magnitude < distance.magnitude) 
+                myPosition += step;
+                else
+                myPosition = targetPosition;
+            }
+
+        e.position.value = myPosition;
+        e.view.gameObject.transform.position = myPosition;
+
+        _player.Add(e);
         }
-    //     _entities.Clear();
 
-    //     foreach (var e in entities)
-    //     {
-    //     myStartPosition = e.position.value;
+        foreach (var e in _player)
+        {
+            if (e.hasStartPosition && myPosition == targetPosition)         
+            {
+            e.RemoveStartPosition();
 
-    //     targetPosition = e.moveTarget.targetPosition;
+            speed = 0.0f;
+            animator = e.view.gameObject.GetComponentInChildren<Animator>();
+            animator.SetFloat("Speed", speed);
 
-    //     myPosition = e.position.value;
+            e.RemoveSpeed();
 
-    //     distance = targetPosition - myPosition;
+            e.isICurrentPlayer = false;
 
-    //     speed = e.speed.value;
+            e.myGameController.gameController.GetComponent<GameController>().NextPlayer();
 
-    //     animator = e.view.gameObject.GetComponentInChildren<Animator>();
-    //     animator.SetFloat("Speed", speed);
+            e.myGameController.gameController.GetComponent<GameController>().playerTurn = false;
+            e.myGameController.gameController.GetComponent<GameController>().enemyTurn = true;
 
-    //         if (distance.magnitude < 0.00001f) 
-    //         myPosition = targetPosition;
-    //         else
-    //         {
-    //         direction = distance.normalized;
-
-    //         targetPosition -= direction * distanceFromTarget;
-    //         distance = (targetPosition - myPosition);
-
-    //         step = direction * speed * Time.deltaTime;
-    //             if (step.magnitude < distance.magnitude) 
-    //             myPosition += step;
-    //             else
-    //             myPosition = targetPosition;
-    //         }
-
-    //     e.position.value = myPosition;
-    //     e.view.gameObject.transform.position = myPosition;
-
-    //     _entities.Add(e);
-    //     }
-
-    //     foreach (var e in _entities)
-    //     {
-    //         if (e.hasMoveTarget && myPosition == targetPosition)         
-    //         {
-    //         e.RemoveMoveTarget();
-
-    //         speed = 0.0f;
-    //         animator = e.view.gameObject.GetComponentInChildren<Animator>();
-    //         animator.SetFloat("Speed", speed);
-
-    //         e.RemoveSpeed();
-
-    //         e.AddStartPosition(myStartPosition);
-
-    //         e.isAttack = true;
-    //         }
-    //     }
+            e.myGameController.gameController.GetComponent<GameController>().EnemyTurn();
+            }
+        }
     }
 }
