@@ -168,7 +168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 3591750979723153889, guid: 268fe3416a5e8cf4694a8632f9cb8c4d, type: 3}
   gameController: {fileID: 1606882347}
-  health: 5
+  health: 1
   speed: 1
 --- !u!1 &212085201
 GameObject:
@@ -305,7 +305,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 3591750979723153889, guid: 268fe3416a5e8cf4694a8632f9cb8c4d, type: 3}
   gameController: {fileID: 1606882347}
-  health: 5
+  health: 1
   speed: 1
 --- !u!1 &439713334
 GameObject:
@@ -352,7 +352,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 3591750979723153889, guid: 268fe3416a5e8cf4694a8632f9cb8c4d, type: 3}
   gameController: {fileID: 1606882347}
-  health: 5
+  health: 1
   speed: 1
 --- !u!1 &598862533
 GameObject:
@@ -988,7 +988,7 @@ MonoBehaviour:
   enemiesGO:
   - {fileID: 0}
   - {fileID: 0}
-  speed: 2
+  speed: 7
   UIController: {fileID: 329995835}
   playerTurn: 0
   enemyTurn: 0
