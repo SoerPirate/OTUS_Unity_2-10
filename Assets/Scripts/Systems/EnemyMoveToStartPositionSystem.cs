@@ -76,10 +76,11 @@ public class EnemyMoveToStartPositionSystem : IExecuteSystem
 
             e.isICurrentEnemy = false;
 
-            e.myGameController.gameController.GetComponent<GameController>().EnemyNextEnemy();
+            //e.myGameController.gameController.GetComponent<GameController>().enemyTurn = false;
+
+            //e.myGameController.gameController.GetComponent<GameController>().EnemyNextEnemy();
 
             e.myGameController.gameController.GetComponent<GameController>().enemyTurn = false;
-
             //e.myGameController.gameController.GetComponent<GameController>().NextPlayer();
             }
         }

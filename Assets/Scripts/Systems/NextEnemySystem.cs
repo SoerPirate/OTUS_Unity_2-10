@@ -13,7 +13,7 @@ public class NextEnemySystem : IExecuteSystem
     public NextEnemySystem(Contexts contexts)
     {
         JudgeGameLoopEntity = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.JudgeGameLoop, GameMatcher.FindNextEnemy));  
-        enemiesEntities = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Player, GameMatcher.IAlive, GameMatcher.FindNextEnemy));                       
+        enemiesEntities = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Enemy, GameMatcher.IAlive, GameMatcher.FindNextEnemy));                       
     }   
 
     public void Execute()

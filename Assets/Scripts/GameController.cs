@@ -169,7 +169,13 @@ public class GameController : MonoBehaviour
     {
         if (playerTurn == false & enemyTurn == true)
         {
-            Debug.Log("EnemyTurn");  
+            Debug.Log("EnemyTurn");
+
+            if (curentEnemyTarget.isICurrentEnemy == false)
+            {
+                EnemyNextEnemy();
+                Debug.Log("NextPlayer");
+            }
 
             foreach (var enemy in enemiesGO)
             {
@@ -208,14 +214,16 @@ public class GameController : MonoBehaviour
 
     public void EnemyNextEnemy()    
     {
-        Debug.Log("EnemyNextEnemy");
-
-        foreach (var enemy in enemiesGO)
+        if (playerTurn == false & enemyTurn == true)
         {
-            enemy.GetComponent<EntitasEntity>().entity.isFindNextEnemy = true;
-        }
+            //Debug.Log("EnemyNextEnemy");
 
-        judgeGameLoop.isFindNextEnemy = true;
-        //judgeGameLoop.judgeGameLoop.playerCount++;
+            foreach (var enemy in enemiesGO)
+            {
+                enemy.GetComponent<EntitasEntity>().entity.isFindNextEnemy = true;
+            }
+
+            judgeGameLoop.isFindNextEnemy = true;
+        }
     }
 }
