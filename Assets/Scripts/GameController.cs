@@ -86,7 +86,7 @@ public class GameController : MonoBehaviour
             { 
             curentPlayerTarget = player.GetComponent<EntitasEntity>().entity;
             curentPlayerTarget.isICurrentPlayer = true;
-            curentPlayerTargetF = curentPlayerTarget;
+            //curentPlayerTargetF = curentPlayerTarget;
             currentPlayerCount++;
             }
         }
@@ -109,7 +109,7 @@ public class GameController : MonoBehaviour
     {
         if (playerTurn == false & enemyTurn == false)
         {
-            if (curentPlayerTargetF.isICurrentPlayer == false)
+            if (curentPlayerTarget.isICurrentPlayer == false)
             {
                 NextPlayer();
                 Debug.Log("NextPlayer");

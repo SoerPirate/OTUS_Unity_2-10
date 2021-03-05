@@ -48,10 +48,15 @@ public class NextPlayerSystem : IExecuteSystem
             if (zh == _playerCount)
             {
             e.isICurrentPlayer = true;
-            zh = 1;
+            //zh = 1;
             }
+            if (zh < _playersEntities.Count)
+                zh++; // = 2
             else
-            zh++; // тоже надо обнулять?
+                zh = 1; 
+
+            // else
+            // zh++; // тоже надо обнулять?
         }
     }
 }

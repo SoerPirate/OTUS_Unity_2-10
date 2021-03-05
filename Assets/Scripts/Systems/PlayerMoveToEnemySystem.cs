@@ -30,13 +30,12 @@ public class PlayerMoveToEnemySystem : IExecuteSystem
 
         foreach (var e in entities)
         {
+
         if (msp == 1)
         {
             myStartPosition = e.position.value;
             msp++;
         }
-
-        //Debug.Log(myStartPosition);
 
         targetPosition = e.moveTarget.targetPosition;
 
@@ -84,6 +83,12 @@ public class PlayerMoveToEnemySystem : IExecuteSystem
             e.RemoveSpeed();
 
             e.AddStartPosition(myStartPosition);
+
+            //myStartPosition = myStartPosition;
+
+            myStartPosition = new Vector3(0,0,0);
+
+            msp = 1;
 
             e.isAttack = true;
             }

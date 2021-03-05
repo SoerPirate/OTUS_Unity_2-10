@@ -85,6 +85,10 @@ public class EnemyMoveToPlayerSystem : IExecuteSystem
 
             e.AddStartPosition(myStartPosition);
 
+            myStartPosition = new Vector3(0,0,0);
+
+            msp = 1;
+
             e.isAttack = true;
             }
         }

@@ -48,10 +48,14 @@ public class NextEnemySystem : IExecuteSystem
             if (zh == _enemyCount)
             {
             e.isICurrentEnemy = true;
-            zh = 1;
+            //zh = 1;
             }
+            if (zh < _enemiesEntities.Count)
+                zh++; // = 2
             else
-            zh++; // тоже надо обнулять?
+                zh = 1; 
+            // else
+            // zh++; // тоже надо обнулять?
         }            
     }
 }
