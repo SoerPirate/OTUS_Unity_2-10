@@ -21,7 +21,7 @@ public class GameController : MonoBehaviour
 
     public GameObject UIController;
 
-    public GameEntity judgeGameLoop, curentPlayerTarget, curentEnemyTarget; 
+    public GameEntity judgeGameLoop, curentPlayerTarget, curentEnemyTarget, curentPlayerTargetF; 
 
     public bool playerTurn = false, enemyTurn = false;
 
@@ -85,7 +85,8 @@ public class GameController : MonoBehaviour
             if (currentPlayerCount==1)
             { 
             curentPlayerTarget = player.GetComponent<EntitasEntity>().entity;
-            player.GetComponent<EntitasEntity>().entity.isICurrentPlayer = true;
+            curentPlayerTarget.isICurrentPlayer = true;
+            curentPlayerTargetF = curentPlayerTarget;
             currentPlayerCount++;
             }
         }
@@ -95,7 +96,7 @@ public class GameController : MonoBehaviour
             if (currentEnemyCount==1)
             {
             curentEnemyTarget = enemy.GetComponent<EntitasEntity>().entity;
-            enemy.GetComponent<EntitasEntity>().entity.isICurrentEnemy = true;     // включать систему маркировки цели 
+            curentEnemyTarget.isICurrentEnemy = true;     // включать систему маркировки цели 
             currentEnemyCount++;                                            // отдельной системой ставить марку по хиттаргету?
             }
         }
@@ -108,6 +109,12 @@ public class GameController : MonoBehaviour
     {
         if (playerTurn == false & enemyTurn == false)
         {
+            if (curentPlayerTargetF.isICurrentPlayer == false)
+            {
+                NextPlayer();
+                Debug.Log("NextPlayer");
+            }
+
             foreach (var player in playersGO)
             {
                 if (!player.GetComponent<EntitasEntity>().entity.hasHitTarget)
@@ -147,7 +154,7 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void NextPlayer()   // НАПИСАТЬ СИСТЕМУ NextPlayer
+    public void NextPlayer()   
     {
         foreach (var player in playersGO)
         {
@@ -199,8 +206,10 @@ public class GameController : MonoBehaviour
             judgeGameLoop.isEnemyNextTarget = true;
     }
 
-    public void EnemyNextEnemy()    // НАПИСАТЬ СИСТЕМУ NextEnemy
+    public void EnemyNextEnemy()    
     {
+        Debug.Log("EnemyNextEnemy");
+
         foreach (var enemy in enemiesGO)
         {
             enemy.GetComponent<EntitasEntity>().entity.isFindNextEnemy = true;

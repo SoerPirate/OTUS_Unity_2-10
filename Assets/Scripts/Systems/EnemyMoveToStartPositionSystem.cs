@@ -80,7 +80,7 @@ public class EnemyMoveToStartPositionSystem : IExecuteSystem
 
             e.myGameController.gameController.GetComponent<GameController>().enemyTurn = false;
 
-            e.myGameController.gameController.GetComponent<GameController>().NextPlayer();
+            //e.myGameController.gameController.GetComponent<GameController>().NextPlayer();
             }
         }
     }
