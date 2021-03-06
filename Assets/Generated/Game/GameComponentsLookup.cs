@@ -28,16 +28,17 @@ public static class GameComponentsLookup {
     public const int MoveTarget = 17;
     public const int MyGameController = 18;
     public const int NextTarget = 19;
-    public const int Player = 20;
-    public const int PlayerTurn = 21;
-    public const int Position = 22;
-    public const int Prefab = 23;
-    public const int Rotation = 24;
-    public const int Speed = 25;
-    public const int StartPosition = 26;
-    public const int View = 27;
+    public const int NextTargetNoButton = 20;
+    public const int Player = 21;
+    public const int PlayerTurn = 22;
+    public const int Position = 23;
+    public const int Prefab = 24;
+    public const int Rotation = 25;
+    public const int Speed = 26;
+    public const int StartPosition = 27;
+    public const int View = 28;
 
-    public const int TotalComponents = 28;
+    public const int TotalComponents = 29;
 
     public static readonly string[] componentNames = {
         "Animator",
@@ -60,6 +61,7 @@ public static class GameComponentsLookup {
         "MoveTarget",
         "MyGameController",
         "NextTarget",
+        "NextTargetNoButton",
         "Player",
         "PlayerTurn",
         "Position",
@@ -91,6 +93,7 @@ public static class GameComponentsLookup {
         typeof(MoveTarget),
         typeof(MyGameControllerComponent),
         typeof(NextTargetComponent),
+        typeof(NextTargetNoButtonComponent),
         typeof(PlayerComponent),
         typeof(PlayerTurnComponent),
         typeof(PositionComponent),

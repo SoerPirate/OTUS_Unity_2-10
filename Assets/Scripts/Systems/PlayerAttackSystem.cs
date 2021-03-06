@@ -30,8 +30,6 @@ public class PlayerAttackSystem : IExecuteSystem
             animator = e.view.gameObject.GetComponentInChildren<Animator>();
             animator.SetTrigger("Shoot");
 
-            //e.isDebug = true;
-
             e.isAttack = false;
 
             e.hitTarget.hitTarget.health.value -= 1.0f;
@@ -39,7 +37,7 @@ public class PlayerAttackSystem : IExecuteSystem
             if (e.hitTarget.hitTarget.health.value <= 0.0f)
             {
                 e.myGameController.gameController.GetComponent<GameController>().NextTargetNoButton();
-                Debug.Log("health.value <= 0.0f");
+                e.myGameController.gameController.GetComponent<GameController>().EnemyNextEnemyInPlayersTurn();
             }
         }
     }

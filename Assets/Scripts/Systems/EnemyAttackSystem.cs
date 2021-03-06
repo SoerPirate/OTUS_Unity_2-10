@@ -37,7 +37,10 @@ public class EnemyAttackSystem : IExecuteSystem
             e.hitTarget.hitTarget.health.value -= 1.0f;
 
             if (e.hitTarget.hitTarget.health.value <= 0.0f)
+            {
                 e.myGameController.gameController.GetComponent<GameController>().EnemyNextTarget();
+                //e.myGameController.gameController.GetComponent<GameController>().NextPlayer();
+            }
         }
     }
 }

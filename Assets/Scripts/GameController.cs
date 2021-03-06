@@ -23,7 +23,7 @@ public class GameController : MonoBehaviour
 
     public GameEntity judgeGameLoop, curentPlayerTarget, curentEnemyTarget, curentPlayerTargetF; 
 
-    public bool playerTurn = false, enemyTurn = false;
+    public bool playerTurn = false, enemyTurn = false, win = false, loose = false;
 
 
     void Awake()
@@ -43,10 +43,13 @@ public class GameController : MonoBehaviour
         systems.Add(new FillPlayersListInGameControllerSystem(context));
         systems.Add(new FillEnemiesListInGameControllerSystem(context));
 
+        systems.Add(new MarkEnemySystem(context));
+
         systems.Add(new NextPlayerSystem(context));
         systems.Add(new NextEnemySystem(context));
 
         systems.Add(new NextTargetSystem(context));
+        systems.Add(new NextTargetNoButtonSystem(context));
         systems.Add(new PlayerMoveToEnemySystem(context));
         systems.Add(new PlayerAttackSystem(context));
         systems.Add(new PlayerMoveToStartPositionSystem(context));
@@ -76,14 +79,16 @@ public class GameController : MonoBehaviour
     {
         systems.Execute();
 
-        if (enemiesGO.Count == 0) 
+        if (win == false & enemiesGO.Count == 0) 
         {
             Debug.Log("Игроки победил");
+            win = true;
         }
 
-        if (playersGO.Count == 0) 
+        if (loose == false & playersGO.Count == 0) 
         {
             Debug.Log("Враги победил");
+            loose = true;
         }
 
         if (currentPlayerCount==1 & currentEnemyCount==1)
@@ -107,6 +112,16 @@ public class GameController : MonoBehaviour
             currentEnemyCount++;                                            // отдельной системой ставить марку по хиттаргету?
             }
         }
+
+        foreach (var player in playersGO)
+        {
+                if (!player.GetComponent<EntitasEntity>().entity.hasHitTarget)
+                {
+                    player.GetComponent<EntitasEntity>().entity.AddHitTarget(curentEnemyTarget.position.value, curentEnemyTarget); 
+                    player.GetComponent<EntitasEntity>().entity.AddMoveTarget(curentEnemyTarget.position.value);
+                    //player.GetComponent<EntitasEntity>().entity.AddSpeed(speed);
+                }
+        }
         }
 
         systems.Cleanup();
@@ -122,7 +137,6 @@ public class GameController : MonoBehaviour
             if (curentPlayerTarget.isICurrentPlayer == false)
             {
                 NextPlayer();
-                Debug.Log("NextPlayer");
             }
 
             foreach (var player in playersGO)
@@ -173,25 +187,19 @@ public class GameController : MonoBehaviour
 
     public void NextTargetNoButton()
     {
-        if (enemiesGO.Count > 0 & playersGO.Count > 0)
+        if (enemiesGO.Count > 1 & playersGO.Count > 1)      // почему не 0? 
         {
-
-            if (enemiesGO.Count > 0 & playersGO.Count > 0)
-            {
-
             foreach (var player in playersGO)
             {
-                player.GetComponent<EntitasEntity>().entity.isNextTarget = true;
+                player.GetComponent<EntitasEntity>().entity.isNextTargetNoButton = true;
             }
         
             foreach (var enemy in enemiesGO)
             {
-                enemy.GetComponent<EntitasEntity>().entity.isNextTarget = true;
+                enemy.GetComponent<EntitasEntity>().entity.isNextTargetNoButton = true;
             }
 
-            judgeGameLoop.isNextTarget = true;
-
-            }
+            judgeGameLoop.isNextTargetNoButton = true;
         }
     }
 
@@ -206,7 +214,6 @@ public class GameController : MonoBehaviour
         }
 
         judgeGameLoop.isFindNextPlayer = true;
-        //judgeGameLoop.judgeGameLoop.playerCount++;
         }
     }
             
@@ -217,12 +224,9 @@ public class GameController : MonoBehaviour
 
         if (playerTurn == false & enemyTurn == true)
         {
-            Debug.Log("EnemyTurn");
-
             if (curentEnemyTarget.isICurrentEnemy == false)
             {
                 EnemyNextEnemy();
-                Debug.Log("NextPlayer");
             }
 
             foreach (var enemy in enemiesGO)
@@ -241,15 +245,13 @@ public class GameController : MonoBehaviour
                     enemy.GetComponent<EntitasEntity>().entity.ReplaceSpeed(speed);
                 }
             }
-        
         }
-
         }
     }
 
     public void EnemyNextTarget()  
     {
-        if (enemiesGO.Count > 0 & playersGO.Count > 0)
+        if (enemiesGO.Count > 1 & playersGO.Count > 1)
         {
 
         foreach (var player in playersGO)
@@ -274,7 +276,6 @@ public class GameController : MonoBehaviour
 
         if (playerTurn == false & enemyTurn == true)
         {
-            //Debug.Log("EnemyNextEnemy");
 
             foreach (var enemy in enemiesGO)
             {
@@ -284,6 +285,19 @@ public class GameController : MonoBehaviour
             judgeGameLoop.isFindNextEnemy = true;
         }
 
+        }
+    }
+
+    public void EnemyNextEnemyInPlayersTurn()    
+    {
+        if (enemiesGO.Count > 0 & playersGO.Count > 0)
+        {
+            foreach (var enemy in enemiesGO)
+            {
+                enemy.GetComponent<EntitasEntity>().entity.isFindNextEnemy = true;
+            }
+
+            judgeGameLoop.isFindNextEnemy = true;
         }
     }
 }

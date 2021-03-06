@@ -17,10 +17,13 @@ public class DeathSystem : IExecuteSystem
     public void Execute()
     {
         deadEntities.Clear();
-        foreach (var e in entities) {
+
+        foreach (var e in entities) 
+        {
             if (e.health.value <= 0)
             {
                 deadEntities.Add(e);
+
                 if (e.isPlayer == true)
                     e.myGameController.gameController.GetComponent<GameController>().playersGO.Clear();
                 if (e.isEnemy == true)
@@ -29,10 +32,9 @@ public class DeathSystem : IExecuteSystem
         }
 
         foreach (var e in deadEntities)
-            //e.isIAlive = false;
-            //враги не должны исчезать. не удалять, а включать анимацию смерти
-            
+        {
+            //враги не должны исчезать. не удалять, а включать анимацию смерти   
             e.Destroy();
-            
+        }    
     }
 }

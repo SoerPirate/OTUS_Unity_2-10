@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NextTargetSystem : IExecuteSystem
+public class NextTargetNoButtonSystem : IExecuteSystem
 {
     IGroup<GameEntity> JudgeGameLoopEntity;
     IGroup<GameEntity> playersEntities;
@@ -16,11 +16,11 @@ public class NextTargetSystem : IExecuteSystem
 
     public int _enemyCount, zh; 
 
-    public NextTargetSystem(Contexts contexts)
+    public NextTargetNoButtonSystem(Contexts contexts)
     {
-        JudgeGameLoopEntity = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.JudgeGameLoop, GameMatcher.NextTarget));  
-        playersEntities = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Player, GameMatcher.IAlive, GameMatcher.NextTarget));            
-        enemiesEntities = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Enemy, GameMatcher.IAlive, GameMatcher.NextTarget));             
+        JudgeGameLoopEntity = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.JudgeGameLoop, GameMatcher.NextTargetNoButton));  
+        playersEntities = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Player, GameMatcher.IAlive, GameMatcher.NextTargetNoButton));            
+        enemiesEntities = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Enemy, GameMatcher.IAlive, GameMatcher.NextTargetNoButton));             
     }   
 
     public void Execute()
@@ -48,11 +48,11 @@ public class NextTargetSystem : IExecuteSystem
 
         foreach (var e in _JudgeGameLoopEntity){
            e.judgeGameLoop.enemyCount = _enemyCount;
-           e.isNextTarget = false;                                  
+           e.isNextTargetNoButton = false;                                  
         }
 
         foreach (var e in _enemiesEntities) {
-            e.isNextTarget = false;
+            e.isNextTargetNoButton = false;
             if (zh == _enemyCount)
             {
             needThisEnemy = e;
@@ -73,13 +73,13 @@ public class NextTargetSystem : IExecuteSystem
         {
             if (e.hasHitTarget)
             {
-            e.hitTarget.hitTarget.view.gameObject.GetComponent<EntitasEntity>().MarkOff();
+            //e.hitTarget.hitTarget.view.gameObject.GetComponent<EntitasEntity>().MarkOff();
             e.ReplaceHitTarget(needThisEnemy.position.value, needThisEnemy); 
             }
             else
             e.AddHitTarget(needThisEnemy.position.value, needThisEnemy); 
    
-            e.isNextTarget = false;            
+            e.isNextTargetNoButton = false;            
         }        
     }
 }
