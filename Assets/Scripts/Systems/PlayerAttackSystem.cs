@@ -37,7 +37,7 @@ public class PlayerAttackSystem : IExecuteSystem
             if (e.hitTarget.hitTarget.health.value <= 0.0f)
             {
                 e.myGameController.gameController.GetComponent<GameController>().NextTargetNoButton();
-                e.myGameController.gameController.GetComponent<GameController>().EnemyNextEnemyInPlayersTurn();
+                //e.myGameController.gameController.GetComponent<GameController>().EnemyNextEnemyInPlayersTurn();
             }
         }
     }

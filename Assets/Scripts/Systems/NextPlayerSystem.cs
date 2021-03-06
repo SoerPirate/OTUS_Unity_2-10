@@ -22,14 +22,16 @@ public class NextPlayerSystem : IExecuteSystem
 
         _JudgeGameLoopEntity.Clear();
 
-        foreach (var e in JudgeGameLoopEntity){
+        foreach (var e in JudgeGameLoopEntity)
+        {
             _playerCount = e.judgeGameLoop.playerCount;
             _JudgeGameLoopEntity.Add(e);
         }
 
         _playersEntities.Clear();
         
-        foreach (var e in playersEntities) {
+        foreach (var e in playersEntities) 
+        {
             _playersEntities.Add(e);
         }
 
@@ -38,12 +40,14 @@ public class NextPlayerSystem : IExecuteSystem
         else
         _playerCount = 1; 
 
-        foreach (var e in _JudgeGameLoopEntity){
+        foreach (var e in _JudgeGameLoopEntity)
+        {
            e.judgeGameLoop.playerCount = _playerCount;
            e.isFindNextPlayer = false;                                  
         }
 
-        foreach (var e in _playersEntities) {
+        foreach (var e in _playersEntities) 
+        {
             e.isFindNextPlayer = false;
             if (zh == _playerCount)
             {
