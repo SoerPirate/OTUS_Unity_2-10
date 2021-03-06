@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using Entitas;
 
-public class MarkEnemySystem : IExecuteSystem
+public class MarkCurrentPlayerSystem : IExecuteSystem
 {
     Animator animator;
     IGroup<GameEntity> entities;
     List<GameEntity> _entities = new List<GameEntity>();
 
-    public MarkEnemySystem(Contexts contexts)
+    public MarkCurrentPlayerSystem(Contexts contexts)
     {
-        entities = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Player, GameMatcher.HitTarget, GameMatcher.IAlive)); ///GameMatcher.ICurrentPlayer,
+        entities = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.ICurrentPlayer, GameMatcher.IAlive)); 
     }
 
     public void Execute()
@@ -25,9 +25,8 @@ public class MarkEnemySystem : IExecuteSystem
 
         foreach (var e in _entities) 
         {
-            var vp = e.hitTarget.hitTarget; 
-            if (vp.hasView)
-            e.hitTarget.hitTarget.view.gameObject.GetComponent<EntitasEntity>().MarkOn();
+            if (e.hasView)
+            e.view.gameObject.GetComponent<EntitasEntity>().CIOn();
         }
     }
 }

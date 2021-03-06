@@ -44,6 +44,7 @@ public class GameController : MonoBehaviour
         systems.Add(new FillEnemiesListInGameControllerSystem(context));
 
         systems.Add(new MarkEnemySystem(context));
+        systems.Add(new MarkCurrentPlayerSystem(context));
 
         systems.Add(new NextPlayerSystem(context));
         systems.Add(new NextEnemySystem(context));

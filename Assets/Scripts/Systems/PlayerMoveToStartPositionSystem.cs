@@ -75,6 +75,7 @@ public class PlayerMoveToStartPositionSystem : IExecuteSystem
             e.RemoveSpeed();
 
             e.isICurrentPlayer = false;
+            e.view.gameObject.GetComponent<EntitasEntity>().CIOff();
 
             //e.myGameController.gameController.GetComponent<GameController>().NextPlayer();
 

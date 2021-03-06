@@ -168,7 +168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 3591750979723153889, guid: 268fe3416a5e8cf4694a8632f9cb8c4d, type: 3}
   gameController: {fileID: 1606882347}
-  health: 1
+  health: 3
   speed: 1
 --- !u!1 &212085201
 GameObject:
@@ -215,7 +215,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 8432393290777526023, guid: 7069c9812e2b61a4897267e66e5134da, type: 3}
   gameController: {fileID: 1606882347}
-  health: 3
+  health: 2
   speed: 1
 --- !u!1 &329995835
 GameObject:
@@ -305,7 +305,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 3591750979723153889, guid: 268fe3416a5e8cf4694a8632f9cb8c4d, type: 3}
   gameController: {fileID: 1606882347}
-  health: 1
+  health: 3
   speed: 1
 --- !u!1 &439713334
 GameObject:
@@ -352,7 +352,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 3591750979723153889, guid: 268fe3416a5e8cf4694a8632f9cb8c4d, type: 3}
   gameController: {fileID: 1606882347}
-  health: 1
+  health: 3
   speed: 1
 --- !u!1 &598862533
 GameObject:
@@ -1342,7 +1342,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 8432393290777526023, guid: 7069c9812e2b61a4897267e66e5134da, type: 3}
   gameController: {fileID: 1606882347}
-  health: 3
+  health: 2
   speed: 1
 --- !u!1 &2088567691
 GameObject:
@@ -1489,5 +1489,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 8432393290777526023, guid: 7069c9812e2b61a4897267e66e5134da, type: 3}
   gameController: {fileID: 1606882347}
-  health: 3
+  health: 2
   speed: 1
