@@ -29,14 +29,16 @@ public class NextTargetSystem : IExecuteSystem
 
         _JudgeGameLoopEntity.Clear();
 
-        foreach (var e in JudgeGameLoopEntity){
+        foreach (var e in JudgeGameLoopEntity)
+        {
             _enemyCount = e.judgeGameLoop.enemyCount;
             _JudgeGameLoopEntity.Add(e);
         }
 
         _enemiesEntities.Clear();
         
-        foreach (var e in enemiesEntities) {
+        foreach (var e in enemiesEntities) 
+        {
             _enemiesEntities.Add(e);
         }
 
@@ -44,19 +46,21 @@ public class NextTargetSystem : IExecuteSystem
         if (_enemyCount < _enemiesEntities.Count)
         _enemyCount++;
         else
-        _enemyCount = 1;                             
+        _enemyCount = 0;                             
 
-        foreach (var e in _JudgeGameLoopEntity){
+        foreach (var e in _JudgeGameLoopEntity)
+        {
            e.judgeGameLoop.enemyCount = _enemyCount;
            e.isNextTarget = false;                                  
         }
 
-        foreach (var e in _enemiesEntities) {
+        foreach (var e in _enemiesEntities) 
+        {
             e.isNextTarget = false;
             if (zh == _enemyCount)
             {
             needThisEnemy = e;
-            zh = 1;
+            zh = 0;
             }
             else
             zh++;
