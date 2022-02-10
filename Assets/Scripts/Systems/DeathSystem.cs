@@ -10,15 +10,19 @@ public class DeathSystem : IExecuteSystem
 
     public DeathSystem(Contexts contexts)
     {
-        entities = contexts.game.GetGroup(GameMatcher.Health);
+        entities = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Health, GameMatcher.View));
     }
 
     public void Execute()
     {
         deadEntities.Clear();
-        foreach (var e in entities) {
+        foreach (var e in entities) 
+        {
             if (e.health.value <= 0)
+            {
                 deadEntities.Add(e);
+                GameObject.Destroy(e.view.gameObject);
+            }
         }
 
         foreach (var e in deadEntities)

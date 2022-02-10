@@ -22,7 +22,7 @@ public class GameController : MonoBehaviour
         systems.Add(new ShotCollisionSystem(context));
         systems.Add(new PlayerCollisionSystem(context));
         systems.Add(new TransformApplySystem(context));
-        systems.Add(new ViewDestroySystem(context));
+        //systems.Add(new ViewDestroySystem(context));
         systems.Initialize();
     }
 
