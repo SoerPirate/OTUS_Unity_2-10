@@ -11,8 +11,11 @@ public class EnemyAttackSystem : IExecuteSystem
 
     public EnemyAttackSystem(Contexts contexts)
     {
-        entities = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Enemy, GameMatcher.ICurrentEnemy, 
-        GameMatcher.HitTarget, GameMatcher.Attack, 
+        entities = contexts.game.GetGroup(GameMatcher.AllOf(
+        GameMatcher.Enemy, 
+        GameMatcher.ICurrentEnemy, 
+        GameMatcher.HitTarget, 
+        GameMatcher.Attack, 
         GameMatcher.IAlive)); 
     }
 
