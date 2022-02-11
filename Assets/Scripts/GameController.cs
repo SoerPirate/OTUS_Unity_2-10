@@ -17,6 +17,8 @@ public class GameController : MonoBehaviour
     {
         var context = Contexts.sharedInstance;
 
+        context.game.SetGlobals(speed);
+
         systems = new Systems();
 /*
         systems.Add(new DeathSystem(context));
@@ -43,9 +45,9 @@ public class GameController : MonoBehaviour
         systems.Add(new EnemyMoveToPlayerSystem(context));
         systems.Add(new EnemyAttackSystem(context));
         systems.Add(new EnemyMoveToStartPositionSystem(context));
-
-        systems.Add(new ViewDestroySystem(context));
 */
+        //systems.Add(new ViewDestroySystem(context));
+
         systems.Initialize();
     }
 

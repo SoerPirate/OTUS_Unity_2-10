@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class EnemyEntity : AbstractEntity
 {
-    public GameObject prefab, gameController;
-    public float health, speed;
+    public GameObject prefab;
+    public float health;
 
     protected override void Start()
     {
@@ -13,7 +13,5 @@ public class EnemyEntity : AbstractEntity
         entity.isEnemy = true;
         entity.AddPrefab(prefab);
         entity.AddHealth(health); 
-        entity.isIAlive = true;
-        entity.AddMyGameController(gameController);
     }
 }

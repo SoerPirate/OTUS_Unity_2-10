@@ -36,10 +36,7 @@ public class TransformApplySystem : ReactiveSystem<GameEntity>
         foreach (var e in entities) {
             var t = e.view.gameObject.transform;
             if (e.hasPosition)
-            {
                 t.position = e.position.value;
-                //e.AddStartPosition(e.position.value);
-            }
             if (e.hasRotation)
                 t.rotation = Quaternion.Euler(0.0f, 0.0f, e.rotation.angle);
         }

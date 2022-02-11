@@ -6,11 +6,14 @@ using Entitas;
 public class PlayerDeathSystem : IExecuteSystem
 {
     IGroup<GameEntity> entities;
-    List<GameEntity> deadEntities;
+    List<Entity> deadEntities = new List<Entity>();
 
     public PlayerDeathSystem(Contexts contexts)
     {
-        entities = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Player, GameMatcher.Health));
+        entities = contexts.game.GetGroup(GameMatcher.AllOf(
+            GameMatcher.Player, 
+            GameMatcher.Health, 
+            GameMatcher.View));
     }
 
     public void Execute()
@@ -21,14 +24,16 @@ public class PlayerDeathSystem : IExecuteSystem
         {
             if (e.health.value <= 0)
             {
-                deadEntities.Add(e);
+                deadEntities.Add(e); // будет ненужен
+                // добавлять IDeadComponent
+                GameObject.Destroy(e.view.gameObject);
             }
         }
 
         foreach (var e in deadEntities)
         {
-            //враги не должны исчезать. не удалять, а включать анимацию смерти   
-            //e.Destroy();
+            e.Destroy();
+            // не удалять E
         }    
     }
 }

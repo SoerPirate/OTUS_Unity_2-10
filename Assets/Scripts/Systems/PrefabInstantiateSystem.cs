@@ -7,7 +7,7 @@ public class PrefabInstantiateSystem : ReactiveSystem<GameEntity>
 {
     Contexts contexts;
 
-    Animator animator;
+    //Animator animator;
 
     public PrefabInstantiateSystem(Contexts contexts)
         : base(contexts.game)
