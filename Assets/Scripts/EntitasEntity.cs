@@ -7,6 +7,7 @@ public class EntitasEntity : MonoBehaviour
 {
     public GameEntity entity;
 
+    /*
     public GameObject gameController, mark, currentIndicator; 
 
     public void MarkOn()
@@ -28,4 +29,5 @@ public class EntitasEntity : MonoBehaviour
     {
         currentIndicator.SetActive(false);
     }
+    */
 }
