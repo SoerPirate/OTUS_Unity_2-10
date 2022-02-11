@@ -20,32 +20,14 @@ public class GameController : MonoBehaviour
         context.game.SetGlobals(speed);
 
         systems = new Systems();
-/*
-        systems.Add(new DeathSystem(context));
+
+        systems.Add(new PlayerDeathSystem(context));
 
         systems.Add(new PrefabInstantiateSystem(context));
         systems.Add(new TransformApplySystem(context));
 
-        systems.Add(new FillPlayersListInGameControllerSystem(context));
-        systems.Add(new FillEnemiesListInGameControllerSystem(context));
 
-        systems.Add(new MarkEnemySystem(context));
-        systems.Add(new MarkCurrentPlayerSystem(context));
 
-        systems.Add(new NextPlayerSystem(context));
-        systems.Add(new NextEnemySystem(context));
-
-        systems.Add(new NextTargetSystem(context));
-        systems.Add(new NextTargetNoButtonSystem(context));
-        systems.Add(new PlayerMoveToEnemySystem(context));
-        systems.Add(new PlayerAttackSystem(context));
-        systems.Add(new PlayerMoveToStartPositionSystem(context));
-
-        systems.Add(new EnemyNextTargetSystem(context));
-        systems.Add(new EnemyMoveToPlayerSystem(context));
-        systems.Add(new EnemyAttackSystem(context));
-        systems.Add(new EnemyMoveToStartPositionSystem(context));
-*/
         //systems.Add(new ViewDestroySystem(context));
 
         systems.Initialize();

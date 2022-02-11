@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Entitas;
-public class IAlive : IComponent
+
+public class PlayerAttackComponent : IComponent
 {
     
 }

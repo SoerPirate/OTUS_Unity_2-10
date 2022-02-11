@@ -9,101 +9,44 @@
 public static class GameComponentsLookup {
 
     public const int Animator = 0;
-    public const int Attack = 1;
-    public const int Debug2 = 2;
-    public const int Debug = 3;
-    public const int Enemy = 4;
-    public const int EnemyNextTarget = 5;
-    public const int EnemyTurn = 6;
-    public const int FindNextEnemy = 7;
-    public const int FindNextPlayer = 8;
-    public const int ForwardMovement = 9;
-    public const int Globals = 10;
-    public const int Health = 11;
-    public const int HitTarget = 12;
-    public const int IAlive = 13;
-    public const int ICurrentEnemy = 14;
-    public const int ICurrentPlayer = 15;
-    public const int ITarget = 16;
-    public const int JudgeGameLoop = 17;
-    public const int MoveTarget = 18;
-    public const int MyGameController = 19;
-    public const int NextTarget = 20;
-    public const int NextTargetNoButton = 21;
-    public const int Player = 22;
-    public const int PlayerTurn = 23;
-    public const int Position = 24;
-    public const int Prefab = 25;
-    public const int Rotation = 26;
-    public const int Speed = 27;
-    public const int StartPosition = 28;
-    public const int View = 29;
+    public const int Enemy = 1;
+    public const int ForwardMovement = 2;
+    public const int Globals = 3;
+    public const int Health = 4;
+    public const int PlayerAttack = 5;
+    public const int Player = 6;
+    public const int Position = 7;
+    public const int Prefab = 8;
+    public const int Rotation = 9;
+    public const int View = 10;
 
-    public const int TotalComponents = 30;
+    public const int TotalComponents = 11;
 
     public static readonly string[] componentNames = {
         "Animator",
-        "Attack",
-        "Debug2",
-        "Debug",
         "Enemy",
-        "EnemyNextTarget",
-        "EnemyTurn",
-        "FindNextEnemy",
-        "FindNextPlayer",
         "ForwardMovement",
         "Globals",
         "Health",
-        "HitTarget",
-        "IAlive",
-        "ICurrentEnemy",
-        "ICurrentPlayer",
-        "ITarget",
-        "JudgeGameLoop",
-        "MoveTarget",
-        "MyGameController",
-        "NextTarget",
-        "NextTargetNoButton",
+        "PlayerAttack",
         "Player",
-        "PlayerTurn",
         "Position",
         "Prefab",
         "Rotation",
-        "Speed",
-        "StartPosition",
         "View"
     };
 
     public static readonly System.Type[] componentTypes = {
         typeof(AnimatorComponent),
-        typeof(AttackComponent),
-        typeof(Debug2Component),
-        typeof(DebugComponent),
         typeof(EnemyComponent),
-        typeof(EnemyNextTargetComponent),
-        typeof(EnemyTurnComponent),
-        typeof(FindNextEnemyComponent),
-        typeof(FindNextPlayerComponent),
         typeof(ForwardMovementComponent),
         typeof(GlobalsComponent),
         typeof(HealthComponent),
-        typeof(HitTarget),
-        typeof(IAlive),
-        typeof(ICurrentEnemyComponent),
-        typeof(ICurrentPlayerComponent),
-        typeof(ITargetComponent),
-        typeof(JudgeGameLoopComponent),
-        typeof(MoveTarget),
-        typeof(MyGameControllerComponent),
-        typeof(NextTargetComponent),
-        typeof(NextTargetNoButtonComponent),
+        typeof(PlayerAttackComponent),
         typeof(PlayerComponent),
-        typeof(PlayerTurnComponent),
         typeof(PositionComponent),
         typeof(PrefabComponent),
         typeof(RotationComponent),
-        typeof(SpeedComponent),
-        typeof(StartPositionComponent),
         typeof(ViewComponent)
     };
 }

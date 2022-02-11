@@ -8,18 +8,18 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly NextTargetNoButtonComponent nextTargetNoButtonComponent = new NextTargetNoButtonComponent();
+    static readonly PlayerAttackComponent playerAttackComponent = new PlayerAttackComponent();
 
-    public bool isNextTargetNoButton {
-        get { return HasComponent(GameComponentsLookup.NextTargetNoButton); }
+    public bool isPlayerAttack {
+        get { return HasComponent(GameComponentsLookup.PlayerAttack); }
         set {
-            if (value != isNextTargetNoButton) {
-                var index = GameComponentsLookup.NextTargetNoButton;
+            if (value != isPlayerAttack) {
+                var index = GameComponentsLookup.PlayerAttack;
                 if (value) {
                     var componentPool = GetComponentPool(index);
                     var component = componentPool.Count > 0
                             ? componentPool.Pop()
-                            : nextTargetNoButtonComponent;
+                            : playerAttackComponent;
 
                     AddComponent(index, component);
                 } else {
@@ -40,17 +40,17 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherNextTargetNoButton;
+    static Entitas.IMatcher<GameEntity> _matcherPlayerAttack;
 
-    public static Entitas.IMatcher<GameEntity> NextTargetNoButton {
+    public static Entitas.IMatcher<GameEntity> PlayerAttack {
         get {
-            if (_matcherNextTargetNoButton == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.NextTargetNoButton);
+            if (_matcherPlayerAttack == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.PlayerAttack);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherNextTargetNoButton = matcher;
+                _matcherPlayerAttack = matcher;
             }
 
-            return _matcherNextTargetNoButton;
+            return _matcherPlayerAttack;
         }
     }
 }
