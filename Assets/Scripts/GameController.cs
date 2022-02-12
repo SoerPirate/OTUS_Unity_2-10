@@ -15,22 +15,26 @@ public class GameController : MonoBehaviour
 
     void Awake()
     {
-        var context = Contexts.sharedInstance;
+        var contexts = Contexts.sharedInstance;
 
-        context.game.SetGlobals(_speed, null, null, null, null, false, false); 
+        contexts.game.SetGlobals(_speed, null, null, null, null, false, false); 
 
-        //var s = context.game.globals.speed * 3;
+        //var s = contexts.game.globals.speed * 3;
 
         systems = new Systems();
 
-        systems.Add(new DeathSystem(context));
-        systems.Add(new PrefabInstantiateSystem(context));
+        systems.Add(new DeathSystem(contexts));
+        systems.Add(new PrefabInstantiateSystem(contexts));
 
-        systems.Add(new FindCurrentPlayerSystem(context));
+        systems.Add(new FindCurrentPlayerSystem(contexts));
+        systems.Add(new FindCurrentEnemySystem(contexts));
 
-        systems.Add(new TransformApplySystem(context));
+        systems.Add(new FillPlayerTargetSystem(contexts));
+        systems.Add(new FillEnemyTargetSystem(contexts));
 
-        //systems.Add(new ViewDestroySystem(context));
+        systems.Add(new TransformApplySystem(contexts));
+
+        //systems.Add(new ViewDestroySystem(contexts));
 
         systems.Initialize();
     }

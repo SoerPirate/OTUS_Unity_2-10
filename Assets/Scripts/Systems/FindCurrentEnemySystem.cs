@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using Entitas;
 
-public class FindCurrentPlayerSystem : IExecuteSystem
+public class FindCurrentEnemySystem : IExecuteSystem
 {
     IGroup<GameEntity> entities;
     Contexts contexts;
     int i=0;
 
-    public FindCurrentPlayerSystem(Contexts contexts)
+    public FindCurrentEnemySystem(Contexts contexts)
     {
         this.contexts = contexts;
-        entities = contexts.game.GetGroup(GameMatcher.Player);
+        entities = contexts.game.GetGroup(GameMatcher.Enemy);
     }
 
     public void Execute()
@@ -20,12 +20,12 @@ public class FindCurrentPlayerSystem : IExecuteSystem
         foreach (var e in entities)
         {
             if (i<1)
-            {   
-                if (!e.isCurrentPlayer)
+            {
+                if (!e.isCurrentEnemy)
                 {
-                    e.isCurrentPlayer = true;
-                    contexts.game.globals.currentPlayer = e;
-                    contexts.game.globals.enemyTarget = e;
+                    e.isCurrentEnemy = true;
+                    contexts.game.globals.currentEnemy = e;
+                    contexts.game.globals.playerTarget = e;
                 }
 
                 i=1;
@@ -34,7 +34,8 @@ public class FindCurrentPlayerSystem : IExecuteSystem
             {
                 i=0;
                 break;
-            }   
+            }
+                
         }
     }
 }
