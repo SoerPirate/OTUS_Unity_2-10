@@ -8,4 +8,10 @@ using Entitas.CodeGeneration.Attributes;
 public class GlobalsComponent : IComponent
 {
     public float speed;
+    public GameEntity currentPlayer;
+    public GameEntity currentEnemy;
+    public GameEntity playerTarget;
+    public GameEntity enemyTarget;
+    public bool nowPlayerTurn = false;
+    public bool nowEnemуTurn = false;
 }

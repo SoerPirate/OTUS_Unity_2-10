@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using Entitas;
 
-public class PlayerDeathSystem : IExecuteSystem
+public class DeathSystem : IExecuteSystem
 {
     IGroup<GameEntity> entities;
     List<Entity> deadEntities = new List<Entity>();
 
-    public PlayerDeathSystem(Contexts contexts)
+    public DeathSystem(Contexts contexts)
     {
         entities = contexts.game.GetGroup(GameMatcher.AllOf(
-            GameMatcher.Player, 
             GameMatcher.Health, 
             GameMatcher.View));
     }

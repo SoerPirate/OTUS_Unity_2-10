@@ -944,7 +944,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonAttack: {fileID: 936045271}
   buttonNextTarget: {fileID: 1942138200}
-  speed: 5
+  _speed: 5
 --- !u!4 &1606882349
 Transform:
   m_ObjectHideFlags: 0

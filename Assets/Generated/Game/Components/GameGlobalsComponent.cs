@@ -12,22 +12,22 @@ public partial class GameContext {
     public GlobalsComponent globals { get { return globalsEntity.globals; } }
     public bool hasGlobals { get { return globalsEntity != null; } }
 
-    public GameEntity SetGlobals(float newSpeed) {
+    public GameEntity SetGlobals(float newSpeed, GameEntity newCurrentPlayer, GameEntity newCurrentEnemy, GameEntity newPlayerTarget, GameEntity newEnemyTarget, bool newNowPlayerTurn, bool newNowEnemуTurn) {
         if (hasGlobals) {
             throw new Entitas.EntitasException("Could not set Globals!\n" + this + " already has an entity with GlobalsComponent!",
                 "You should check if the context already has a globalsEntity before setting it or use context.ReplaceGlobals().");
         }
         var entity = CreateEntity();
-        entity.AddGlobals(newSpeed);
+        entity.AddGlobals(newSpeed, newCurrentPlayer, newCurrentEnemy, newPlayerTarget, newEnemyTarget, newNowPlayerTurn, newNowEnemуTurn);
         return entity;
     }
 
-    public void ReplaceGlobals(float newSpeed) {
+    public void ReplaceGlobals(float newSpeed, GameEntity newCurrentPlayer, GameEntity newCurrentEnemy, GameEntity newPlayerTarget, GameEntity newEnemyTarget, bool newNowPlayerTurn, bool newNowEnemуTurn) {
         var entity = globalsEntity;
         if (entity == null) {
-            entity = SetGlobals(newSpeed);
+            entity = SetGlobals(newSpeed, newCurrentPlayer, newCurrentEnemy, newPlayerTarget, newEnemyTarget, newNowPlayerTurn, newNowEnemуTurn);
         } else {
-            entity.ReplaceGlobals(newSpeed);
+            entity.ReplaceGlobals(newSpeed, newCurrentPlayer, newCurrentEnemy, newPlayerTarget, newEnemyTarget, newNowPlayerTurn, newNowEnemуTurn);
         }
     }
 
@@ -49,17 +49,29 @@ public partial class GameEntity {
     public GlobalsComponent globals { get { return (GlobalsComponent)GetComponent(GameComponentsLookup.Globals); } }
     public bool hasGlobals { get { return HasComponent(GameComponentsLookup.Globals); } }
 
-    public void AddGlobals(float newSpeed) {
+    public void AddGlobals(float newSpeed, GameEntity newCurrentPlayer, GameEntity newCurrentEnemy, GameEntity newPlayerTarget, GameEntity newEnemyTarget, bool newNowPlayerTurn, bool newNowEnemуTurn) {
         var index = GameComponentsLookup.Globals;
         var component = (GlobalsComponent)CreateComponent(index, typeof(GlobalsComponent));
         component.speed = newSpeed;
+        component.currentPlayer = newCurrentPlayer;
+        component.currentEnemy = newCurrentEnemy;
+        component.playerTarget = newPlayerTarget;
+        component.enemyTarget = newEnemyTarget;
+        component.nowPlayerTurn = newNowPlayerTurn;
+        component.nowEnemуTurn = newNowEnemуTurn;
         AddComponent(index, component);
     }
 
-    public void ReplaceGlobals(float newSpeed) {
+    public void ReplaceGlobals(float newSpeed, GameEntity newCurrentPlayer, GameEntity newCurrentEnemy, GameEntity newPlayerTarget, GameEntity newEnemyTarget, bool newNowPlayerTurn, bool newNowEnemуTurn) {
         var index = GameComponentsLookup.Globals;
         var component = (GlobalsComponent)CreateComponent(index, typeof(GlobalsComponent));
         component.speed = newSpeed;
+        component.currentPlayer = newCurrentPlayer;
+        component.currentEnemy = newCurrentEnemy;
+        component.playerTarget = newPlayerTarget;
+        component.enemyTarget = newEnemyTarget;
+        component.nowPlayerTurn = newNowPlayerTurn;
+        component.nowEnemуTurn = newNowEnemуTurn;
         ReplaceComponent(index, component);
     }
 
