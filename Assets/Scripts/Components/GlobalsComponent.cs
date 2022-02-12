@@ -14,4 +14,5 @@ public class GlobalsComponent : IComponent
     public GameEntity enemyTarget;
     public bool nowPlayerTurn = false;
     public bool nowEnemуTurn = false;
+    //public bool needFindCurrentPlayer = true;  и еще 3 компонента
 }

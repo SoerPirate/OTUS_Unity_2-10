@@ -19,13 +19,14 @@ public class FindCurrentPlayerSystem : IExecuteSystem
     {
         foreach (var e in entities)
         {
-            if (i<1)
+            if (i<1) // if (contexts.game.globals.needFindCurrentPlayer == true) & (!e.IsDead);
             {   
                 if (!e.isCurrentPlayer)
                 {
                     e.isCurrentPlayer = true;
                     contexts.game.globals.currentPlayer = e;
                     contexts.game.globals.enemyTarget = e;
+                    // contexts.game.globals.needFindCurrentPlayer == false
                 }
 
                 i=1;

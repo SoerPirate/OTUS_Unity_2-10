@@ -21,7 +21,9 @@ public class FillPlayerTargetSystem : IExecuteSystem
         foreach (var e in entities)
         {
             if (!e.hasPlayerTarget)
-                e.AddPlayerTarget(contexts.game.globals.playerTarget);       
+                e.AddPlayerTarget(contexts.game.globals.playerTarget);      
+            //else
+            //Replace 
         }
     }
 }

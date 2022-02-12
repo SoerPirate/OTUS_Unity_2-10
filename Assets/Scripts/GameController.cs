@@ -58,11 +58,11 @@ public class GameController : MonoBehaviour
 
     public void PlayerAttack()
     {
-
+        //contexts.game.globals.attackButton = true;
     }
 
     public void NextTarget()
     {
-
+        //contexts.game.globals.nextTargetButton = true;  ?? нужно ставить needFindPlayerTarget = true;
     }
 }
