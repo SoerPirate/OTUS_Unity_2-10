@@ -38,6 +38,8 @@ public class GameController : MonoBehaviour
 
         systems.Add(new NextTargetSystem(contexts));
 
+        systems.Add(new AttackSystem(contexts));
+
         systems.Add(new TransformApplySystem(contexts));
 
         //systems.Add(new ViewDestroySystem(contexts));
