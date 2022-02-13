@@ -20,14 +20,14 @@ public class FillPlayerTargetSystem : IExecuteSystem
     {
         foreach (var e in entities)
         {
-            if (contexts.game.globals.needFindPlayerTarget == true)
+            if (contexts.game.globals.needFillPlayerTarget == true)
             {
                 if (!e.hasPlayerTarget) 
                     e.AddPlayerTarget(contexts.game.globals.playerTarget);
                 else
                     e.ReplacePlayerTarget(contexts.game.globals.playerTarget);
 
-                contexts.game.globals.needFindPlayerTarget = false;  
+                contexts.game.globals.needFillPlayerTarget = false;  
             } 
         }
     }

@@ -12,7 +12,7 @@ public class DeathSystem : IExecuteSystem
     public DeathSystem(Contexts contexts)
     {
         this.contexts = contexts;
-        
+
         entities = contexts.game.GetGroup(GameMatcher.AllOf(
             GameMatcher.Health, 
             GameMatcher.View));
@@ -32,8 +32,8 @@ public class DeathSystem : IExecuteSystem
 
                 contexts.game.globals.needFindCurrentPlayer = true;  
                 contexts.game.globals.needFindCurrentEnemy = true;
-                contexts.game.globals.needFindPlayerTarget = true;
-                contexts.game.globals.needFindEnemyTarget = true;
+                contexts.game.globals.needFillPlayerTarget = true;
+                contexts.game.globals.needFillEnemyTarget = true;
             }
         }
 

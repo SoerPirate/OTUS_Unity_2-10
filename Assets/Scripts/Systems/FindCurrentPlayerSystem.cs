@@ -20,13 +20,16 @@ public class FindCurrentPlayerSystem : IExecuteSystem
         {
             if (contexts.game.globals.needFindCurrentPlayer == true)
             {   
-                if (!e.isCurrentPlayer)
+                if (e.isCurrentPlayer)
+                    break;
+                else
                 {
                     e.isCurrentPlayer = true;
                     contexts.game.globals.currentPlayer = e;
                     contexts.game.globals.enemyTarget = e;
-                    contexts.game.globals.needFindCurrentPlayer = false;
                 }
+
+                contexts.game.globals.needFindCurrentPlayer = false;
             }
         }
     }

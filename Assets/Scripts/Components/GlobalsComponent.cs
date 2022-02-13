@@ -16,6 +16,6 @@ public class GlobalsComponent : IComponent
     public bool nowEnemуTurn = false;
     public bool needFindCurrentPlayer = true;  
     public bool needFindCurrentEnemy = true;
-    public bool needFindPlayerTarget = true;
-    public bool needFindEnemyTarget = true;
+    public bool needFillPlayerTarget = true;
+    public bool needFillEnemyTarget = true;
 }
