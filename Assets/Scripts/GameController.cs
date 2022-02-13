@@ -38,6 +38,10 @@ public class GameController : MonoBehaviour
 
         systems.Add(new NextTargetSystem(contexts));
 
+        systems.Add(new TargetIndicatorSystem(contexts));
+        systems.Add(new PlayerTargIndFalseSystem(contexts));
+        systems.Add(new EnemyTargIndFalseSystem(contexts));
+        
         systems.Add(new AttackSystem(contexts));
 
         systems.Add(new TransformApplySystem(contexts));
