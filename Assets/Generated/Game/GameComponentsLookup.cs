@@ -9,25 +9,29 @@
 public static class GameComponentsLookup {
 
     public const int Animator = 0;
-    public const int CurrentEnemy = 1;
-    public const int CurrentPlayer = 2;
-    public const int Enemy = 3;
-    public const int EnemyTarget = 4;
-    public const int ForwardMovement = 5;
-    public const int Globals = 6;
-    public const int Health = 7;
-    public const int PlayerAttack = 8;
-    public const int Player = 9;
-    public const int PlayerTarget = 10;
-    public const int Position = 11;
-    public const int Prefab = 12;
-    public const int Rotation = 13;
-    public const int View = 14;
+    public const int Bat = 1;
+    public const int CurrentEnemy = 2;
+    public const int CurrentPlayer = 3;
+    public const int Enemy = 4;
+    public const int EnemyTarget = 5;
+    public const int ForwardMovement = 6;
+    public const int Globals = 7;
+    public const int Health = 8;
+    public const int NeedMove = 9;
+    public const int Pistol = 10;
+    public const int PlayerAttack = 11;
+    public const int Player = 12;
+    public const int PlayerTarget = 13;
+    public const int Position = 14;
+    public const int Prefab = 15;
+    public const int Rotation = 16;
+    public const int View = 17;
 
-    public const int TotalComponents = 15;
+    public const int TotalComponents = 18;
 
     public static readonly string[] componentNames = {
         "Animator",
+        "Bat",
         "CurrentEnemy",
         "CurrentPlayer",
         "Enemy",
@@ -35,6 +39,8 @@ public static class GameComponentsLookup {
         "ForwardMovement",
         "Globals",
         "Health",
+        "NeedMove",
+        "Pistol",
         "PlayerAttack",
         "Player",
         "PlayerTarget",
@@ -46,6 +52,7 @@ public static class GameComponentsLookup {
 
     public static readonly System.Type[] componentTypes = {
         typeof(AnimatorComponent),
+        typeof(BatComponent),
         typeof(CurrentEnemyComponent),
         typeof(CurrentPlayerComponent),
         typeof(EnemyComponent),
@@ -53,6 +60,8 @@ public static class GameComponentsLookup {
         typeof(ForwardMovementComponent),
         typeof(GlobalsComponent),
         typeof(HealthComponent),
+        typeof(NeedMoveComponent),
+        typeof(PistolComponent),
         typeof(PlayerAttackComponent),
         typeof(PlayerComponent),
         typeof(PlayerTargetComponent),

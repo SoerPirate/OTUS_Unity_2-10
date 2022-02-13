@@ -6,4 +6,10 @@ using Entitas;
 public class EntitasEntity : MonoBehaviour
 {
     public GameEntity entity;
+    public Animator animator;
+
+    void Start() 
+    {
+        animator = GetComponentInChildren<Animator>();
+    }
 }

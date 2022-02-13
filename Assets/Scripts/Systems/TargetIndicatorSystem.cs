@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Entitas;
 
-public class TargetIndicatorSystem : IExecuteSystem
+public class TargetIndicatorSystem : IExecuteSystem // переделать через подписку, как уничтожение индикатора
 {
     IGroup<GameEntity> entities;
     Contexts contexts;
