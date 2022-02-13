@@ -20,7 +20,7 @@ public class MoveEnemySystem : IExecuteSystem
             if (contexts.game.globals.nowEnemуTurn == true)
             {
                 // движение
-                //e.isEnemyAttack = true;      - // надо доработать AttackEnemySystem
+                e.isEnemyAttack = true;       // надо доработать AttackEnemySystem
                 contexts.game.globals.nowEnemуTurn = false;
             }
         }

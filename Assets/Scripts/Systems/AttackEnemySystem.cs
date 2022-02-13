@@ -7,7 +7,7 @@ public class AttackEnemySystem : IExecuteSystem
 {
     IGroup<GameEntity> entities;
     Contexts contexts;
-    List<Entity> endAttack = new List<Entity>();
+    List<GameEntity> endAttack = new List<GameEntity>();
 
     public AttackEnemySystem(Contexts contexts)
     {
@@ -25,9 +25,9 @@ public class AttackEnemySystem : IExecuteSystem
             endAttack.Add(e);
         }
 
-        foreach (var e in endAttack)
+        foreach (var ee in endAttack)
         {
-            //e.isEnemyAttack = false;
+            ee.isEnemyAttack = false;
         }
     }
 }
