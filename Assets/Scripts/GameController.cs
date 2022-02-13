@@ -8,18 +8,22 @@ using TMPro;
 public class GameController : MonoBehaviour
 {
     Systems systems;
-
+    Contexts contexts;
     public Button buttonAttack, buttonNextTarget;
-
     public float _speed;
 
     void Awake()
     {
         var contexts = Contexts.sharedInstance;
+        this.contexts = contexts;
 
-        contexts.game.SetGlobals(_speed, null, null, null, null, false, false, true, true, true, true);  
-
-        //var s = contexts.game.globals.speed * 3;
+        contexts.game.SetGlobals(
+            _speed,                 // speed
+            null, null, null, null, // currentPlayer, currentEnemy, playerTarget, enemyTarget
+            false, false,           // nowPlayerTurn, nowEnemуTurn
+            true, true, true, true, // needFindCurrentPlayer, needFindCurrentEnemy, needFillPlayerTarget, needFillEnemyTarget
+            false, false,           // nextTargetButton, attackButton
+            0);                     // currentEnemyIndex
 
         systems = new Systems();
 
@@ -31,6 +35,8 @@ public class GameController : MonoBehaviour
 
         systems.Add(new FillPlayerTargetSystem(contexts));
         systems.Add(new FillEnemyTargetSystem(contexts));
+
+        systems.Add(new NextTargetSystem(contexts));
 
         systems.Add(new TransformApplySystem(contexts));
 
@@ -58,11 +64,11 @@ public class GameController : MonoBehaviour
 
     public void PlayerAttack()
     {
-        //contexts.game.globals.attackButton = true;
+        contexts.game.globals.attackButton = true;
     }
 
     public void NextTarget()
     {
-        //contexts.game.globals.nextTargetButton = true;  ?? нужно ставить needFindPlayerTarget = true;
+        contexts.game.globals.nextTargetButton = true; 
     }
 }

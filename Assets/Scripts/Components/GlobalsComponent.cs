@@ -18,4 +18,7 @@ public class GlobalsComponent : IComponent
     public bool needFindCurrentEnemy = true;
     public bool needFillPlayerTarget = true;
     public bool needFillEnemyTarget = true;
+    public bool nextTargetButton = false;
+    public bool attackButton = false;
+    public int currentEnemyIndex;
 }

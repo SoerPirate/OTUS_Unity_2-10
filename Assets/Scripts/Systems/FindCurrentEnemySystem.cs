@@ -21,6 +21,7 @@ public class FindCurrentEnemySystem : IExecuteSystem
             if (contexts.game.globals.needFindCurrentEnemy == true)
             {
                 if (e.isCurrentEnemy)
+                    //if (contexts.game.globals.nextTargetButton == true)
                     break;
                 else
                 {
