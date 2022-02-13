@@ -12,28 +12,30 @@ public static class GameComponentsLookup {
     public const int Bat = 1;
     public const int CurrentEnemy = 2;
     public const int CurrentPlayer = 3;
-    public const int Enemy = 4;
-    public const int EnemyTarget = 5;
-    public const int ForwardMovement = 6;
-    public const int Globals = 7;
-    public const int Health = 8;
-    public const int NeedMove = 9;
-    public const int Pistol = 10;
-    public const int PlayerAttack = 11;
-    public const int Player = 12;
-    public const int PlayerTarget = 13;
-    public const int Position = 14;
-    public const int Prefab = 15;
-    public const int Rotation = 16;
-    public const int View = 17;
+    public const int EnemyAttack = 4;
+    public const int Enemy = 5;
+    public const int EnemyTarget = 6;
+    public const int ForwardMovement = 7;
+    public const int Globals = 8;
+    public const int Health = 9;
+    public const int NeedMove = 10;
+    public const int Pistol = 11;
+    public const int PlayerAttack = 12;
+    public const int Player = 13;
+    public const int PlayerTarget = 14;
+    public const int Position = 15;
+    public const int Prefab = 16;
+    public const int Rotation = 17;
+    public const int View = 18;
 
-    public const int TotalComponents = 18;
+    public const int TotalComponents = 19;
 
     public static readonly string[] componentNames = {
         "Animator",
         "Bat",
         "CurrentEnemy",
         "CurrentPlayer",
+        "EnemyAttack",
         "Enemy",
         "EnemyTarget",
         "ForwardMovement",
@@ -55,6 +57,7 @@ public static class GameComponentsLookup {
         typeof(BatComponent),
         typeof(CurrentEnemyComponent),
         typeof(CurrentPlayerComponent),
+        typeof(EnemyAttackComponent),
         typeof(EnemyComponent),
         typeof(EnemyTargetComponent),
         typeof(ForwardMovementComponent),

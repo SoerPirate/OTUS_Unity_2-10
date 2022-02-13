@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Entitas;
 
-public class AttackSystem : IExecuteSystem
+public class PlayerAttackSystem : IExecuteSystem
 {
     IGroup<GameEntity> entities;
     Contexts contexts;
-    public AttackSystem(Contexts contexts)
+    public PlayerAttackSystem(Contexts contexts)
     {
         this.contexts = contexts;
         entities = contexts.game.GetGroup(GameMatcher.CurrentPlayer);
@@ -21,8 +21,8 @@ public class AttackSystem : IExecuteSystem
             {
                 e.playerTarget.playerTarget.health.value -=1;  
                 contexts.game.globals.attackButton = false;
+                contexts.game.globals.nowEnemуTurn = true;
             }
-                     
         }
     }
 }
