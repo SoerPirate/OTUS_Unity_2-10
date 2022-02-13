@@ -17,7 +17,7 @@ public class GameController : MonoBehaviour
     {
         var contexts = Contexts.sharedInstance;
 
-        contexts.game.SetGlobals(_speed, null, null, null, null, false, false); 
+        contexts.game.SetGlobals(_speed, null, null, null, null, false, false, true, true, true, true);  
 
         //var s = contexts.game.globals.speed * 3;
 

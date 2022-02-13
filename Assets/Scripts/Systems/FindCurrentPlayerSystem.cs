@@ -7,7 +7,6 @@ public class FindCurrentPlayerSystem : IExecuteSystem
 {
     IGroup<GameEntity> entities;
     Contexts contexts;
-    int i=0;
 
     public FindCurrentPlayerSystem(Contexts contexts)
     {
@@ -19,23 +18,16 @@ public class FindCurrentPlayerSystem : IExecuteSystem
     {
         foreach (var e in entities)
         {
-            if (i<1) // if (contexts.game.globals.needFindCurrentPlayer == true) & (!e.IsDead);
+            if (contexts.game.globals.needFindCurrentPlayer == true)
             {   
                 if (!e.isCurrentPlayer)
                 {
                     e.isCurrentPlayer = true;
                     contexts.game.globals.currentPlayer = e;
                     contexts.game.globals.enemyTarget = e;
-                    // contexts.game.globals.needFindCurrentPlayer == false
+                    contexts.game.globals.needFindCurrentPlayer = false;
                 }
-
-                i=1;
             }
-            else
-            {
-                i=0;
-                break;
-            }   
         }
     }
 }

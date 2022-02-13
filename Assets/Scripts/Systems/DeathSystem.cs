@@ -7,9 +7,12 @@ public class DeathSystem : IExecuteSystem
 {
     IGroup<GameEntity> entities;
     List<Entity> deadEntities = new List<Entity>();
+    Contexts contexts;
 
     public DeathSystem(Contexts contexts)
     {
+        this.contexts = contexts;
+        
         entities = contexts.game.GetGroup(GameMatcher.AllOf(
             GameMatcher.Health, 
             GameMatcher.View));
@@ -26,6 +29,11 @@ public class DeathSystem : IExecuteSystem
                 deadEntities.Add(e); // будет ненужен
                 // добавлять IDeadComponent
                 GameObject.Destroy(e.view.gameObject);
+
+                contexts.game.globals.needFindCurrentPlayer = true;  
+                contexts.game.globals.needFindCurrentEnemy = true;
+                contexts.game.globals.needFindPlayerTarget = true;
+                contexts.game.globals.needFindEnemyTarget = true;
             }
         }
 

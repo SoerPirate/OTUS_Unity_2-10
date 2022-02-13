@@ -7,7 +7,6 @@ public class FindCurrentEnemySystem : IExecuteSystem
 {
     IGroup<GameEntity> entities;
     Contexts contexts;
-    int i=0;
 
     public FindCurrentEnemySystem(Contexts contexts)
     {
@@ -19,23 +18,16 @@ public class FindCurrentEnemySystem : IExecuteSystem
     {
         foreach (var e in entities)
         {
-            if (i<1)
+            if (contexts.game.globals.needFindCurrentEnemy == true)
             {
                 if (!e.isCurrentEnemy)
                 {
                     e.isCurrentEnemy = true;
                     contexts.game.globals.currentEnemy = e;
                     contexts.game.globals.playerTarget = e;
+                    contexts.game.globals.needFindCurrentEnemy = false;
                 }
-
-                i=1;
-            }
-            else
-            {
-                i=0;
-                break;
-            }
-                
+            }                
         }
     }
 }

@@ -20,8 +20,15 @@ public class FillEnemyTargetSystem : IExecuteSystem
     {
         foreach (var e in entities)
         {
-            if (!e.hasEnemyTarget)
-                e.AddEnemyTarget(contexts.game.globals.enemyTarget);       
+            if (contexts.game.globals.needFindEnemyTarget == true)
+            {
+                if (!e.hasEnemyTarget) 
+                    e.AddEnemyTarget(contexts.game.globals.enemyTarget);
+                else
+                    e.ReplaceEnemyTarget(contexts.game.globals.enemyTarget);
+
+                contexts.game.globals.needFindEnemyTarget = false;  
+            }    
         }
     }
 }
