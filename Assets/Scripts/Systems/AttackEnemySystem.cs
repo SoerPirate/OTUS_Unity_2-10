@@ -28,6 +28,7 @@ public class AttackEnemySystem : IExecuteSystem
         foreach (var ee in endAttack)
         {
             ee.isEnemyAttack = false;
+            contexts.game.globals.nowPlayerTurn = true;
         }
     }
 }

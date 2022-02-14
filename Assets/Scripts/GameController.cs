@@ -20,7 +20,7 @@ public class GameController : MonoBehaviour
         contexts.game.SetGlobals(
             _speed,                 // speed
             null, null, null, null, // currentPlayer, currentEnemy, playerTarget, enemyTarget
-            false, false,           // nowPlayerTurn, nowEnemуTurn
+            true, false,           // nowPlayerTurn, nowEnemуTurn
             true, true, true, true, // needFindCurrentPlayer, needFindCurrentEnemy, needFillPlayerTarget, needFillEnemyTarget
             false, false,           // nextTargetButton, attackButton
             0);                     // currentEnemyIndex
@@ -72,11 +72,17 @@ public class GameController : MonoBehaviour
 
     public void PlayerAttack()
     {
-        contexts.game.globals.attackButton = true;
+        if (contexts.game.globals.nowPlayerTurn == true)
+        {
+            contexts.game.globals.nowPlayerTurn = false;
+            contexts.game.globals.attackButton = true;
+        }
+            
     }
 
     public void NextTarget()
     {
-        contexts.game.globals.nextTargetButton = true; 
+        if (contexts.game.globals.nowPlayerTurn == true)
+            contexts.game.globals.nextTargetButton = true; 
     }
 }
