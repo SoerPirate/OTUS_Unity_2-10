@@ -5,9 +5,7 @@ using Entitas;
 
 public class CharacterAnimationEvents : MonoBehaviour
 {
-    //EntitasEntity EntitasEntity;
-
-    //float speed;
+    public bool shootEnd = false;
 
     void Start()
     {
@@ -16,12 +14,7 @@ public class CharacterAnimationEvents : MonoBehaviour
 
     void ShootEnd()
     {
-        /*
-        EntitasEntity = GetComponentInParent<EntitasEntity>();
-
-        speed = EntitasEntity.gameController.GetComponent<GameController>().speed;
-        EntitasEntity.entity.AddSpeed(speed);
-        */
+        shootEnd = true;
     }
 
     void AttackEnd()

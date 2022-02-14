@@ -5,9 +5,13 @@ using Entitas;
 
 public class PlayerAttackSystem : IExecuteSystem
 {
+    // можно было сделать вместо PlayTargetComp + EnemyTargCom универсальный TargetComp, 
+    // а в этой системе сделать Switch + Case оружия
+    // и if nowEnemуTurn или nowPlayerTurn
     IGroup<GameEntity> entities;
     Contexts contexts;
     EntitasEntity entitasEntity;
+    bool animationNow = false;
 
     public PlayerAttackSystem(Contexts contexts)
     {
@@ -21,11 +25,22 @@ public class PlayerAttackSystem : IExecuteSystem
         {
             if (contexts.game.globals.attackButton == true)
             {
-                entitasEntity = e.view.gameObject.GetComponent<EntitasEntity>();
-                entitasEntity.animator.SetTrigger("Shoot");
-                e.playerTarget.playerTarget.health.value -=1;  
-                contexts.game.globals.attackButton = false;
-                contexts.game.globals.nowEnemуTurn = true;
+                //contexts.game.globals.attackButton = false;
+                if (animationNow == false)
+                {
+                    entitasEntity = e.view.gameObject.GetComponent<EntitasEntity>();
+                    entitasEntity.animator.SetTrigger("Shoot");
+                    animationNow = true;
+                }
+                
+                if (entitasEntity.caracterAnimationEvents.shootEnd == true)
+                {
+                    e.playerTarget.playerTarget.health.value -=1;  
+                    entitasEntity.caracterAnimationEvents.shootEnd = false;
+                    contexts.game.globals.attackButton = false;
+                    animationNow = false;
+                    contexts.game.globals.nowEnemуTurn = true;
+                }
             }
         }
     }
