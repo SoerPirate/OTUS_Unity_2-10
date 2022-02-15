@@ -8,7 +8,7 @@ public class MoveEnemySystem : IExecuteSystem
     IGroup<GameEntity> entities;
     Contexts contexts;
     Vector3 distance, direction, step, targetPosition, myPosition;
-    float runSpeed, distanceFromTarget = 1.0f;
+    float runSpeed, distanceFromTarget = 1.2f;
     Quaternion myRotation;
     List<GameEntity> moveEntities = new List<GameEntity>();
 
@@ -47,7 +47,7 @@ public class MoveEnemySystem : IExecuteSystem
                 targetPosition -= direction * distanceFromTarget;
                 distance = (targetPosition - myPosition);
 
-                step = direction * runSpeed;
+                step = direction * runSpeed; //* Time.deltaTime;    почему так БЫСТРО?
                 if (step.magnitude < distance.magnitude) 
                 {
                     myPosition += step;
