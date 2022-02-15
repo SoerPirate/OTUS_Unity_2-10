@@ -11,6 +11,8 @@ public class MoveEnemySystem : IExecuteSystem
     float runSpeed, distanceFromTarget = 1.2f;
     Quaternion myRotation;
     List<GameEntity> moveEntities = new List<GameEntity>();
+    EntitasEntity entitasEntity;
+    bool animationNow = false;
 
     public MoveEnemySystem(Contexts contexts)
     {
@@ -31,8 +33,15 @@ public class MoveEnemySystem : IExecuteSystem
                 targetPosition = e.enemyTarget.enemyTarget.position.value;
                 myPosition = e.position.value;
                 myRotation = e.rotation.rotation;
-                // движение
 
+                if (animationNow == false)
+                {
+                    entitasEntity = e.view.gameObject.GetComponent<EntitasEntity>();
+                    entitasEntity.animator.SetFloat("Speed", runSpeed);
+                    animationNow = true;
+                }
+                
+                // движение
                 distance = targetPosition - myPosition;
                 if (distance.magnitude < 0.00001f) 
                 {
@@ -51,14 +60,12 @@ public class MoveEnemySystem : IExecuteSystem
                 if (step.magnitude < distance.magnitude) 
                 {
                     myPosition += step;
-                    //e.position.value = myPosition;
                     break;
-                    //
-                    //e.enemyTarget.enemyTarget.position.value = targetPosition;
                 }
         
                 myPosition = targetPosition;
-               // e.position.value = myPosition;
+                entitasEntity.animator.SetFloat("Speed", 0.0f);
+                animationNow = false;
                 e.isEnemyAttack = true;       
                 contexts.game.globals.nowEnemуTurn = false;
             }
