@@ -22,7 +22,7 @@ public class NextTargetSystem : IExecuteSystem
             {
                 if (i == contexts.game.globals.currentEnemyIndex)
                 {
-                    e.isCurrentEnemy = false;
+                    e.isCurrentEnemy = false;  // playerTarget? ОШИБКА мы хотим менять цель у игрока, а не текущего врага
                 }
 
                 if (i == contexts.game.globals.currentEnemyIndex + 1)

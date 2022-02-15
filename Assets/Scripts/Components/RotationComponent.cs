@@ -4,5 +4,6 @@ using UnityEngine;
 using Entitas;
 public class RotationComponent : IComponent
 {
-   public float angle;
+   //public float angle;
+   public Quaternion rotation;
 }

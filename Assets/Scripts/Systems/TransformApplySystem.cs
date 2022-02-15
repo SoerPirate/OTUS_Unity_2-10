@@ -6,6 +6,7 @@ using Entitas;
 public class TransformApplySystem : ReactiveSystem<GameEntity>
 {
     Contexts contexts;
+    List<GameEntity> _needMove = new List<GameEntity>();
 
     public TransformApplySystem(Contexts contexts)
         : base(contexts.game)
@@ -19,7 +20,9 @@ public class TransformApplySystem : ReactiveSystem<GameEntity>
             new [] {
                 context.GetGroup(GameMatcher.AnyOf(GameMatcher.Position, GameMatcher.Rotation)),
                 context.GetGroup(GameMatcher.View),
+                context.GetGroup(GameMatcher.NeedMove),
             }, new [] {
+                GroupEvent.Added,
                 GroupEvent.Added,
                 GroupEvent.Added,
             }
@@ -33,12 +36,21 @@ public class TransformApplySystem : ReactiveSystem<GameEntity>
 
     protected override void Execute(List<GameEntity> entities)
     {
+        _needMove.Clear();
+
         foreach (var e in entities) {
             var t = e.view.gameObject.transform;
             if (e.hasPosition)
                 t.position = e.position.value;
             if (e.hasRotation)
-                t.rotation = Quaternion.Euler(0.0f, 0.0f, e.rotation.angle);
+                //t.rotation = Quaternion.Euler(0.0f, 0.0f, e.rotation.angle);
+                t.rotation = e.rotation.rotation;
+            _needMove.Add(e);
+        }
+
+        foreach (var ee in _needMove)
+        {
+            ee.isNeedMove = false;
         }
     }
 }

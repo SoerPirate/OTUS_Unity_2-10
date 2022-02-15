@@ -10,16 +10,15 @@ public class ForwardMovementSystem : IExecuteSystem
     {
         entities = contexts.game.GetGroup(GameMatcher.AllOf(
             GameMatcher.ForwardMovement,
-            GameMatcher.Position,
-            GameMatcher.Rotation));
+            GameMatcher.Position));
     }
 
     public void Execute()
     {
         foreach (var e in entities) {
-            var angle = e.rotation.angle * Mathf.Deg2Rad;
-            var dir = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle));
-            e.ReplacePosition(e.position.value + dir * e.forwardMovement.speed * Time.deltaTime);
+            //var angle = e.rotation.angle * Mathf.Deg2Rad;
+            //var dir = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle));
+            //e.ReplacePosition(e.position.value + dir * e.forwardMovement.speed * Time.deltaTime);
         }
     }
 }
