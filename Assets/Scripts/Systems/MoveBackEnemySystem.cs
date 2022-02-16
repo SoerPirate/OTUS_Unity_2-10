@@ -42,23 +42,17 @@ public class MoveBackEnemySystem : IExecuteSystem
             }
             
             // движение
-            distance = targetPosition - myPosition; // сейчас не учитывается distanceFromTarget
+            distance = targetPosition - myPosition;
             if (distance.magnitude < 0.00001f) 
             {
                 endMoveEntities.Add(e);
-                //e.isMoveBack = false;     
-                //animationNow = false;
-                //contexts.game.globals.nowPlayerTurn = true;
                 break;
             }
 
             direction = distance.normalized;
             e.rotation.rotation = Quaternion.LookRotation(direction);
 
-            //targetPosition -= direction * distanceFromTarget;
-            //distance = (targetPosition - myPosition);
-
-            step = direction * runSpeed; //* Time.deltaTime;    почему так БЫСТРО?
+            step = direction * runSpeed; 
             if (step.magnitude < distance.magnitude) 
             {
                 myPosition += step;
@@ -67,19 +61,13 @@ public class MoveBackEnemySystem : IExecuteSystem
 
             myPosition = targetPosition;
             entitasEntity.animator.SetFloat("Speed", 0.0f);
-            endMoveEntities.Add(e);
-
-            //animationNow = false;     
-            //e.isMoveBack = false;  
-            //contexts.game.globals.nowPlayerTurn = true;
-            
+            endMoveEntities.Add(e);       
         }
 
         foreach (var ee in moveEntities)
         {
             ee.position.value = myPosition;
             ee.isNeedMove = true;
-            //ee.isMoveBack = false;
         }
 
         foreach (var eee in endMoveEntities)
