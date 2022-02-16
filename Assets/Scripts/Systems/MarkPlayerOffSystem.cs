@@ -3,34 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using Entitas;
 
-public class EnemyTargIndFalseSystem : IInitializeSystem, ITearDownSystem
+public class MarkPlayerOffSystem : IInitializeSystem, ITearDownSystem
 {
     IGroup<GameEntity> group;
     TargetIndicator targetIndicator;
     CurrentPlayerIndicator currentIndicator;
 
-    public EnemyTargIndFalseSystem(Contexts contexts)
+    public MarkPlayerOffSystem(Contexts contexts)
     {
-        group = contexts.game.GetGroup(GameMatcher.CurrentEnemy);
+        group = contexts.game.GetGroup(GameMatcher.CurrentPlayer);
     }
 
     public void Initialize()
     {
-        group.OnEntityRemoved += OnCurrentEnemyRemoved;
+        group.OnEntityRemoved += OnCurrentPlayerRemoved;
     }
 
     public void TearDown()
     {
-        group.OnEntityRemoved -= OnCurrentEnemyRemoved;
+        group.OnEntityRemoved -= OnCurrentPlayerRemoved;
     }
 
-    void OnCurrentEnemyRemoved(IGroup<GameEntity> group, GameEntity entity, int index, IComponent component)
+    void OnCurrentPlayerRemoved(IGroup<GameEntity> group, GameEntity entity, int index, IComponent component)
     {
         //var view = (ViewComponent)component;
         //targetIndicator = entity.view.gameObject.GetComponentInChildren<TargetIndicator>(true);
-        //targetIndicator.SetActiveFalse();  
+        //targetIndicator.SetActiveFalse(); 
 
         currentIndicator = entity.view.gameObject.GetComponentInChildren<CurrentPlayerIndicator>(true);           
-        currentIndicator.SetActiveTrue(); 
+        currentIndicator.SetActiveTrue();  
     }
 }

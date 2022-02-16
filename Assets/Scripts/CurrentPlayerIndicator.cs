@@ -6,7 +6,14 @@ public class CurrentPlayerIndicator : MonoBehaviour
 {
     void Start()
     {
-        //GetComponentInParent<EntitasEntity>().currentIndicator = gameObject;
-        //gameObject.SetActive(false);
+        gameObject.SetActive(false);
+    }
+    public void SetActiveTrue()
+    {
+        gameObject.SetActive(true);
+    }
+    public void SetActiveFalse()
+    {
+        gameObject.SetActive(false);
     }
 }

@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using Entitas;
 
-public class TargetIndicatorSystem : IExecuteSystem // переделать через подписку, как уничтожение индикатора
+public class MarkIndicatorSystem : IExecuteSystem // переделать через подписку, как уничтожение индикатора
 {
     IGroup<GameEntity> entities;
     Contexts contexts;
     TargetIndicator targetIndicator;
     CurrentPlayerIndicator currentIndicator;
-    public TargetIndicatorSystem(Contexts contexts)
+    public MarkIndicatorSystem(Contexts contexts)
     {
         this.contexts = contexts;
         entities = contexts.game.GetGroup(GameMatcher.AnyOf(

@@ -32,7 +32,7 @@ public class NextTargetSystem : IExecuteSystem
                     //contexts.game.globals.currentEnemy = e;
                     contexts.game.globals.playerTarget = e;
                     contexts.game.globals.nextTargetButton = false;
-                    contexts.game.globals.needFillEnemyTarget = true; 
+                    //contexts.game.globals.needFillEnemyTarget = true; 
                     contexts.game.globals.needFillPlayerTarget = true;
                     i = 0;
                     break;

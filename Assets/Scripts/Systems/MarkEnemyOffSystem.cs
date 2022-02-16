@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using Entitas;
 
-public class EnemyTargIndFalseSystem : IInitializeSystem, ITearDownSystem
+public class MarkEnemyOffSystem : IInitializeSystem, ITearDownSystem
 {
     IGroup<GameEntity> group;
     TargetIndicator targetIndicator;
     CurrentPlayerIndicator currentIndicator;
 
-    public EnemyTargIndFalseSystem(Contexts contexts)
+    public MarkEnemyOffSystem(Contexts contexts)
     {
         group = contexts.game.GetGroup(GameMatcher.CurrentEnemy);
     }
@@ -34,3 +34,4 @@ public class EnemyTargIndFalseSystem : IInitializeSystem, ITearDownSystem
         currentIndicator.SetActiveTrue(); 
     }
 }
+
