@@ -22,10 +22,7 @@ public class MarkIndicatorPLSystem : IExecuteSystem // переделать че
         {
             _playerTarget = e.playerTarget.playerTarget;
             targetIndicator = _playerTarget.view.gameObject.GetComponentInChildren<TargetIndicator>(true);           
-            targetIndicator.SetActiveTrue(); 
-
-            //currentIndicator = e.view.gameObject.GetComponentInChildren<CurrentPlayerIndicator>(true);           
-            //currentIndicator.SetActiveTrue();     
+            targetIndicator.SetActiveTrue();     
         }
     }
 }

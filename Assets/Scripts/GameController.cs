@@ -42,7 +42,7 @@ public class GameController : MonoBehaviour
         systems.Add(new PlayerTargIndFalseSystem(contexts));
         systems.Add(new EnemyTargIndFalseSystem(contexts));
 
-        //systems.Add(new MarkIndicatorSystem(contexts));
+        systems.Add(new MarkIndicatorSystem(contexts));
         systems.Add(new MarkIndicatorPLSystem(contexts));
         //systems.Add(new MarkEnemyOffSystem(contexts));
         //systems.Add(new MarkPlayerOffSystem(contexts));
