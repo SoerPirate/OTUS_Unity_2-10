@@ -36,14 +36,14 @@ public class AttackEnemySystem : IExecuteSystem
                 animationNow = false;
                 entitasEntity.caracterAnimationEvents.attackEnd = false;
                 endAttack.Add(e);
-                contexts.game.globals.nowPlayerTurn = true;
+                //contexts.game.globals.nowPlayerTurn = true;
             }
         }
 
         foreach (var ee in endAttack)
         {
             ee.isEnemyAttack = false;
-            
+            ee.isMoveBack = true;
         }
     }
 }

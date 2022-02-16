@@ -46,6 +46,7 @@ public class MoveEnemySystem : IExecuteSystem
                 if (distance.magnitude < 0.00001f) 
                 {
                     e.isEnemyAttack = true;       
+                    animationNow = false;
                     contexts.game.globals.nowEnemуTurn = false;
                     break;
                 }

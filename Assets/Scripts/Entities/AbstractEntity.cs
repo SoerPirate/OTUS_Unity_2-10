@@ -14,6 +14,8 @@ public abstract class AbstractEntity : MonoBehaviour
         entity = contexts.game.CreateEntity();
         entity.AddPosition(transform.position);
         entity.AddRotation(transform.rotation);
+        entity.AddStartPosition(transform.position);
+        entity.AddStartRotation(transform.rotation);
         Destroy(gameObject);
     }
 }

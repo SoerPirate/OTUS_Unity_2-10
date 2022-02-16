@@ -45,6 +45,7 @@ public class GameController : MonoBehaviour
         systems.Add(new PlayerAttackSystem(contexts));
         systems.Add(new MoveEnemySystem(contexts));
         systems.Add(new AttackEnemySystem(contexts));
+        systems.Add(new MoveBackEnemySystem(contexts));
 
         systems.Add(new TransformApplySystem(contexts));
 

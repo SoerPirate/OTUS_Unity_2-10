@@ -18,17 +18,20 @@ public static class GameComponentsLookup {
     public const int ForwardMovement = 7;
     public const int Globals = 8;
     public const int Health = 9;
-    public const int NeedMove = 10;
-    public const int Pistol = 11;
-    public const int PlayerAttack = 12;
-    public const int Player = 13;
-    public const int PlayerTarget = 14;
-    public const int Position = 15;
-    public const int Prefab = 16;
-    public const int Rotation = 17;
-    public const int View = 18;
+    public const int MoveBack = 10;
+    public const int NeedMove = 11;
+    public const int Pistol = 12;
+    public const int PlayerAttack = 13;
+    public const int Player = 14;
+    public const int PlayerTarget = 15;
+    public const int Position = 16;
+    public const int Prefab = 17;
+    public const int Rotation = 18;
+    public const int StartPosition = 19;
+    public const int StartRotation = 20;
+    public const int View = 21;
 
-    public const int TotalComponents = 19;
+    public const int TotalComponents = 22;
 
     public static readonly string[] componentNames = {
         "Animator",
@@ -41,6 +44,7 @@ public static class GameComponentsLookup {
         "ForwardMovement",
         "Globals",
         "Health",
+        "MoveBack",
         "NeedMove",
         "Pistol",
         "PlayerAttack",
@@ -49,6 +53,8 @@ public static class GameComponentsLookup {
         "Position",
         "Prefab",
         "Rotation",
+        "StartPosition",
+        "StartRotation",
         "View"
     };
 
@@ -63,6 +69,7 @@ public static class GameComponentsLookup {
         typeof(ForwardMovementComponent),
         typeof(GlobalsComponent),
         typeof(HealthComponent),
+        typeof(MoveBackComponent),
         typeof(NeedMoveComponent),
         typeof(PistolComponent),
         typeof(PlayerAttackComponent),
@@ -71,6 +78,8 @@ public static class GameComponentsLookup {
         typeof(PositionComponent),
         typeof(PrefabComponent),
         typeof(RotationComponent),
+        typeof(StartPositionComponent),
+        typeof(StartRotationComponent),
         typeof(ViewComponent)
     };
 }
