@@ -10,6 +10,7 @@ public class MarkIndicatorSystem : IExecuteSystem // переделать чер
     Contexts contexts;
     TargetIndicator targetIndicator;
     CurrentPlayerIndicator currentIndicator;
+    
     public MarkIndicatorSystem(Contexts contexts)
     {
         this.contexts = contexts;

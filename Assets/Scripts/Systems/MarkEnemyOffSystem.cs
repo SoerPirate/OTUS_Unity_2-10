@@ -7,31 +7,28 @@ public class MarkEnemyOffSystem : IInitializeSystem, ITearDownSystem
 {
     IGroup<GameEntity> group;
     TargetIndicator targetIndicator;
-    CurrentPlayerIndicator currentIndicator;
+    GameEntity _enemyTarget;
 
     public MarkEnemyOffSystem(Contexts contexts)
     {
-        group = contexts.game.GetGroup(GameMatcher.CurrentEnemy);
+        group = contexts.game.GetGroup(GameMatcher.EnemyTarget);
     }
 
     public void Initialize()
     {
-        group.OnEntityRemoved += OnCurrentEnemyRemoved;
+        group.OnEntityRemoved += OnEnemyTargetRemoved;
     }
 
     public void TearDown()
     {
-        group.OnEntityRemoved -= OnCurrentEnemyRemoved;
+        group.OnEntityRemoved -= OnEnemyTargetRemoved;
     }
 
-    void OnCurrentEnemyRemoved(IGroup<GameEntity> group, GameEntity entity, int index, IComponent component)
+    void OnEnemyTargetRemoved(IGroup<GameEntity> group, GameEntity entity, int index, IComponent component)
     {
-        //var view = (ViewComponent)component;
-        //targetIndicator = entity.view.gameObject.GetComponentInChildren<TargetIndicator>(true);
-        //targetIndicator.SetActiveFalse();  
-
-        currentIndicator = entity.view.gameObject.GetComponentInChildren<CurrentPlayerIndicator>(true);           
-        currentIndicator.SetActiveTrue(); 
+        _enemyTarget = entity.enemyTarget.enemyTarget;
+        targetIndicator = _enemyTarget.view.gameObject.GetComponentInChildren<TargetIndicator>(true);           
+        targetIndicator.SetActiveFalse();
     }
 }
 

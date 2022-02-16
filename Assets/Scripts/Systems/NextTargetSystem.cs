@@ -6,8 +6,10 @@ using Entitas;
 public class NextTargetSystem : IExecuteSystem
 {
     IGroup<GameEntity> entities;
+    TargetIndicator targetIndicator;
     Contexts contexts;
     int i=0;
+
     public NextTargetSystem(Contexts contexts)
     {
         this.contexts = contexts;
@@ -20,15 +22,20 @@ public class NextTargetSystem : IExecuteSystem
         {
             if (contexts.game.globals.nextTargetButton == true)
             {
-                //if (i == contexts.game.globals.currentEnemyIndex)
-                //{
-                //    e.isCurrentEnemy = false;  // playerTarget? ОШИБКА мы хотим менять цель у игрока, а не текущего врага
-                //}
+                if (i == contexts.game.globals.currentEnemyIndex)
+                {
+                    targetIndicator = e.view.gameObject.GetComponentInChildren<TargetIndicator>(true);
+                    targetIndicator.SetActiveFalse(); 
+                }
 
                 if (i == contexts.game.globals.currentEnemyIndex + 1)
                 {
                     //e.isCurrentEnemy = true;
                     contexts.game.globals.currentEnemyIndex = i;
+
+                    //targetIndicator = contexts.game.globals.playerTarget.view.gameObject.GetComponentInChildren<TargetIndicator>(true);
+                    //targetIndicator.SetActiveFalse(); 
+
                     //contexts.game.globals.currentEnemy = e;
                     contexts.game.globals.playerTarget = e;
                     contexts.game.globals.nextTargetButton = false;

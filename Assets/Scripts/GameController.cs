@@ -36,7 +36,7 @@ public class GameController : MonoBehaviour
         systems.Add(new FillPlayerTargetSystem(contexts));
         systems.Add(new FillEnemyTargetSystem(contexts));
 
-        systems.Add(new NextTargetSystem(contexts));
+        
 
         systems.Add(new TargetIndicatorSystem(contexts));
         systems.Add(new PlayerTargIndFalseSystem(contexts));
@@ -51,6 +51,8 @@ public class GameController : MonoBehaviour
         systems.Add(new MoveEnemySystem(contexts));
         systems.Add(new AttackEnemySystem(contexts));
         systems.Add(new MoveBackEnemySystem(contexts));
+
+        systems.Add(new NextTargetSystem(contexts));
 
         systems.Add(new TransformApplySystem(contexts));
 

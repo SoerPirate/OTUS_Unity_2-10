@@ -10,6 +10,7 @@ public class MarkIndicatorPLSystem : IExecuteSystem // переделать че
     Contexts contexts;
     TargetIndicator targetIndicator;
     CurrentPlayerIndicator currentIndicator;
+    
     public MarkIndicatorPLSystem(Contexts contexts)
     {
         this.contexts = contexts;

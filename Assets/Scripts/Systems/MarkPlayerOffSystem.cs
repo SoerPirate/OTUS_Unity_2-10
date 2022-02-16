@@ -7,30 +7,27 @@ public class MarkPlayerOffSystem : IInitializeSystem, ITearDownSystem
 {
     IGroup<GameEntity> group;
     TargetIndicator targetIndicator;
-    CurrentPlayerIndicator currentIndicator;
+    GameEntity _playerTarget;
 
     public MarkPlayerOffSystem(Contexts contexts)
     {
-        group = contexts.game.GetGroup(GameMatcher.CurrentPlayer);
+        group = contexts.game.GetGroup(GameMatcher.PlayerTarget);
     }
 
     public void Initialize()
     {
-        group.OnEntityRemoved += OnCurrentPlayerRemoved;
+        group.OnEntityRemoved += OnPlayerTargetRemoved;
     }
 
     public void TearDown()
     {
-        group.OnEntityRemoved -= OnCurrentPlayerRemoved;
+        group.OnEntityRemoved -= OnPlayerTargetRemoved;
     }
 
-    void OnCurrentPlayerRemoved(IGroup<GameEntity> group, GameEntity entity, int index, IComponent component)
+    void OnPlayerTargetRemoved(IGroup<GameEntity> group, GameEntity entity, int index, IComponent component)
     {
-        //var view = (ViewComponent)component;
-        //targetIndicator = entity.view.gameObject.GetComponentInChildren<TargetIndicator>(true);
-        //targetIndicator.SetActiveFalse(); 
-
-        currentIndicator = entity.view.gameObject.GetComponentInChildren<CurrentPlayerIndicator>(true);           
-        currentIndicator.SetActiveTrue();  
+        _playerTarget = entity.playerTarget.playerTarget;
+        targetIndicator = _playerTarget.view.gameObject.GetComponentInChildren<TargetIndicator>(true);
+        targetIndicator.SetActiveFalse(); 
     }
 }
