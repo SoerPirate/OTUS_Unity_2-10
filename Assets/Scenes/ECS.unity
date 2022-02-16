@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 3591750979723153889, guid: 268fe3416a5e8cf4694a8632f9cb8c4d, type: 3}
-  health: 2
+  health: 3
 --- !u!1 &212085201
 GameObject:
   m_ObjectHideFlags: 0
@@ -257,7 +257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 3591750979723153889, guid: 268fe3416a5e8cf4694a8632f9cb8c4d, type: 3}
-  health: 2
+  health: 3
 --- !u!1 &439713334
 GameObject:
   m_ObjectHideFlags: 0
@@ -302,7 +302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 3591750979723153889, guid: 268fe3416a5e8cf4694a8632f9cb8c4d, type: 3}
-  health: 2
+  health: 3
 --- !u!1 &598862533
 GameObject:
   m_ObjectHideFlags: 0
@@ -944,7 +944,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonAttack: {fileID: 936045271}
   buttonNextTarget: {fileID: 1942138200}
-  _speed: 0.02
+  _speed: 0.04
 --- !u!4 &1606882349
 Transform:
   m_ObjectHideFlags: 0
