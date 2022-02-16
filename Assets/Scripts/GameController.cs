@@ -20,7 +20,7 @@ public class GameController : MonoBehaviour
         contexts.game.SetGlobals(
             _speed,                 // speed
             null, null, null, null, // currentPlayer, currentEnemy, playerTarget, enemyTarget
-            true, false,           // nowPlayerTurn, nowEnemуTurn
+            true, false,            // nowPlayerTurn, nowEnemуTurn
             true, true, true, true, // needFindCurrentPlayer, needFindCurrentEnemy, needFillPlayerTarget, needFillEnemyTarget
             false, false,           // nextTargetButton, attackButton
             0);                     // currentEnemyIndex

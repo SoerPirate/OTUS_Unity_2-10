@@ -8,6 +8,8 @@ public class AttackEnemySystem : IExecuteSystem
     IGroup<GameEntity> entities;
     Contexts contexts;
     List<GameEntity> endAttack = new List<GameEntity>();
+    EntitasEntity entitasEntity;
+    bool animationNow = false;
 
     public AttackEnemySystem(Contexts contexts)
     {
@@ -21,14 +23,27 @@ public class AttackEnemySystem : IExecuteSystem
 
         foreach (var e in entities)
         {
-            e.enemyTarget.enemyTarget.health.value -=1;  
-            endAttack.Add(e);
+            if (animationNow == false)
+            {
+                entitasEntity = e.view.gameObject.GetComponent<EntitasEntity>();
+                entitasEntity.animator.SetTrigger("MeleeAttack");
+                animationNow = true;
+            }
+
+            if (entitasEntity.caracterAnimationEvents.attackEnd == true)
+            {
+                e.enemyTarget.enemyTarget.health.value -=1;  
+                animationNow = false;
+                entitasEntity.caracterAnimationEvents.attackEnd = false;
+                endAttack.Add(e);
+                contexts.game.globals.nowPlayerTurn = true;
+            }
         }
 
         foreach (var ee in endAttack)
         {
             ee.isEnemyAttack = false;
-            contexts.game.globals.nowPlayerTurn = true;
+            
         }
     }
 }

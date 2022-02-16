@@ -42,7 +42,7 @@ public class MoveEnemySystem : IExecuteSystem
                 }
                 
                 // движение
-                distance = targetPosition - myPosition;
+                distance = targetPosition - myPosition; // сейчас не учитывается distanceFromTarget
                 if (distance.magnitude < 0.00001f) 
                 {
                     e.isEnemyAttack = true;       
