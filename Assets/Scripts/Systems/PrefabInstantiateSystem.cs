@@ -37,6 +37,12 @@ public class PrefabInstantiateSystem : ReactiveSystem<GameEntity>
                 obj.AddComponent<EntitasEntity>().entity = e;
 
             e.AddView(obj);
+
+            if (e.isEnemy)
+                contexts.game.globals.enemyCount += 1; 
+
+            if (e.isPlayer)
+                contexts.game.globals.playerCount += 1;
         }
     }
 }

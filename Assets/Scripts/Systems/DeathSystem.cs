@@ -40,6 +40,7 @@ public class DeathSystem : IExecuteSystem
                     contexts.game.globals.needFillPlayerTarget = true;
                     contexts.game.globals.needFillEnemyTarget = true;
                     contexts.game.globals.currentEnemyIndex = 0;
+                    contexts.game.globals.enemyCount -= 1;
                 }
                     
                 if (e.isPlayer)
@@ -48,6 +49,7 @@ public class DeathSystem : IExecuteSystem
                     contexts.game.globals.changeDeadPlayer = true;
                     contexts.game.globals.needFillEnemyTarget = true;
                     contexts.game.globals.needFillPlayerTarget = true;
+                    contexts.game.globals.playerCount -= 1;
                 } 
             }
         }

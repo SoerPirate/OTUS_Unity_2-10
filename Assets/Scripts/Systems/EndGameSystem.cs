@@ -6,24 +6,34 @@ using Entitas;
 public class EndGameSystem : IExecuteSystem
 {
     IGroup<GameEntity> entities;
-    //List<Entity> deadEntities = new List<Entity>();
+    bool endGame = false;
     Contexts contexts;
 
     public EndGameSystem(Contexts contexts)
     {
         this.contexts = contexts;
 
-        entities = contexts.game.GetGroup(GameMatcher.Enemy);
+        entities = contexts.game.GetGroup(GameMatcher.Globals);
     }
 
     public void Execute()
     {
         foreach (var e in entities) 
         {
-            var x = entities.count;
+            if (endGame == false)
+            {
+                if (contexts.game.globals.enemyCount == 0)
+                {
+                    Debug.Log("Player Win");
+                    endGame = true;
+                }
 
-            if (x == 0)
-                Debug.Log("Player Win");
+                if (contexts.game.globals.playerCount == 0)
+                {
+                    Debug.Log("You lose");
+                    endGame = true;
+                }
+            }
         }    
     }
 }

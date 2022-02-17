@@ -24,4 +24,5 @@ public class GlobalsComponent : IComponent
     public bool changeDeadEnemy = false;
     public bool changeDeadPlayer = false;
     public CanvasGroup playerMenu;
+    public int enemyCount = 0, playerCount = 0;
 }

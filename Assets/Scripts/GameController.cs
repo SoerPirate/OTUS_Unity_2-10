@@ -27,18 +27,19 @@ public class GameController : MonoBehaviour
             false, false,           // nextTargetButton, attackButton
             0,                      // currentEnemyIndex
             true, true,             // changeDeadEnemy, changeDeadPlayer 
-            playerMenu);            // playerMenu          
+            playerMenu,             // playerMenu
+            0, 0);                     // enemyCount, playerCount      
 
         systems = new Systems();
 
         systems.Add(new DeathSystem(contexts));
-        //systems.Add(new EndGameSystem(contexts));
+        
         systems.Add(new PrefabInstantiateSystem(contexts));
+
+        systems.Add(new EndGameSystem(contexts));
 
         systems.Add(new FindCurrentPlayerSystem(contexts));
         systems.Add(new FindCurrentEnemySystem(contexts));
-
-
 
         systems.Add(new ChangeDeadEnemySystem(contexts));
         systems.Add(new ChangeDeadPlayerSystem(contexts));
@@ -52,6 +53,7 @@ public class GameController : MonoBehaviour
 
         systems.Add(new MarkIndicatorSystem(contexts));
         systems.Add(new MarkIndicatorPLSystem(contexts));
+
         //systems.Add(new MarkEnemyOffSystem(contexts));
         //systems.Add(new MarkPlayerOffSystem(contexts));
         
@@ -62,8 +64,6 @@ public class GameController : MonoBehaviour
         systems.Add(new MoveEnemySystem(contexts));
         systems.Add(new AttackEnemySystem(contexts));
         systems.Add(new MoveBackEnemySystem(contexts));
-
-        
 
         systems.Add(new TransformApplySystem(contexts));
 
@@ -100,7 +100,6 @@ public class GameController : MonoBehaviour
             contexts.game.globals.nowPlayerTurn = false;
             contexts.game.globals.attackButton = true;
         }
-            
     }
 
     public void NextTarget()
@@ -109,20 +108,4 @@ public class GameController : MonoBehaviour
             contexts.game.globals.nextTargetButton = true; 
     }
 
-/*
-    void SetCurrentScreen(Screen screen)
-    {
-        Utility.SetCanvasGroupEnabled(mainScreen, screen == Screen.Main);
-        Utility.SetCanvasGroupEnabled(settingsScreen, screen == Screen.Settings);
-        Utility.SetCanvasGroupEnabled(ChooseLevelScreen, screen == Screen.ChooseLevel);
-    }
-
-    public static void SetCanvasGroupEnabled(CanvasGroup group, bool enabled)
-    {
-        //group.alpha = (enabled ? 1.0f : 0.0f);
-        playerMenu.GetComponent<AlphaAnimator>().targetAlpha = 0.0f;
-        playerMenu.interactable = enabled;
-        playerMenu.blocksRaycasts = enabled;
-    }
-*/
 }
