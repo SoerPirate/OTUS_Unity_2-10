@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Entitas;
+using UnityEngine.SceneManagement;
 
 public class MoveBackEnemySystem : IExecuteSystem
 {
@@ -14,6 +15,7 @@ public class MoveBackEnemySystem : IExecuteSystem
     List<GameEntity> endMoveEntities = new List<GameEntity>();
     EntitasEntity entitasEntity;
     bool animationNow = false;
+    CanvasGroup playerMenu;
 
     public MoveBackEnemySystem(Contexts contexts)
     {
@@ -77,6 +79,11 @@ public class MoveBackEnemySystem : IExecuteSystem
             eee.isMoveBack = false;     
             animationNow = false;
             contexts.game.globals.nowPlayerTurn = true;
+
+            playerMenu = contexts.game.globals.playerMenu;
+            playerMenu.alpha = 1.0f;
+            playerMenu.interactable = true;
+            playerMenu.blocksRaycasts = true;
         }
     }
 }

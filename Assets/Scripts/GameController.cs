@@ -26,11 +26,13 @@ public class GameController : MonoBehaviour
             true, true, true, true, // needFindCurrentPlayer, needFindCurrentEnemy, needFillPlayerTarget, needFillEnemyTarget
             false, false,           // nextTargetButton, attackButton
             0,                      // currentEnemyIndex
-            true, true);          // changeDeadEnemy, changeDeadPlayer            
+            true, true,             // changeDeadEnemy, changeDeadPlayer 
+            playerMenu);            // playerMenu          
 
         systems = new Systems();
 
         systems.Add(new DeathSystem(contexts));
+        //systems.Add(new EndGameSystem(contexts));
         systems.Add(new PrefabInstantiateSystem(contexts));
 
         systems.Add(new FindCurrentPlayerSystem(contexts));
@@ -91,6 +93,10 @@ public class GameController : MonoBehaviour
     {
         if (contexts.game.globals.nowPlayerTurn == true)
         {
+            playerMenu.alpha = 0.0f;
+            playerMenu.interactable = false;
+            playerMenu.blocksRaycasts = false;
+
             contexts.game.globals.nowPlayerTurn = false;
             contexts.game.globals.attackButton = true;
         }
@@ -114,9 +120,9 @@ public class GameController : MonoBehaviour
     public static void SetCanvasGroupEnabled(CanvasGroup group, bool enabled)
     {
         //group.alpha = (enabled ? 1.0f : 0.0f);
-        group.GetComponent<AlphaAnimator>().targetAlpha = (enabled ? 1.0f : 0.0f);
-        group.interactable = enabled;
-        group.blocksRaycasts = enabled;
+        playerMenu.GetComponent<AlphaAnimator>().targetAlpha = 0.0f;
+        playerMenu.interactable = enabled;
+        playerMenu.blocksRaycasts = enabled;
     }
 */
 }

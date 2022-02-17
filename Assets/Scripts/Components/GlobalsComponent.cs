@@ -23,4 +23,5 @@ public class GlobalsComponent : IComponent
     public int currentEnemyIndex;
     public bool changeDeadEnemy = false;
     public bool changeDeadPlayer = false;
+    public CanvasGroup playerMenu;
 }
