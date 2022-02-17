@@ -36,7 +36,7 @@ public class MoveEnemySystem : IExecuteSystem
 
                 if (animationNow == false)
                 {
-                    entitasEntity = e.view.gameObject.GetComponent<EntitasEntity>();
+                    entitasEntity = e.view.gameObject.GetComponent<EntitasEntity>();  // ???
                     if (!entitasEntity == null)
                     {
                         entitasEntity.animator.SetFloat("Speed", runSpeed);

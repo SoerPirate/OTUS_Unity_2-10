@@ -29,7 +29,10 @@ public class MarkIndicatorPLSystem : IExecuteSystem // переделать че
             }
             else
             {
-                targetIndicator = _playerTarget.view.gameObject.GetComponentInChildren<TargetIndicator>(true);           
+                if (_playerTarget.hasView)
+                    targetIndicator = _playerTarget.view.gameObject.GetComponentInChildren<TargetIndicator>(true); 
+                if (targetIndicator == null)
+                    break;          
                 targetIndicator.SetActiveTrue();
             }
         }

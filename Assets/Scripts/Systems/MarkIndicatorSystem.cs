@@ -22,8 +22,19 @@ public class MarkIndicatorSystem : IExecuteSystem // переделать чер
         foreach (var e in entities)
         {
             _enemyTarget = e.enemyTarget.enemyTarget;
-            targetIndicator = _enemyTarget.view.gameObject.GetComponentInChildren<TargetIndicator>(true);           
-            targetIndicator.SetActiveTrue();   
+
+            if (_enemyTarget == null)
+            {
+                break;   
+            }
+            else
+            {
+                if (_enemyTarget.hasView)
+                    targetIndicator = _enemyTarget.view.gameObject.GetComponentInChildren<TargetIndicator>(true); 
+                if (targetIndicator == null)
+                    break;          
+                targetIndicator.SetActiveTrue();
+            } 
         }
     }
 }

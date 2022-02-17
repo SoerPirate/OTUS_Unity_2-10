@@ -23,7 +23,7 @@ public class PlayerAttackSystem : IExecuteSystem
     {
         foreach (var e in entities)
         {
-            if (contexts.game.globals.attackButton == true)
+            if ((contexts.game.globals.attackButton == true) & (e.playerTarget.playerTarget.hasHealth)) 
             {
                 //contexts.game.globals.attackButton = false;
                 if (animationNow == false)
@@ -35,11 +35,15 @@ public class PlayerAttackSystem : IExecuteSystem
                 
                 if (entitasEntity.caracterAnimationEvents.shootEnd == true)
                 {
-                    e.playerTarget.playerTarget.health.value -=1;  
-                    entitasEntity.caracterAnimationEvents.shootEnd = false;
-                    contexts.game.globals.attackButton = false;
-                    animationNow = false;
-                    contexts.game.globals.nowEnemуTurn = true;
+                    if (e.playerTarget.playerTarget.hasHealth)      // ???
+                    {
+                        e.playerTarget.playerTarget.health.value -=1;  
+                        entitasEntity.caracterAnimationEvents.shootEnd = false;
+                        contexts.game.globals.attackButton = false;
+                        animationNow = false;
+                        contexts.game.globals.nowEnemуTurn = true;
+                    }
+                    
                 }
             }
         }

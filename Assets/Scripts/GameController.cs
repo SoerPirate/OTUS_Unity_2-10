@@ -23,7 +23,8 @@ public class GameController : MonoBehaviour
             true, false,            // nowPlayerTurn, nowEnemуTurn
             true, true, true, true, // needFindCurrentPlayer, needFindCurrentEnemy, needFillPlayerTarget, needFillEnemyTarget
             false, false,           // nextTargetButton, attackButton
-            0);                     // currentEnemyIndex
+            0,                      // currentEnemyIndex
+            false, false);          // changeDeadEnemy, changeDeadPlayer            
 
         systems = new Systems();
 
@@ -33,10 +34,13 @@ public class GameController : MonoBehaviour
         systems.Add(new FindCurrentPlayerSystem(contexts));
         systems.Add(new FindCurrentEnemySystem(contexts));
 
+
+
+        systems.Add(new ChangeDeadEnemySystem(contexts));
+        systems.Add(new ChangeDeadPlayerSystem(contexts));
+
         systems.Add(new FillPlayerTargetSystem(contexts));
         systems.Add(new FillEnemyTargetSystem(contexts));
-
-        
 
         systems.Add(new TargetIndicatorSystem(contexts));
         systems.Add(new PlayerTargIndFalseSystem(contexts));
@@ -47,12 +51,15 @@ public class GameController : MonoBehaviour
         //systems.Add(new MarkEnemyOffSystem(contexts));
         //systems.Add(new MarkPlayerOffSystem(contexts));
         
+        systems.Add(new NextTargetSystem(contexts));
+
         systems.Add(new PlayerAttackSystem(contexts));
+
         systems.Add(new MoveEnemySystem(contexts));
         systems.Add(new AttackEnemySystem(contexts));
         systems.Add(new MoveBackEnemySystem(contexts));
 
-        systems.Add(new NextTargetSystem(contexts));
+        
 
         systems.Add(new TransformApplySystem(contexts));
 

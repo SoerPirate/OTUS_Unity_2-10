@@ -21,4 +21,6 @@ public class GlobalsComponent : IComponent
     public bool nextTargetButton = false;
     public bool attackButton = false;
     public int currentEnemyIndex;
+    public bool changeDeadEnemy = false;
+    public bool changeDeadPlayer = false;
 }
