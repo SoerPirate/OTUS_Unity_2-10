@@ -22,8 +22,16 @@ public class MarkIndicatorPLSystem : IExecuteSystem // переделать че
         foreach (var e in entities)
         {
             _playerTarget = e.playerTarget.playerTarget;
-            targetIndicator = _playerTarget.view.gameObject.GetComponentInChildren<TargetIndicator>(true);           
-            targetIndicator.SetActiveTrue();     
+            
+            if (_playerTarget == null)
+            {
+                break;   
+            }
+            else
+            {
+                targetIndicator = _playerTarget.view.gameObject.GetComponentInChildren<TargetIndicator>(true);           
+                targetIndicator.SetActiveTrue();
+            }
         }
     }
 }

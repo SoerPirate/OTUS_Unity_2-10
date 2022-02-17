@@ -6,7 +6,6 @@ using Entitas;
 public class EnemyTargIndFalseSystem : IInitializeSystem, ITearDownSystem
 {
     IGroup<GameEntity> group;
-    TargetIndicator targetIndicator;
     CurrentPlayerIndicator currentIndicator;
 
     public EnemyTargIndFalseSystem(Contexts contexts)
@@ -26,10 +25,6 @@ public class EnemyTargIndFalseSystem : IInitializeSystem, ITearDownSystem
 
     void OnCurrentEnemyRemoved(IGroup<GameEntity> group, GameEntity entity, int index, IComponent component)
     {
-        //var view = (ViewComponent)component;
-        //targetIndicator = entity.view.gameObject.GetComponentInChildren<TargetIndicator>(true);
-        //targetIndicator.SetActiveFalse();  
-
         currentIndicator = entity.view.gameObject.GetComponentInChildren<CurrentPlayerIndicator>(true);           
         currentIndicator.SetActiveTrue(); 
     }

@@ -7,8 +7,8 @@ public class TargetIndicatorSystem : IExecuteSystem // переделать че
 {
     IGroup<GameEntity> entities;
     Contexts contexts;
-    TargetIndicator targetIndicator;
     CurrentPlayerIndicator currentIndicator;
+    
     public TargetIndicatorSystem(Contexts contexts)
     {
         this.contexts = contexts;
@@ -21,9 +21,6 @@ public class TargetIndicatorSystem : IExecuteSystem // переделать че
     {
         foreach (var e in entities)
         {
-            //targetIndicator = e.view.gameObject.GetComponentInChildren<TargetIndicator>(true);           
-            //targetIndicator.SetActiveTrue(); 
-
             currentIndicator = e.view.gameObject.GetComponentInChildren<CurrentPlayerIndicator>(true);           
             currentIndicator.SetActiveTrue();     
         }

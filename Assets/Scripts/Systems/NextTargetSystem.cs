@@ -25,11 +25,15 @@ public class NextTargetSystem : IExecuteSystem
                 if (i == contexts.game.globals.currentEnemyIndex)
                 {
                     targetIndicator = e.view.gameObject.GetComponentInChildren<TargetIndicator>(true);
-                    targetIndicator.SetActiveFalse(); 
+                    targetIndicator.SetActiveFalse();
+                    contexts.game.globals.playerTarget = null;
+                    contexts.game.globals.needFillPlayerTarget = true; 
                 }
 
                 if (i == contexts.game.globals.currentEnemyIndex + 1)
                 {
+                    if (i>2)
+                        i=0;
                     //e.isCurrentEnemy = true;
                     contexts.game.globals.currentEnemyIndex = i;
 
@@ -45,8 +49,8 @@ public class NextTargetSystem : IExecuteSystem
                     break;
                 }
                     
-                i+=1;
-            }                
+                i+=1;  
+            }                         
         }
     }
 }
