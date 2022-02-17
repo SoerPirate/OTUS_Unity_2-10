@@ -24,6 +24,7 @@ public class MoveBackEnemySystem : IExecuteSystem
     public void Execute()
     {
         moveEntities.Clear();
+        endMoveEntities.Clear();
 
         foreach (var e in entities)
         {
