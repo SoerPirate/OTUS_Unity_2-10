@@ -20,6 +20,9 @@ public class NextTargetSystem : IExecuteSystem
     {
         foreach (var e in entities)
         {
+            //Debug.Log(entities.count);
+            var x = entities.count;
+
             if (contexts.game.globals.nextTargetButton == true)
             {
                 if (i == contexts.game.globals.currentEnemyIndex)
@@ -32,7 +35,7 @@ public class NextTargetSystem : IExecuteSystem
 
                 if (i == contexts.game.globals.currentEnemyIndex + 1)
                 {
-                    if (i>2)
+                    if (i>x-1)
                         i=0;
                     //e.isCurrentEnemy = true;
                     contexts.game.globals.currentEnemyIndex = i;
