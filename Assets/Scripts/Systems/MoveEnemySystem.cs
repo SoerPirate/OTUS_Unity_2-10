@@ -28,7 +28,7 @@ public class MoveEnemySystem : IExecuteSystem
         {
             if (contexts.game.globals.nowEnemуTurn == true)
             {
-                if (!e.hasHealth)
+                if (e.health.value <= 0) // по хорошему везде бы такие проверки надо вставить 
                     break;
                 moveEntities.Add(e);
                 runSpeed = contexts.game.globals.speed;
@@ -36,14 +36,14 @@ public class MoveEnemySystem : IExecuteSystem
                 myPosition = e.position.value;
                 myRotation = e.rotation.rotation;
 
-                if (animationNow == false)
+                if (animationNow == false) // мертвая Е включает анимациию без контролера, а живая Е потом не попадает в этот IF
                 {
                     entitasEntity = e.view.gameObject.GetComponent<EntitasEntity>();  // ???
-                    if (!entitasEntity == null)
-                    {
-                        entitasEntity.animator.SetFloat("Speed", runSpeed);
-                        animationNow = true;
-                    }
+                    //if (!entitasEntity == null)
+                    //{
+                    entitasEntity.animator.SetFloat("Speed", runSpeed);
+                    animationNow = true;
+                    //}
                 }
                 
                 // движение
