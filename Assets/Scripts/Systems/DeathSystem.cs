@@ -39,6 +39,7 @@ public class DeathSystem : IExecuteSystem
                     contexts.game.globals.changeDeadEnemy = true;
                     contexts.game.globals.needFillPlayerTarget = true;
                     contexts.game.globals.needFillEnemyTarget = true;
+                    contexts.game.globals.currentEnemyIndex = 0;
                 }
                     
                 if (e.isPlayer)
