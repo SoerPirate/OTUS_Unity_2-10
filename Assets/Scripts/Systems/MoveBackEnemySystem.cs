@@ -73,6 +73,7 @@ public class MoveBackEnemySystem : IExecuteSystem
 
         foreach (var eee in endMoveEntities)
         {
+            eee.rotation.rotation = eee.startRotation.startRotation;
             eee.isMoveBack = false;     
             animationNow = false;
             contexts.game.globals.nowPlayerTurn = true;

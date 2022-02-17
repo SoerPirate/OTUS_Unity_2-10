@@ -4,12 +4,14 @@ using UnityEngine;
 using Entitas;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
     
 public class GameController : MonoBehaviour
 {
     Systems systems;
     Contexts contexts;
     public Button buttonAttack, buttonNextTarget;
+    public CanvasGroup playerMenu;
     public float _speed;
 
     void Awake()
@@ -100,4 +102,21 @@ public class GameController : MonoBehaviour
         if (contexts.game.globals.nowPlayerTurn == true)
             contexts.game.globals.nextTargetButton = true; 
     }
+
+/*
+    void SetCurrentScreen(Screen screen)
+    {
+        Utility.SetCanvasGroupEnabled(mainScreen, screen == Screen.Main);
+        Utility.SetCanvasGroupEnabled(settingsScreen, screen == Screen.Settings);
+        Utility.SetCanvasGroupEnabled(ChooseLevelScreen, screen == Screen.ChooseLevel);
+    }
+
+    public static void SetCanvasGroupEnabled(CanvasGroup group, bool enabled)
+    {
+        //group.alpha = (enabled ? 1.0f : 0.0f);
+        group.GetComponent<AlphaAnimator>().targetAlpha = (enabled ? 1.0f : 0.0f);
+        group.interactable = enabled;
+        group.blocksRaycasts = enabled;
+    }
+*/
 }
