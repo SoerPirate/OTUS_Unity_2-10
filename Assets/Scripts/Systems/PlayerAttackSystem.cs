@@ -23,7 +23,8 @@ public class PlayerAttackSystem : IExecuteSystem
     {
         foreach (var e in entities)
         {
-            if ((contexts.game.globals.attackButton == true) & (e.playerTarget.playerTarget.hasHealth)) 
+            //if ((contexts.game.globals.attackButton == true) & (e.playerTarget.playerTarget.hasHealth))
+            if (contexts.game.globals.attackButton == true) 
             {
                 //contexts.game.globals.attackButton = false;
                 if (animationNow == false)

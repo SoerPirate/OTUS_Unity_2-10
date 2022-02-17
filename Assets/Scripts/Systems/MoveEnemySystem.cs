@@ -28,6 +28,8 @@ public class MoveEnemySystem : IExecuteSystem
         {
             if (contexts.game.globals.nowEnemуTurn == true)
             {
+                if (!e.hasHealth)
+                    break;
                 moveEntities.Add(e);
                 runSpeed = contexts.game.globals.speed;
                 targetPosition = e.enemyTarget.enemyTarget.position.value;

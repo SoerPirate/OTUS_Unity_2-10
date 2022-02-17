@@ -24,7 +24,7 @@ public class GameController : MonoBehaviour
             true, true, true, true, // needFindCurrentPlayer, needFindCurrentEnemy, needFillPlayerTarget, needFillEnemyTarget
             false, false,           // nextTargetButton, attackButton
             0,                      // currentEnemyIndex
-            false, false);          // changeDeadEnemy, changeDeadPlayer            
+            true, true);          // changeDeadEnemy, changeDeadPlayer            
 
         systems = new Systems();
 

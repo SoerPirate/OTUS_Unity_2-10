@@ -30,19 +30,23 @@ public class DeathSystem : IExecuteSystem
                 // добавлять IDeadComponent
                 GameObject.Destroy(e.view.gameObject);
 
-                //contexts.game.globals.needFindCurrentPlayer = true;  
-                //contexts.game.globals.needFindCurrentEnemy = true;
+                // 
+                //
 
                 if (e.isEnemy)
                 {
+                    contexts.game.globals.needFindCurrentEnemy = true;
                     contexts.game.globals.changeDeadEnemy = true;
                     contexts.game.globals.needFillPlayerTarget = true;
+                    contexts.game.globals.needFillEnemyTarget = true;
                 }
                     
                 if (e.isPlayer)
                 {
+                    contexts.game.globals.needFindCurrentPlayer = true; 
                     contexts.game.globals.changeDeadPlayer = true;
                     contexts.game.globals.needFillEnemyTarget = true;
+                    contexts.game.globals.needFillPlayerTarget = true;
                 } 
             }
         }

@@ -20,15 +20,15 @@ public class FindCurrentEnemySystem : IExecuteSystem
         {
             if (contexts.game.globals.needFindCurrentEnemy == true)
             {
-                if (e.isCurrentEnemy)
+                //if (e.isCurrentEnemy)
                     //if (contexts.game.globals.nextTargetButton == true)
-                    break;
-                else
-                {
-                    e.isCurrentEnemy = true;
-                    contexts.game.globals.currentEnemy = e;
-                    contexts.game.globals.playerTarget = e;
-                }
+                    //break;
+                //else
+                //{
+                e.isCurrentEnemy = true;
+                contexts.game.globals.currentEnemy = e;
+                    //contexts.game.globals.playerTarget = e;
+                //}
 
                 contexts.game.globals.needFindCurrentEnemy = false;
             }                
